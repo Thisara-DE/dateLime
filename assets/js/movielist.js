@@ -172,7 +172,9 @@ var getMoviePoster = function(posterPath) {
 // var apiUrl = "https://api.themoviedb.org/3/movie/" + movieId "/watch/providers?api_key=8269c18eac650b276376132ecb76ecf7"
 // create a data object to be sent to the createMovie function and it will create movie elements in the DOM
 
-// 
+var getWatchProviders = function() {
+    
+}
 
 
 
