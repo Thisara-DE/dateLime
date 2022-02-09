@@ -1,4 +1,4 @@
-fetch("https://movie-database-imdb-alternative.p.rapidapi.com/?s=korean&r=json&type=movie&page=10", {
+fetch("https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=tt4154796", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
@@ -6,7 +6,8 @@ fetch("https://movie-database-imdb-alternative.p.rapidapi.com/?s=korean&r=json&t
 	}
 })
 .then(function(response) {
-	response.json().then(function(data) {
+	console.log(response);
+    response.json().then(function(data) {
         console.log(data);
     })
 })
