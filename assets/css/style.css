@@ -1,4 +1,7 @@
-#start-btn:hover {
-  background-color: #00a900;
-  color: white;
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.title {
+  font-size: 150px;
 }
