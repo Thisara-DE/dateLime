@@ -1,0 +1,39 @@
+* {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.title {
+  font-size: 100px;
+  color: white;
+}
+
+.card {
+  display: flex;
+}
+
+.card-content {
+  display: block;
+  text-align: left;
+}
+
+.subHeader {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+body {
+  background-color: #23d160;
+  height: 100vh;
+}
+
+#start-btn:hover {
+  background-color: #00a900;
+  color: white;
+}
+
+.cardTitle {
+  font-weight: bold;
+}
