@@ -1,0 +1,41 @@
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+  
+  .card {
+    display: flex;
+  }
+  
+  .card-content {
+    display: block;
+    text-align: left;
+  }
+  
+  .subHeader {
+    text-align: center;
+  }
+  
+  body {
+    background-color: #23d160;
+    height: 100vh;
+  }
+  
+  .subHeader {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+  }
+
+  #sub1 {
+      height: 100px;
+  }
+
+  #sub2 {
+    height: 100px;
+}
+
+#btn-container {
+    margin-top: 50px;
+  }
