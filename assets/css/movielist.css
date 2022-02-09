@@ -1,0 +1,13 @@
+.card {
+    display: flex;
+}
+
+.card-content {
+    display: block;
+    text-align: left;
+}
+
+.subHeader {
+    text-align: center;
+}
+
