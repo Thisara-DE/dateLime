@@ -57,7 +57,8 @@ function getRecipes() {
 	})
 	.then(data => {
 		const html = data.results
-		.map(list => {
+		.map(results => {
+			// style this section
 			return `
 			<div class="list">
 				<p class="image"><img src="${results.thumbnail_url}" /></p>
@@ -74,3 +75,23 @@ function getRecipes() {
 }
 
 getRecipes();
+
+// Ignore for now
+// console logging list data
+// fetch("https://tasty.p.rapidapi.com/recipes/list?from=0&size=4&tags=under_30_minutes", {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "tasty.p.rapidapi.com",
+// 		"x-rapidapi-key": "c932fbbb24mshb43abde3fc25cffp11cacajsnae76ac16d611"
+// 	}
+// })
+// .then(function(response) {
+// 	console.log(response);
+//     response.json().then(function(data) {
+//         console.log(data);
+		
+//     });
+// })
+// .catch(err => {
+// 	console.error(err);
+// });
