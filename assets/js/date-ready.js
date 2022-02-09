@@ -9,7 +9,8 @@ fetch("https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=tt415479
 	console.log(response);
     response.json().then(function(data) {
         console.log(data);
-    })
+		
+    });
 })
 .catch(err => {
 	console.error(err);
