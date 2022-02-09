@@ -112,7 +112,7 @@ var UsCerts = [
     }
     ]
 
-var movieCounter = 0;
+var movieIdArr = [];
 
 // get movie object info from genre ID
 //var apiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=8269c18eac650b276376132ecb76ecf7&language=en-US&sort_by=popularity.desc&certification=US&certification.lte=" + certId + "&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "&with_watch_monetization_types=free"
@@ -146,12 +146,17 @@ var createMovie = function(data, cert) {
     var certification = cert;    
     var plot = data.results[i].overview;
     var posterPath = data.results[i].poster_path;
+    var movieId = data.results[i].id;
+    // ingest movie IDs into the movieIdArr
+                                                         
+
     getMoviePoster(posterPath);
 
     console.log(movieTitle);
     console.log(certification);
     console.log(plot);
-    console.log(certification);    
+    console.log(certification);  
+    console.log(movieId);  
     };
 }
 
@@ -161,9 +166,13 @@ var getMoviePoster = function(posterPath) {
     var apiUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
     console.log(apiUrl);
 }
-getMoviePoster();
 
+// get movies by watch providers
+// need to capture movie IDs from createMovie and save it in the movieIdArr
+// var apiUrl = "https://api.themoviedb.org/3/movie/" + movieId "/watch/providers?api_key=8269c18eac650b276376132ecb76ecf7"
+// create a data object to be sent to the createMovie function and it will create movie elements in the DOM
 
+// 
 
 
 
