@@ -5,16 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <title>Document</title>
+    <title>dateLime</title>
 </head>
 
 <body>
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
+          <a class="navbar-item" id="dateLime-logo" href="movielist.html">
             <h1>dateLime</h1>
           </a>
 
@@ -22,10 +25,10 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-primary">
+                <a class="button is-success is-rounded">
                   <strong>Your Dates</strong>
                 </a>
-                <a class="button is-light">
+                <a class="button is-light is-rounded">
                   Our Team
                 </a>
               </div>
@@ -36,19 +39,24 @@
 
       <section class="hero is-success is-fullheight">
         <div class="hero-body">
-          <div class="">
-            <p class="title">
+          <div class="container has-text-centered">
+            <h1 class="title">
               dateLime
-            </p>
+            </h1>
             <p class="subtitle">
               An app that pairs delicious recipes with movies.
             </p>
-            <button class="button is-white">
+            <button class="button is-white is-rounded" id="start-btn" href="movielist.html">
                 Start Your Date Here!
             </button>
           </div>
         </div>
       </section>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+      <script src="assets/js/script.js"></script>
     
 </body>
 </html>
