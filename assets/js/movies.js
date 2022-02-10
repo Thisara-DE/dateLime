@@ -10,3 +10,4 @@ function parseQuery(queryString) {
 }
 
 console.log("query params from url",parseQuery(queryString));
+
