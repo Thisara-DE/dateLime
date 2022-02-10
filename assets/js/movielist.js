@@ -121,6 +121,12 @@ var UsCerts = [
 
 var movieIdArr = [];
 
+
+// getting the certId and genreId from the url
+var getCertGenreIds = function(){
+    var queryString = document.location.search;
+}
+
 // get movie object info from genre ID
 //var apiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=8269c18eac650b276376132ecb76ecf7&language=en-US&sort_by=popularity.desc&certification=US&certification.lte=" + certId + "&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "&with_watch_monetization_types=free"
 
@@ -148,12 +154,11 @@ var getMovieObject = function (certId, genreId) {
       alert("Unable to connect to the Movie Database");
     });
 };
-getMovieObject(5, 14);
+// 
+ getMovieObject(4, 14);
 
 // gets the highest rating 20 movies for a given genre and certification
 var createMovie = function (data, cert) {
-  console.log("CreateMovie is being run");
-
   for (var i = 0; i < data.results.length; i++) {
     var movieTitle = data.results[i].original_title;
     var certification = cert;
@@ -221,15 +226,22 @@ var createMovie = function (data, cert) {
     plotEl.className = "content";
     plotEl.textContent = plot;
 
+    // creating select button
+    var selectMovieBtnEl = document.createElement("button");
+    selectMovieBtnEl.textContent = "Select Movie";
+    selectMovieBtnEl.setAttribute("id", movieId);
+    selectMovieBtnEl.classList = "button is-success is-rounded";
+
     cardContentEl.appendChild(cardTitleContEl);
     cardContentEl.appendChild(providerEl);
     cardContentEl.appendChild(plotEl);
+    cardContentEl.appendChild(selectMovieBtnEl);
 
     cardContainerEl.appendChild(cardContentEl);
     movieBodyEl.appendChild(cardContainerEl);
     movieSectionEl.appendChild(movieBodyEl);
-    var newLineEl = document.createElement("br");
-    movieSectionEl.appendChild(newLineEl);
+    // var newLineEl = document.createElement("br");
+    // movieSectionEl.appendChild(newLineEl);
   }
   // console.log(movieIdArr);
 };
@@ -254,7 +266,7 @@ var getWatchProviders = function (movieId) {
         for (var i = 0; i < providers.length; i++) {
           var provider = providers[i].provider_name;
           providerList.push(provider);
-          console.log("Provider is:", provider);
+        //   console.log("Provider is:", provider);
         }
         document.getElementById(movieId).textContent = providerList.join("    -     ");
       });
