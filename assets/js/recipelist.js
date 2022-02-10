@@ -93,8 +93,33 @@ var createRecipe = function (data, recipeName) {
     recipeSectionEl.appendChild(recipeBodyEl);
     var newLineEl = document.createElement("br");
     recipeSectionEl.appendChild(newLineEl);
+
+// creating select button
+    var selectRecipeBtnEl = document.createElement("button");
+    selectRecipeBtnEl.textContent = "Select Recipe";
+    selectRecipeBtnEl.setAttribute("name", recipeName);
+    selectRecipeBtnEl.classList = "button is-success is-rounded";
+
+    cardContentEl.appendChild(cardTitleContEl);
+    cardContentEl.appendChild(selectRecipeBtnEl);
+    cardContainerEl.appendChild(cardContentEl);
+    recipeBodyEl.appendChild(cardContainerEl);
   }
   
 };
+
+// save the recipeName in localStorage
+var saveAndGoToYourDate = function(event) {
+  recipeName = event.target.name;
+  // console.log("selected recipe is ",name);
+
+  localStorage.setItem("recipeName", recipeName);
+
+  document.location.replace("./date-ready.html")
+
+}
+
+var selectRecipe = document.addEventListener("click", saveAndGoToYourDate);
+
 
 
