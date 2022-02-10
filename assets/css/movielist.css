@@ -9,6 +9,7 @@
 .card-content {
     display: block;
     text-align: left;
+    height: 375px;
 }
 
 .subHeader {
