@@ -11,6 +11,10 @@
   text-align: left;
 }
 
+.card-content {
+  height: 192px;
+}
+
 .subHeader {
   text-align: center;
 }
