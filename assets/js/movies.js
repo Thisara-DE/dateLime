@@ -1,22 +1,16 @@
-var queryString = document.location.search;
-var userClickedGenre = '';
 var goBtn = document.querySelector("#goBtn");
-var genre = document.getElementsByClassName("genre");
-var action = document.getElementsById("28");
+
+// Genre id tags
+var action = document.getElementById("28");
 var drama = document.getElementById("18");
 var comedy = document.getElementById("35");
 var horror = document.getElementById("27");
 
-// genre IDs are contained within obj
-// var id = {
-//     'Action': 28,
-
-//     "Comedy": 35,
-
-//     "Drama": 18,
-
-//     "Horror": 27,
-// };
+// Rating id tags
+var g = document.getElementById("1");
+var pg = document.getElementById("2");
+var pg13 = document.getElementById("3");
+var r = document.getElementById("4");
 
 var saveID = function() {
     var saved = document.querySelector("input:checked").value;
@@ -25,28 +19,20 @@ var saveID = function() {
     console.log(saved);
 };
 
-// parse genre and rating ids into query params
-// function parseQuery(queryString) {
-//     var query = id;
-//     var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-//     for (var i = 0; i < genre.length; i++) {
-//         var pair = pairs[i].split('=');
-//         query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
-//     }
-//     console.log(query);
-//     return query;
-// };
-
 // link to movielist page
-var goToNewPage = function(goBtn) {
+var goToNewPage = function() {
+
+    var url = url("http://127.0.0.1:5501/movielist.html?info=3,14&genre=");
 
     // turn goBtn into a hyperlink to movielist page
     var link = document.createElement("a");
-    link.setAttribute("href", "./movielist.html" + action + "?info=3,14");
+    link.setAttribute("href", url);
+    URLSearchParams.append("Action", action);
     link.setAttribute("target", "_blank");
-    goBtn.appendChild(link);
-}
+    
 
-parseQuery();
-goBtn.addEventListener("click", goToNewPage());
+    
+};
+
 saveID();
+goBtn.addEventListener("click", goToNewPage());
