@@ -155,7 +155,7 @@ var getMovieObject = function (certId, genreId) {
     });
 };
 // 
-// getMovieObject(4, 878);
+ getMovieObject(4, 14);
 
 // gets the highest rating 20 movies for a given genre and certification
 var createMovie = function (data, cert) {
