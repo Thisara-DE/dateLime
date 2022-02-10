@@ -42,12 +42,12 @@
 // var data = localStorage.getItem('myDataKey');
 
 function getRecipes() {
-	fetch("https://tasty.p.rapidapi.com/recipes/list?from=0&size=4&tags=under_30_minutes", {
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "tasty.p.rapidapi.com",
-			"x-rapidapi-key": "c932fbbb24mshb43abde3fc25cffp11cacajsnae76ac16d611"
-		}
+	fetch("https://tasty.p.rapidapi.com/recipes/list?from=0&size=4&tags=under_30_minutes&q=chicken", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "tasty.p.rapidapi.com",
+		"x-rapidapi-key": "c932fbbb24mshb43abde3fc25cffp11cacajsnae76ac16d611"
+	}
 	})
 	.then(response => {
 		if (!response.ok) {
@@ -63,6 +63,7 @@ function getRecipes() {
 			<div class="list">
 				<p class="image"><img src="${results.thumbnail_url}" /></p>
 				<p class="name">${results.name}</p>
+				<a class="button is-rounded is-medium is-responsive is-primary" href=./date-ready.html id="select-btn">Select</a>
 			</div>
 			`;
 		})
