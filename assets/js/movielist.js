@@ -296,4 +296,3 @@ var saveAndGoToRecipe = function(event) {
 }
 
 var selectMovie = document.addEventListener("click", saveAndGoToRecipe);
-
