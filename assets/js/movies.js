@@ -12,6 +12,12 @@ var pg = document.getElementById("PG");
 var pg13 = document.getElementById("PG-13");
 var r = document.getElementById("R");
 
+var userClickedGenere = '';
+
+var genres = {
+    'Action': 28,
+}
+
 function parseQuery(queryString) {
     var query = {};
     var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
@@ -23,9 +29,16 @@ function parseQuery(queryString) {
 
 }
 
-if (action === "clicked") {
-    
+var checkboxes = document.getElementsByClassName('checkbox');
+
+for(var i = 0; i < checkboxes.length; i++){
+    checkboxes[i].addEventListener('click', function(){
+
+         userClickedGenere = this.value;
+         console.log(userClickedGenere)
+    })
 }
 
-
-console.log("query params from url",parseQuery(queryString));
+document.getElementById('gobtn').addEventListener('click', function(){
+    console.log(genres.userClickedGenere)
+})
