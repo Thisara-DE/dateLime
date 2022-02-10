@@ -121,9 +121,6 @@ var UsCerts = [
 
 var movieIdArr = [];
 
-
-
-
 // get movie object info from genre ID
 //var apiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=8269c18eac650b276376132ecb76ecf7&language=en-US&sort_by=popularity.desc&certification=US&certification.lte=" + certId + "&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "&with_watch_monetization_types=free"
 
@@ -222,6 +219,7 @@ var createMovie = function (data, cert) {
 
     var SubTitleEl = document.createElement("p");
     SubTitleEl.classList = "subtitle is-6";
+    SubTitleEl.setAttribute("id", certification);
     SubTitleEl.textContent = certification;
 
     
@@ -287,9 +285,12 @@ var getWatchProviders = function (movieId) {
 // save the movieId in localStorage
 var saveAndGoToRecipe = function(event) {
     movieId = event.target.id;
+    
     // console.log("selected movie ID is ",movieId);
 
     localStorage.setItem("movieId", movieId);
+    // var certification = document.getElementById(this.certification).textContent;
+    // localStorage.setItem("cert", certification);
 
     document.location.replace("./recipelist.html")
 
