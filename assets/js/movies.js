@@ -1,44 +1,41 @@
 var queryString = document.location.search;
+console.log(queryString);
+var userClickedGenre = '';
+var goBtn = document.querySelector("#goBtn");
+var genre = document.getElementsByClassName("genre");
 
-// Genre button choices
-var action = document.getElementById("action");
-var drama = document.getElementById("drama");
-var comedy = document.getElementById("comedy");
-var horror = document.getElementById("horror");
-
-// Rating button choices 
-var g = document.getElementById("G");
-var pg = document.getElementById("PG");
-var pg13 = document.getElementById("PG-13");
-var r = document.getElementById("R");
-
-var userClickedGenere = '';
-
-var genres = {
+// genre IDs are contained within obj
+var id = {
     'Action': 28,
-}
 
+    "Comedy": 35,
+
+    "Drama": 18,
+
+    "Horror": 27,
+};
+
+// parse genre and rating ids into query params
 function parseQuery(queryString) {
-    var query = {};
+    var query = id;
     var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    for (var i = 0; i < pairs.length; i++) {
+    for (var i = 0; i < genre.length; i++) {
         var pair = pairs[i].split('=');
         query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
     }
+    console.log(query);
     return query;
+};
 
+// link to movielist page
+var goToNewPage = function(goBtn) {
+
+    // turn goBtn into a hyperlink to movielist page
+    var link = document.createElement("a");
+    link.setAttribute("href", "http://127.0.0.1:5501/movielist.html?info=3,14");
+    link.setAttribute("target", "_blank");
+    goBtn.appendChild(link);
 }
 
-var checkboxes = document.getElementsByClassName('checkbox');
-
-for(var i = 0; i < checkboxes.length; i++){
-    checkboxes[i].addEventListener('click', function(){
-
-         userClickedGenere = this.value;
-         console.log(userClickedGenere)
-    })
-}
-
-document.getElementById('gobtn').addEventListener('click', function(){
-    console.log(genres.userClickedGenere)
-})
+parseQuery();
+goBtn.addEventListener("click", goToNewPage());
