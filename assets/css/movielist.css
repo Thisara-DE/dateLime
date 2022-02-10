@@ -27,6 +27,7 @@ body {
 
 .card-content {
     height: 375px;
+    overflow: hidden;
 }
 
 
