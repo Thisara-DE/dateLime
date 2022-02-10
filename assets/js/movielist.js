@@ -163,7 +163,7 @@ var getCertGenreIds = function(){
 }
 getCertGenreIds();
 
-// getMovieObject(3, 14);
+getMovieObject(3, 14);
 
 // gets the highest rating 20 movies for a given genre and certification
 var createMovie = function (data, cert) {
