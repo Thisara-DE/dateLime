@@ -122,10 +122,7 @@ var UsCerts = [
 var movieIdArr = [];
 
 
-// getting the certId and genreId from the url
-var getCertGenreIds = function(){
-    var queryString = document.location.search;
-}
+
 
 // get movie object info from genre ID
 //var apiUrl = "https://api.themoviedb.org/3/discover/movie?api_key=8269c18eac650b276376132ecb76ecf7&language=en-US&sort_by=popularity.desc&certification=US&certification.lte=" + certId + "&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "&with_watch_monetization_types=free"
@@ -154,8 +151,19 @@ var getMovieObject = function (certId, genreId) {
       alert("Unable to connect to the Movie Database");
     });
 };
-// 
-// getMovieObject(4, 878);
+
+// getting the certId and genreId from the url
+var getCertGenreIds = function(){
+    var queryString = document.location.search;
+    var certAndGenre = queryString.split("=")[1];
+    var cert = certAndGenre.split(",")[0];
+    var genre = certAndGenre.split(",")[1];
+    // console.log(cert,genre);
+    getMovieObject(cert,genre);
+}
+getCertGenreIds();
+
+// getMovieObject(3, 14);
 
 // gets the highest rating 20 movies for a given genre and certification
 var createMovie = function (data, cert) {
@@ -166,9 +174,9 @@ var createMovie = function (data, cert) {
     var posterPath = data.results[i].poster_path;
     var posterUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
     var movieId = data.results[i].id;
-    movieIdArr.push(movieId);
-    // ingest movieId into the movieIdArr
     
+    // ingest movieId into the movieIdArr
+    movieIdArr.push(movieId);    
 
     // Creating DOM elements
     var providerEl = document.createElement("strong");
@@ -276,4 +284,16 @@ var getWatchProviders = function (movieId) {
   });
 };
 
-// getWatchProviders(524434);
+// save the movieId in localStorage
+var saveAndGoToRecipe = function(event) {
+    movieId = event.target.id;
+    // console.log("selected movie ID is ",movieId);
+
+    localStorage.setItem("movieId", movieId);
+
+    document.location.replace("./recipelist.html")
+
+}
+
+var selectMovie = document.addEventListener("click", saveAndGoToRecipe);
+
