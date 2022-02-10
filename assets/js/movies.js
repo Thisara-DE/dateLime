@@ -2,6 +2,10 @@ var queryString = document.location.search;
 var userClickedGenre = '';
 var goBtn = document.querySelector("#goBtn");
 var genre = document.getElementsByClassName("genre");
+var action = document.getElementsById("28");
+var drama = document.getElementById("18");
+var comedy = document.getElementById("35");
+var horror = document.getElementById("27");
 
 // genre IDs are contained within obj
 // var id = {
@@ -15,18 +19,10 @@ var genre = document.getElementsByClassName("genre");
 // };
 
 var saveID = function() {
+    var saved = document.querySelector("input:checked").value;
+    localStorage.setItem("saved", saved);
 
-    var action = document.getElementsById("28");
-    var drama = document.getElementById("18");
-    var comedy = document.getElementById("35");
-    var horror = document.getElementById("27");
-    
-    if (action === "click") {
-        localStorage.setItem(action.textcontent);
-        console.log(action);
-    }
-    
-
+    console.log(saved);
 };
 
 // parse genre and rating ids into query params
@@ -46,7 +42,7 @@ var goToNewPage = function(goBtn) {
 
     // turn goBtn into a hyperlink to movielist page
     var link = document.createElement("a");
-    link.setAttribute("href", "./movielist.html?info=3,14");
+    link.setAttribute("href", "./movielist.html" + action + "?info=3,14");
     link.setAttribute("target", "_blank");
     goBtn.appendChild(link);
 }
