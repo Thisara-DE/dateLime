@@ -21,6 +21,11 @@
 
 body {
     background-color: #23d160;
-    height: 100vh;
+    height: 100%;
 }
 
+.content {   
+    height: 210px;
+    overflow: hidden; 
+    
+}
