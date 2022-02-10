@@ -1,3 +1,5 @@
+var movieSectionElement = document.querySelector("#movie-section")
+
 // genre object
 var genres = [
     {
@@ -140,43 +142,107 @@ getMovieObject(5, 14);
 
 // gets the highest rating 20 movies for a given genre and certification
 var createMovie = function(data, cert) {
-    console.log(data.results.length);
+    
     for(var i = 0; i < data.results.length; i++) {
     var movieTitle = data.results[i].original_title;
     var certification = cert;    
     var plot = data.results[i].overview;
     var posterPath = data.results[i].poster_path;
+    var posterUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
     var movieId = data.results[i].id;
-    // ingest movie IDs into the movieIdArr
-                                                         
+    // ingest movieId into the movieIdArr
+    
+    
+    // Creating DOM elements
+    var movieBodyEl = document.createElement("div");
+    movieBodyEl.classList = "column is-half"; 
 
-    getMoviePoster(posterPath);
+    var cardContainerEl = document.createElement("div");
+    cardContainerEl.className = "card";
+    cardContainerEl.setAttribute("id", "card-container");
 
-    console.log(movieTitle);
-    console.log(certification);
-    console.log(plot);
-    console.log(certification);  
-    console.log(movieId);  
+    var cardEl = document.createElement("div");
+    cardEl.className = "card-image";
+    cardEl.setAttribute("id", "image-container")
+
+    //creating the poster
+    var ImgContEl = document.createElement("figure");
+    ImgContEl.classList = "image is-128x128";
+    ImgContEl.setAttribute("id", "card-image");
+
+    var posterEl = document.createElement("img");
+    posterEl.setAttribute("src", posterUrl);
+    
+    ImgContEl.appendChild(posterEl);
+    cardEl.appendChild(ImgContEl);
+    cardContainerEl.appendChild(cardEl);
+
+    // creating title and subtitle
+    var cardContentEl = document.createElement("div");
+    cardContentEl.setAttribute("id", "content");
+    cardContentEl.className = "card-content";
+
+    var cardTitleContEl = document.createElement("div");
+    cardTitleContEl.className = "media-content";
+    cardTitleContEl.setAttribute("id", "title-sec");
+
+    var titleEl = document.createElement("p");
+    titleEl.classList = "title is-4";
+    titleEl.textContent = movieTitle;
+
+    var SubTitleEl = document.createElement("p");
+    SubTitleEl.classList = "subtitle is-6";
+    SubTitleEl.textContent = certification;
+
+    cardTitleContEl.appendChild(titleEl);
+    cardTitleContEl.appendChild(SubTitleEl);
+
+    // creating plot
+    var plotEl = document.createElement("div");
+    plotEl.className = "content";
+    plotEl.textContent = plot;
+
+    cardContentEl.appendChild(cardTitleContEl);
+    cardContentEl.appendChild(plotEl);
+
+    
+    cardContainerEl.appendChild(cardContentEl);    
+    movieBodyEl.appendChild(cardContainerEl);
+    // console.log(movieTitle);
+    // console.log(certification);
+    // console.log(plot);
+    // console.log(certification);  
+    // console.log(posterUrl);  
     };
+    
+    
+    
+
 }
 
-// get movie poster by poster path
-// var apiURL = "http://image.tmdb.org/t/p/w300" + poster-path
-var getMoviePoster = function(posterPath) {
-    var apiUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
-    console.log(apiUrl);
-}
+
 
 // get movies by watch providers
 // need to capture movie IDs from createMovie and save it in the movieIdArr
-// var apiUrl = "https://api.themoviedb.org/3/movie/" + movieId "/watch/providers?api_key=8269c18eac650b276376132ecb76ecf7"
+// var apiUrl = "https://api.themoviedb.org/3/movie/" + movieId + "/watch/providers?api_key=8269c18eac650b276376132ecb76ecf7"
 // create a data object to be sent to the createMovie function and it will create movie elements in the DOM
 
-var getWatchProviders = function() {
-    
+var getWatchProviders = function(movieId) {
+    var apiUrl = "https://api.themoviedb.org/3/movie/" + movieId + "/watch/providers?api_key=8269c18eac650b276376132ecb76ecf7"
+
+    fetch(apiUrl)
+        .then(function(response){
+            if(response.ok) {
+                response.json().then(function(data) {
+                    console.log(data.results.US.flatrate);
+                });
+            } else {
+                alert("Sorry, we couldn't find providers for the movies");
+            }
+        })
 }
 
-
+getWatchProviders(460465);
 
 
 
