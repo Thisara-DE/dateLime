@@ -23,9 +23,5 @@ function parseQuery(queryString) {
 
 }
 
-if (action === "clicked") {
-    
-}
-
-
 console.log("query params from url",parseQuery(queryString));
+

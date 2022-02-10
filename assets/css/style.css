@@ -5,3 +5,8 @@
 .title {
   font-size: 150px;
 }
+
+body {
+  background-color: #23d160;
+  height: 100vh;
+}
