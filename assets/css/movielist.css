@@ -9,6 +9,7 @@
 .card-content {
     display: block;
     text-align: left;
+    height: 375px;
 }
 
 .subHeader {
@@ -21,6 +22,20 @@
 
 body {
     background-color: #23d160;
-    height: 100vh;
+    height: 100%;
 }
 
+.card-content {
+    height: 375px;
+}
+
+
+.content {   
+    overflow: hidden; 
+}
+
+@media only screen and (max-width: 1280px) {
+    .card-content {
+      height: 535px;
+    }
+  }

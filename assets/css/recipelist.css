@@ -12,15 +12,6 @@
 }
 
 .subHeader {
-    text-align: center;
-}
-
-body {
-    background-color: #23d160;
-    height: 100vh;
-}
-
-.subHeader {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -28,3 +19,13 @@ body {
     height: 150px;
 }
 
+body {
+    background-color: #23d160;
+    height: 100%;
+}
+
+.content {   
+    height: 210px;
+    overflow: hidden; 
+    
+}

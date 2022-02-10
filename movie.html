@@ -5,59 +5,111 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/movie.css">
 
-    <title>DateLime</title>
+    <title>dateLime</title>
 </head>
+
 <body>
 
-    <h2>What kind of movie do you want to see?</h2>
-    <form>
-    <h3 class="button is-normal is-rounded">Genre</h3>
-    <label >
-        <input type="checkbox" class="genre" id="28" >
-        Action
-    </label>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="index.html">
+            <h1>dateLime</h1>
+          </a>
+    
+        </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-success is-rounded" href="your-dates.html">
+                  <strong>Your Saved Dates</strong>
+                </a>
+                <a class="button is-light is-rounded">
+                  Our Team
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </nav>
 
-    <label>
-        <input type="checkbox" class="genre" id="35">
-        Drama
-    </label>
+    <div class="container">
+        <div class="subHeader"> 
+          <h1 class="title has-text-white is-size-1">What kind of movie do you want to see?</h1>
+        </div>
+    </div>
 
-    <label>
-        <input type="checkbox" class="genre" id="18">
-        Comedy
-    </label>
+    <div class="container">
+        <div class="subHeader" id="sub1"> 
+          <h1 class="title has-text-white is-size-3">Genre</h1>
+        </div>
+    </div>
 
-    <label>
-        <input type="checkbox" class="genre" id="27">
-        Horror
-    </label>
+    <form class="container has-text-centered">
 
-    <form>
-        <h3 class="button is-normal is-rounded">Rating</h3>
-        <label>
-            <input type="checkbox" class="rating">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
+            Action
+        </label>
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
+            Drama
+        </label>
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
+            Comedy
+        </label>
+    
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
+            Horror
+        </label>
+
+    </form>
+
+    <div class="container">
+        <div class="subHeader" id="sub2"> 
+          <h1 class="title has-text-white is-size-3">Rating</h1>
+        </div>
+    </div>
+
+    <form class="container has-text-centered">
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
             G
         </label>
     
-        <label>
-            <input type="checkbox" class="rating">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
             PG
         </label>
     
-        <labe>
-            <input type="checkbox" class="rating">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
             PG-13
         </label>
     
-        <label>
-            <input type="checkbox" class="rating">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer">
             R
         </label>
     </form>
 
-    <button class="button is-normal is rounded" id="goBtn">Let's Go!</button>
+    <div class="container has-text-centered" id="btn-container">
+        <div class="subheader">
+          <a class="button is-rounded is-success is-outlined is-inverted is-size-4" id="save-btn" href="movielist.html">
+            Let's Go!
+          </a>
+        </div>
+      </div>  
     
     <script src="./assets/js/movies.js"></script>
 </body>
