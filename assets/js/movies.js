@@ -4,15 +4,15 @@ var goBtn = document.querySelector("#goBtn");
 var genre = document.getElementsByClassName("genre");
 
 // genre IDs are contained within obj
-var id = {
-    'Action': 28,
+// var id = {
+//     'Action': 28,
 
-    "Comedy": 35,
+//     "Comedy": 35,
 
-    "Drama": 18,
+//     "Drama": 18,
 
-    "Horror": 27,
-};
+//     "Horror": 27,
+// };
 
 var saveID = function() {
 
