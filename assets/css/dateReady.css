@@ -9,6 +9,7 @@
 .card-content {
   display: block;
   text-align: left;
+  overflow: hidden;
 }
 
 .card-content {
