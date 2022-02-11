@@ -1,6 +1,4 @@
 var recipeSectionEl = document.querySelector("#recipe-section");
-var recipeNameArr = [];
-
 
 var getRecipeObject = function () {
   
