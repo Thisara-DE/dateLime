@@ -149,14 +149,18 @@ var getRecipeObject = function () {
 getRecipeObject();
 
 // gets recipe from local
-var recipeName = localStorage.getItem(recipeName)
-var createRecipe = function (data, recipeName) {
+
+var createRecipe = function (recipeName) {
+	var recipeTitle = (localStorage.getItem("recipeName")).replace('"', "").replace('"', "")
+
+console.log(typeof JSON.stringify(localStorage.getItem("recipeName")).toString())
+var thumbnailUrl = JSON.stringify(localStorage.getItem("recipeUrl")).replace('"', "").replace('"', "")
   console.log("createRecipe is being run");
 
 // Dom elements
 
     var recipeBodyEl = document.createElement("div");
-    recipeBodyEl.classList = "column is-half";
+    recipeBodyEl.classList = "column";
 
     var cardContainerEl = document.createElement("div");
     cardContainerEl.className = "card";
@@ -189,7 +193,7 @@ var createRecipe = function (data, recipeName) {
 
     var titleEl = document.createElement("p");
     titleEl.classList = "title is-4";
-    titleEl.textContent = recipeName;
+    titleEl.textContent = JSON.stringify(recipeTitle);
 
     cardTitleContEl.appendChild(titleEl);
 
@@ -198,10 +202,10 @@ var createRecipe = function (data, recipeName) {
 // creating instructions
     var instructionsEl = document.createElement("div");
     instructionsEl.className = "content";
-    instructionsEl.textContent = instructions;
+   // instructionsEl.textContent = instructions;
 
     cardContentEl.appendChild(cardTitleContEl);
-    cardContentEl.appendChild(instructionsEl);
+   // cardContentEl.appendChild(instructionsEl);
 
     cardContainerEl.appendChild(cardContentEl);
     recipeBodyEl.appendChild(cardContainerEl);

@@ -24,6 +24,9 @@ var getRecipeObject = function () {
       alert("Error");
     });
 };
+
+
+
 getRecipeObject();
 
 // gets the first 20 recipes for a given genre and certification
@@ -32,7 +35,10 @@ var createRecipe = function (data, recipeName) {
 
   for (var i = 0; i < data.results.length; i++) {
     var recipeName = data.results[i].name;
-    var instructions = data.results[i].instructions;
+    var recipeUrl = data.results[i].thumbnail_url;
+    var instructions = data.results[i].instructions.map((instruction, index) => {
+      return (index + 1) + ". " + instruction.display_text;
+    });
     var thumbnailUrl = data.results[i].thumbnail_url;
     
 
@@ -76,12 +82,10 @@ var createRecipe = function (data, recipeName) {
 
     cardTitleContEl.appendChild(titleEl);
 
-   
-
 // creating instructions
     var instructionsEl = document.createElement("div");
     instructionsEl.className = "content";
-    instructionsEl.textContent = instructions;
+    instructionsEl.innerHTML = instructions.join("<br> <br>");
 
     cardContentEl.appendChild(cardTitleContEl);
     cardContentEl.appendChild(instructionsEl);
@@ -96,6 +100,7 @@ var createRecipe = function (data, recipeName) {
     var selectRecipeBtnEl = document.createElement("button");
     selectRecipeBtnEl.textContent = "Select Recipe";
     selectRecipeBtnEl.setAttribute("name", recipeName);
+    selectRecipeBtnEl.setAttribute("data-url", recipeUrl);
     selectRecipeBtnEl.classList = "button is-success is-rounded";
 
     cardContentEl.appendChild(cardTitleContEl);
@@ -109,9 +114,11 @@ var createRecipe = function (data, recipeName) {
 // save the recipeName in localStorage
 var saveAndGoToYourDate = function(event) {
   recipeName = event.target.name;
+  var recipeUrl = event.target.dataset.url;
   // console.log("selected recipe is ",name);
 
-  localStorage.setItem("recipeName", recipeName);
+  localStorage.setItem("recipeName", recipeName); 
+  localStorage.setItem("recipeUrl", recipeUrl);
 
   document.location.replace("./date-ready.html")
 
