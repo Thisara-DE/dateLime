@@ -1,27 +1,22 @@
-var queryString = document.location.search;
+var goBtn = document.querySelector("#save-btn");
 
-// Genre button choices
-var action = document.getElementById("action");
-var drama = document.getElementById("drama");
-var comedy = document.getElementById("comedy");
-var horror = document.getElementById("horror");
+var genreClass = document.getElementsByClassName("genre");
 
-// Rating button choices 
-var g = document.getElementById("G");
-var pg = document.getElementById("PG");
-var pg13 = document.getElementById("PG-13");
-var r = document.getElementById("R");
+// link to movielist page
+var goToNewPage = function(certId, genreId) {
 
-function parseQuery(queryString) {
-    var query = {};
-    var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    for (var i = 0; i < pairs.length; i++) {
-        var pair = pairs[i].split('=');
-        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
-    }
-    return query;
+    var url = "./movielist.html?info=" + certId + "," + genreId
 
-}
+    window.location.href = url;
+};
 
-console.log("query params from url",parseQuery(queryString));
+goBtn.addEventListener("click", function(){
 
+    var certInput = document.querySelector(".rating:checked").id;
+
+    var genreInput = document.querySelector(".genre:checked").id;
+
+    console.log("Let's go Clicked", certInput, genreInput);
+
+    goToNewPage(certInput, genreInput)
+});

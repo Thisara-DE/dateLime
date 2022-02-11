@@ -15,13 +15,24 @@
 
 <body>
 
-    <h2>What kind of movie do you want to see?</h2>
-    <form>
-    <h3 class="button is-normal is-rounded">Genre</h3>
-    <label class="checkbox" id="action">
-        <input type="checkbox" >
-        Action
-    </label>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="index.html">
+            <h1><a href="./index.html">dateLime</a></h1>
+          </a>
+    
+        </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-light is-rounded" href="/our-team.html">
+                  Our Team
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </nav>
 
     <label class="checkbox" id="drama">
         <input type="checkbox" >
@@ -38,34 +49,63 @@
         Horror
     </label>
 
-    <form>
-        <h3 class="button is-normal is-rounded">Rating</h3>
-        <label class="checkbox" id="G">
-            <input type="checkbox">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="genre" id="28">
+            Action
+        </label>
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="genre" id="18">
+            Drama
+        </label>
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="genre" id="35">
+            Comedy
+        </label>
+    
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="genre" id="27">
+            Horror
+        </label>
+
+    </form>
+
+    <div class="container">
+        <div class="subHeader" id="sub2"> 
+          <h1 class="title has-text-white is-size-3">Rating</h1>
+        </div>
+    </div>
+
+    <form class="container has-text-centered">
+
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="rating" id="1">
             G
         </label>
     
-        <label class="checkbox" id="PG">
-            <input type="checkbox">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="rating" id="2">
             PG
         </label>
     
-        <label class="checkbox" id="PG-13">
-            <input type="checkbox">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="rating" id="3">
             PG-13
         </label>
     
-        <label class="checkbox" id="R">
-            <input type="checkbox">
+        <label class="radio is-size-4">
+            <input type="radio" name="answer" class="rating" id="4">
             R
         </label>
     </form>
 
     <div class="container has-text-centered" id="btn-container">
         <div class="subheader">
-          <a class="button is-rounded is-success is-outlined is-inverted is-size-4" id="save-btn" href="movielist.html">
+          <div class="button is-rounded is-success is-outlined is-inverted is-size-4" id="save-btn">
             Let's Go!
-          </a>
+          </div>
         </div>
       </div>  
     
