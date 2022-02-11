@@ -14,3 +14,20 @@ your guide to date night planning
 4. Once the user selects the recipe, the next page will launch displaying both the movie and the recipe that the user selected and provide them with a date package. The information provided is the exact same from each of the pages (movie & recipe)
 
 This project was created by Cha Vue, Ryan Harris, Sonja Watson, Thisara M A, Will Yazdani
+
+## Website
+
+https://sonarie.github.io/Seven/
+
+
+<img src="assets\images\Screenshot-landing page.png" alt="Picture of the website's landing page"/>
+
+
+## Contribution
+
+* ThisaraMallawaArachchige
+* chavue91
+* WillYazdani
+* rharris529
+
+ 
