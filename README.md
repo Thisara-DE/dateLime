@@ -17,7 +17,7 @@ This project was created by Cha Vue, Ryan Harris, Sonja Watson, Thisara M A, Wil
 
 ## Website
 
-https://sonarie.github.io/Seven/
+https://thisaramallawaarachchige.github.io/dateLime/
 
 
 <img src="assets\images\Screenshot-landing page.png" alt="Picture of the website's landing page"/>
