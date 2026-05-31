@@ -1,33 +1,91 @@
-# dateLime
-your guide to date night planning
+# 🍿🍽️ dateLime
 
-1. This webpage allows users to select basic movie filter options of 1. Genre & 2. Rating. Once selected and launched a list of movies that match that specific the options the user selected. 
+> **Your Guide to Perfect Date Night Planning**
 
-2. The list of movies contain an image, the title, the rating and a brief description of the movie. The user will have the option to select the movie they would like to watch.
-  
-  a. The list of movies is provided by using The Movie DB API, as this API allowed us to narrow the search criteria to genre and rating, while populating the information we are looking for.
+Plan the ultimate date night by pairing curated movies with delicious recipes. Choose your favorite movie genre and rating, discover paired recipes, and get a complete date package—all in one place!
 
-3. Once the user has selected a movie, the next page will launch, providing the user with a list of recipes to choose from that would match the movie style. The recipe's display a picture of the food as well as a name of what the food is. 
+---
 
-  a. the list of recipes is provided by the Tasty API, as this API allowed us to narrow down the dietary option that we will install later in the program, while populating the information we are looking for
+## ✨ Features
 
-4. Once the user selects the recipe, the next page will launch displaying both the movie and the recipe that the user selected and provide them with a date package. The information provided is the exact same from each of the pages (movie & recipe)
+### 🎬 Smart Movie Discovery
+- Filter movies by **genre** and **rating**
+- Browse stunning movie posters and descriptions
+- View detailed ratings and information
 
-This project was created by Cha Vue, Ryan Harris, Sonja Watson, Thisara M A, Will Yazdani
+### 🍳 Recipe Recommendations
+- Get recipes matched to your movie's vibe
+- Filter recipes by dietary preferences
+- Discover culinary pairings for your film choice
 
-## Website
+### 📋 Complete Date Package
+- See your full date night plan at a glance
+- Movie and recipe pairing suggestions
+- Everything you need for a perfect evening
 
-https://thisara-de.github.io/dateLime/
+---
 
+## 🚀 How It Works
 
-<img src="assets\images\Screenshot-landing page.png" alt="Picture of the website's landing page"/>
+1. **Select Your Movie**
+   - Choose a genre and rating preference
+   - Browse from curated options powered by The Movie DB API
 
+2. **Pick Your Recipe**
+   - Find recipes that match your movie's style
+   - Filter by dietary requirements
+   - Get inspiration from the Tasty API
 
-## Contribution
+3. **Get Your Date Package**
+   - View your complete date night plan
+   - Movie details + recipe pairing
+   - Ready to impress!
 
-* ThisaraMallawaArachchige
-* chavue91
-* WillYazdani
-* rharris529
+---
 
- 
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML, CSS, JavaScript
+- **APIs**: 
+  - [The Movie DB API](https://www.themoviedb.org/settings/api) — Movie data & filtering
+  - [Tasty API](https://rapidapi.com/apidojo/api/tasty) — Recipe discovery
+
+---
+
+## 🌐 Live Demo
+
+👉 **[Visit dateLime](https://thisara-de.github.io/dateLime/)**
+
+---
+
+## 📸 Preview
+
+![dateLime Landing Page](assets/images/Screenshot-landing%20page.png)
+
+---
+
+## 👥 Meet the Team
+
+Built with ❤️ by:
+
+- **Cha Vue** – [@chavue91](https://github.com/chavue91)
+- **Ryan Harris** – [@rharris529](https://github.com/rharris529)
+- **Sonja Watson** – [@Sonarie](https://github.com/Sonarie)
+- **Thisara M A** – [@Thisara-DE](https://github.com/Thisara-DE)
+- **Will Yazdani** – [@WillYazdani](https://github.com/WillYazdani)
+
+---
+
+## 📝 License
+
+This project is open source and available to the community.
+
+---
+
+## 💡 Contributing
+
+Interested in improving dateLime? We'd love to see your contributions! Feel free to fork this repository and submit a pull request.
+
+---
+
+**Made with 🍿🍷 by the dateLime team**
