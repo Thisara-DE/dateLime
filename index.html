@@ -1,60 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>dateLime · Dinner and a movie, for two</title>
+  <meta name="description" content="Plan a date night in: pick a movie, get a recipe that matches its vibe, and share the plan with your date.">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#140F1A">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0xToGsakv4SSw1Hvg1s6lD1q4thdpY+kTKLbMdE1Oeo='; style-src 'self'; img-src 'self' data: blob: https://image.tmdb.org https://www.themealdb.com https://www.thecocktaildb.com; connect-src 'self' https://api.themoviedb.org https://www.themealdb.com https://www.thecocktaildb.com; font-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 
-    <title>dateLime</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="dateLime · Dinner and a movie, for two">
+  <meta property="og:description" content="Pick tonight's movie. We'll pair a dinner with its mood and hand you a ticket for two.">
+  <meta property="og:url" content="https://thisara-de.github.io/dateLime/">
+  <meta property="og:image" content="https://thisara-de.github.io/dateLime/assets/img/icon-512.png">
+
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/roboto-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://api.themoviedb.org" crossorigin>
+  <link rel="preconnect" href="https://image.tmdb.org">
+
+  <script>(()=>{let t;try{t=localStorage.getItem('datelime.theme')}catch{}if(t!=='dark'&&t!=='light'){const h=new Date().getHours();t=matchMedia('(prefers-color-scheme: dark)').matches||h>=18||h<6?'dark':'light'}document.documentElement.dataset.theme=t})()</script>
+
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/views.css">
+  <link rel="modulepreload" href="assets/js/main.js">
+  <script type="module" src="assets/js/main.js"></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main" data-skip-link>Skip to content</a>
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" id="dateLime-logo" href="./index.html">
-            <h1><a href="index.html">dateLime</a></h1>
-          </a>
-
-        </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-light is-rounded" href="./our-team.html">
-                  Our Team
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand-link" href="#/" data-home-link aria-label="dateLime, home"></a>
+      <nav class="site-nav" aria-label="Main">
+        <a class="nav-link nav-link--desktop" href="#/movies" data-nav="/movies">Plan a date</a>
+        <a class="nav-link" href="#/dates" data-nav="/dates">Your dates <span class="count" data-saved-count hidden></span></a>
+        <a class="nav-link nav-link--desktop" href="#/team" data-nav="/team">Team</a>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Theme"></button>
       </nav>
+    </div>
+  </header>
 
-      <section class="hero is-success is-fullheight">
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <h1 class="title">
-              dateLime
-            </h1>
-            <p class="subtitle is-size-3">
-              Your Guide to Date Night Planning.
-            </p>
-            <a class="button is-rounded is-success is-outlined is-inverted is-size-4" id="start-btn" href="movie.html">
-                Start Your Date Here!
-            </a>
-          </div>
-        </div>
-      </section>
+  <main id="main" tabindex="-1">
+    <noscript>
+      <div class="state">
+        <h1>dateLime needs JavaScript</h1>
+        <p>We fetch movies from TMDB and recipes from TheMealDB in your browser. Please enable JavaScript to plan your date.</p>
+      </div>
+    </noscript>
+  </main>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-      <script src="assets/js/script.js"></script>
-    
-    
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__links">
+        <a href="#/team">Team</a>
+        <a href="#/dates">Your dates</a>
+        <a href="#/rules">House rules</a>
+        <span data-theme-choice></span>
+      </div>
+      <div class="credits">
+        <p>This product uses the TMDB API but is not endorsed or certified by TMDB. Streaming data by JustWatch.</p>
+        <p>Recipes from TheMealDB, drinks from TheCocktailDB.</p>
+        <p>Made by a team of five in 2022, remastered in 2026.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

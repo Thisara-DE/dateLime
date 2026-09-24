@@ -1,0 +1,217 @@
+/* dateLime design tokens: "Limelight × Couch-Proof" (see docs/design/06-design-language.md).
+   Every text/UI pairing is contrast-tested in tests/unit/contrast.test.js.
+   Themes: "Late Show" (dark) and "Matinee" (light). index.html's boot script always sets
+   data-theme; without JS the page stays in Late Show. */
+
+@layer tokens {
+  :root {
+    /* Lime scale built around the original dateLime green, #23D160 (400). */
+    --lime-50: #ecfbf1;
+    --lime-100: #d3f6df;
+    --lime-200: #a8edc0;
+    --lime-300: #6fe19a;
+    --lime-400: #23d160;
+    --lime-500: #1db553;
+    --lime-600: #178f42;
+    --lime-700: #106b31;
+    --lime-800: #0c5226;
+    --lime-900: #083b1b;
+    --heritage-lime: #23d160;
+    --velvet: #140f1a;
+    --ink: #1a1420;
+    --paper: #f7f0e4;
+
+    /* Type */
+    --font-body: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-label: 'Roboto Condensed', 'Condensed Fallback', 'Arial Narrow', sans-serif;
+    --font-heading: var(--font-label);
+    --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;
+    --text-display: clamp(4.5rem, 3.25rem + 7.2vw, 9rem);
+    --text-h1: clamp(2.125rem, 1.7rem + 2vw, 3.25rem);
+    --text-h2: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
+    --text-h3: 1.25rem;
+    --text-lead: 1.125rem;
+    --text-body: 1rem;
+    --text-label: 0.9375rem;
+    --text-small: 0.875rem; /* the floor: nothing is set smaller */
+    --text-cook: clamp(1.375rem, 1.1rem + 1.2vw, 1.75rem);
+
+    /* Space (4-point) */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 2rem;
+    --space-8: 2.5rem;
+    --space-9: 3rem;
+    --space-10: 4rem;
+    --gutter: 1rem;
+    --content-max: 72rem;
+    --reading-max: 40rem;
+    --header-height: 64px;
+
+    /* Shape: rectangles are screens, circles are plates, pills are actions */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-pill: 999px;
+
+    /* Motion: steps ≤300ms; the ticket print (650ms) plays once. All reduced under
+       prefers-reduced-motion (base.css). */
+    --dur-micro: 120ms;
+    --dur-fast: 200ms;
+    --dur-base: 300ms;
+    --dur-print: 650ms;
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+    --z-header: 20;
+    --z-sticky: 30;
+    --z-toast: 60;
+    --z-skip: 100;
+  }
+
+  @media (min-width: 600px) {
+    :root {
+      --gutter: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --gutter: 2rem;
+    }
+  }
+
+  /* ---- Late Show (dark), the default without JS ---------------------------------------- */
+  :root,
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+    --color-page: var(--velvet);
+    --color-raised: #1e1726;
+    --color-overlay: #2a2133;
+    --color-sunken: #0e0a12;
+    --color-chip: #1e1726;
+    --color-text: #f6f2ec;
+    --color-text-secondary: #d2c8dc;
+    --color-text-muted: #a89cb6;
+    --color-link: var(--lime-300);
+    --color-brand-text: var(--lime-400);
+    --color-brand: var(--lime-400);
+    --color-brand-hover: var(--lime-300);
+    --color-brand-active: var(--lime-500);
+    --color-on-brand: var(--velvet);
+    --color-brand-edge: transparent;
+    --color-brand-edge-strong: var(--lime-400);
+    --color-brand-tint: #1c2a22;
+    --color-indicator: var(--lime-400);
+    --color-border: #7a6e88;
+    --color-hairline: #372c42;
+    --color-focus: var(--lime-200);
+    --color-selection: #264a33;
+    --color-success: var(--lime-300);
+    --color-success-bg: #13301f;
+    --color-warning: #ffc96b;
+    --color-warning-bg: #3a2b12;
+    --color-danger: #ff8a73;
+    --color-danger-bg: #3b1a1c;
+    --color-info: #9dbeff;
+    --color-info-bg: #1a2440;
+    --color-blush: #ff9cc8;
+    --color-scrim: rgb(14 10 18 / 0.72);
+    --color-skeleton: #2a2133;
+    --color-skeleton-shine: #372c42;
+    --color-toast-bg: var(--color-overlay);
+    --color-toast-text: var(--color-text);
+    --wordmark-date: var(--color-text);
+    --wordmark-lime: var(--lime-400);
+    --slice-rind: var(--heritage-lime);
+    --slice-pith: var(--lime-100);
+    --slice-flesh: var(--lime-300);
+    /* The ticket stays velvet at night; paper would glare (16.66:1 against the page). */
+    --ticket-bg: #1e1726;
+    --ticket-edge: transparent;
+    --ticket-text: var(--color-text);
+    --ticket-muted: #d2c8dc;
+    --ticket-rule: #7a6e88;
+    --ticket-link: var(--lime-300);
+    --ticket-stub-bg: var(--lime-400);
+    --ticket-stub-text: var(--velvet);
+    --shadow-1: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 2px 6px rgb(0 0 0 / 0.35);
+    --shadow-2: 0 12px 32px -8px rgb(0 0 0 / 0.6);
+    --shadow-3: 0 24px 64px -12px rgb(0 0 0 / 0.75);
+  }
+
+  /* ---- Matinee (light) ---------------------------------------------------------------- */
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --color-page: #fbf7f1;
+    --color-raised: #ffffff;
+    --color-overlay: #ffffff;
+    --color-sunken: #f2ece3;
+    --color-chip: #ffffff;
+    --color-text: var(--ink);
+    --color-text-secondary: #463c50;
+    --color-text-muted: #685d73;
+    --color-link: var(--lime-700);
+    --color-brand-text: var(--lime-700);
+    /* The lime can't draw its own edge on paper, so every lime fill gets a dark rim. */
+    --color-brand: var(--lime-400);
+    --color-brand-hover: var(--lime-300);
+    --color-brand-active: var(--lime-500);
+    --color-on-brand: var(--velvet);
+    --color-brand-edge: var(--lime-800);
+    --color-brand-edge-strong: var(--lime-800);
+    --color-brand-tint: #e6f8ec;
+    --color-indicator: var(--lime-700);
+    --color-border: #8a7f94;
+    --color-hairline: #e6ded3;
+    --color-focus: var(--lime-700);
+    --color-selection: #a8edc0;
+    --color-success: var(--lime-800);
+    --color-success-bg: #e6f8ec;
+    --color-warning: #8a5200;
+    --color-warning-bg: #fff3da;
+    --color-danger: #b42a1a;
+    --color-danger-bg: #fdece8;
+    --color-info: #2556c4;
+    --color-info-bg: #eaf0ff;
+    --color-blush: #a62b7c;
+    --color-scrim: rgb(26 20 32 / 0.45);
+    --color-skeleton: #ede6dc;
+    --color-skeleton-shine: #f7f2ea;
+    --color-toast-bg: var(--ink);
+    --color-toast-text: #f6f2ec;
+    --wordmark-date: var(--ink);
+    --wordmark-lime: var(--lime-700);
+    --slice-rind: var(--heritage-lime);
+    --slice-pith: var(--lime-100);
+    --slice-flesh: var(--lime-300);
+    --ticket-bg: var(--paper);
+    --ticket-edge: #8a7f94;
+    --ticket-text: var(--ink);
+    --ticket-muted: #463c50;
+    --ticket-rule: #8a7f94;
+    --ticket-link: var(--lime-700);
+    --ticket-stub-bg: var(--lime-400);
+    --ticket-stub-text: var(--velvet);
+    --shadow-1: 0 1px 2px rgb(26 20 32 / 0.06), 0 2px 8px rgb(26 20 32 / 0.06);
+    --shadow-2: 0 12px 28px -10px rgb(26 20 32 / 0.25);
+    --shadow-3: 0 24px 56px -16px rgb(26 20 32 / 0.3);
+  }
+
+  /* People who ask for more contrast get primary text everywhere and heavier edges. */
+  /* Matches the theme selectors' specificity and comes later, so it wins in both themes. */
+  @media (prefers-contrast: more) {
+    :root[data-theme],
+    :root:not([data-theme]) {
+      --color-text-secondary: var(--color-text);
+      --color-text-muted: var(--color-text);
+      --color-hairline: var(--color-border);
+    }
+  }
+}
