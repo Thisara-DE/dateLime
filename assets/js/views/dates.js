@@ -1,5 +1,5 @@
 // Your dates: the saved-date diary. Lives on this device; export keeps a copy.
-import { html, render, href, icon, on, poster, plate, emptyState, formatDay, formatTime, pluralize, withArticle } from '../ui.js';
+import { html, render, href, icon, on, poster, plate, emptyState, formatDay, formatTime, pluralize, withArticle, focusHeading } from '../ui.js';
 import { toShareQuery } from '../domain/plan.js';
 import { store, getSaved, removeSaved, rateSaved, exportDiary, importDiary } from '../state.js';
 import { shareLink, downloadFile, appUrl } from '../lib/share.js';
@@ -74,7 +74,8 @@ export function mount(outlet, { signal }) {
     const plan = getSaved().find((p) => p.id === button.dataset.delete);
     const undo = removeSaved(button.dataset.delete);
     if (!undo) return;
-    outlet.querySelector('h1')?.focus();
+    // The button is gone with its date; keep focus on the page (the h1 may not be focusable yet).
+    focusHeading(outlet);
     toast(`Deleted ${plan.movie.title} + ${plan.meal.name}.`, { tone: 'info', action: { label: 'Undo', onClick: undo } });
   }, { signal });
 

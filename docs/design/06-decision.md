@@ -183,3 +183,18 @@ These are refinements within the agreed decisions, not overrides:
 - **Match Night ships as a SHOULD** so that the five-couple hallway test the analysts asked for can run on the real thing. The README flags it as awaiting that validation.
 - **Recipe cards show their source** ("French", "Dessert"). It comes from the list the recipe came from, so no lookup per card is needed. Details load only when a recipe sheet opens.
 - **"Match the movie" off** switches the recipe step to a category picker (Chicken, Pasta, Seafood and so on).
+
+## Build status
+
+| Priority | Shipped | Not built yet |
+|---|---|---|
+| MUST | All five: the Date Ticket, Vibe Pairing, House Rules, Cook-along, and Spin the Lime | none |
+| SHOULD | All three: Match Night (the blind shortlist), moods and blends, and the ingredient scan | none |
+| COULD | Afterglow ratings (1 to 5 limes) on past dates | The typographic share image, Afterglow notes, and the "their mood" second group |
+
+Each MUST and SHOULD feature has browser tests for its main behavior in `tests/e2e/`, run on desktop Chrome and a Pixel 7 against mocked APIs. The logic behind them (pairing tiers, diet relaxation, timers, `.ics`) has unit tests. The axe-core audits pass on every screen in both themes. Some details are checked only by review, not by tests: the chime and vibration, and the 64px Back and Next buttons.
+
+**Still open for the product owners:**
+1. Sign off on Zest `#9FE143`, or revert the `--lime-*` tokens.
+2. Run the five-couple hallway test before Match Night is promoted.
+3. Revoke the two RapidAPI keys left in the git history (audit item 17).

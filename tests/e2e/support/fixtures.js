@@ -35,7 +35,18 @@ export const test = base.extend({
 
 export { expect };
 
-/** Seeds localStorage before the app boots (house rules, a draft, saved dates...). */
+/**
+ * Seeds localStorage before the app first boots (house rules, a draft, saved dates...).
+ * Once per tab: a reload keeps whatever the app saved since, as it would for a person.
+ */
 export async function seedState(page, state) {
-  await page.addInitScript((s) => localStorage.setItem('datelime.v2', JSON.stringify({ v: 1, data: s })), state);
+  await page.addInitScript((s) => {
+    try {
+      if (sessionStorage.getItem('datelime.test-seeded')) return;
+      sessionStorage.setItem('datelime.test-seeded', '1');
+      localStorage.setItem('datelime.v2', JSON.stringify({ v: 1, data: s }));
+    } catch {
+      // Frames without storage (about:blank) have nothing to seed.
+    }
+  }, state);
 }
