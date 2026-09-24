@@ -162,7 +162,7 @@ export function mount(outlet, { query, signal }) {
           <label>Press play at <input class="input" type="time" name="time" value="${time}" required></label>
         </div>
         <fieldset class="field"><legend>Cooking time</legend><p class="field__hint">Your estimate: recipes don't list cook times.</p>
-          <div class="chips">${COOK_MINUTES.map((m) => html`<label class="chip"><input type="radio" name="cook" value="${m}" ${plan.cookMinutes === m ? html`checked` : ''}><span class="chip__glyph" aria-hidden="true"></span>${m} min</label>`)}</div>
+          <div class="chips chips--even">${COOK_MINUTES.map((m) => html`<label class="chip"><input type="radio" name="cook" value="${m}" ${plan.cookMinutes === m ? html`checked` : ''}><span class="chip__glyph" aria-hidden="true"></span>${m} min</label>`)}</div>
         </fieldset>
         <label>Note for your date (optional)
           <input class="input" type="text" name="note" maxlength="80" value="${plan.note}" autocomplete="off">

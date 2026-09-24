@@ -68,6 +68,17 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
     U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+/* Size-adjusted fallback for Fraunces (H1s), so the swap doesn't shift the layout.
+   Fraunces: 2000 upm, ascent 1956, descent 510, average advance about 0.51em. The size-adjust
+   of 106% targets Georgia, and the overrides are divided by it (they scale with size-adjust). */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia'), local('Noto Serif'), local('Times New Roman');
+  size-adjust: 106%;
+  ascent-override: 92.3%;
+  descent-override: 24.1%;
+  line-gap-override: 0%;
+}
 /* Metric-adjusted local fallback so the swap doesn't shift the layout. */
 @font-face {
   font-family: 'Condensed Fallback';

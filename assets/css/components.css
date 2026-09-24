@@ -26,14 +26,23 @@
     position: sticky;
     inset-block-start: 0;
     z-index: var(--z-header);
-    background: color-mix(in srgb, var(--color-page) 92%, transparent);
+    background: var(--color-page);
     border-block-end: 1px solid var(--color-hairline);
   }
+  /* Frosted only where the blur exists: translucency without blur lets headings
+     scrolling underneath ghost through the wordmark. */
   @supports (backdrop-filter: blur(1px)) {
     @media (min-width: 900px) {
       .site-header {
+        background: color-mix(in srgb, var(--color-page) 92%, transparent);
         backdrop-filter: saturate(1.2) blur(8px);
       }
+    }
+  }
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .site-header {
+      background: var(--color-page);
+      backdrop-filter: none;
     }
   }
   .site-header__inner {
@@ -283,6 +292,19 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
+  }
+  /* Four equal options read as one row or a 2×2 block, never three and a straggler. */
+  .chips--even {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .chips--even .chip {
+    justify-content: center;
+  }
+  @container (min-width: 30rem) {
+    .chips--even {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
   .chip {
     position: relative;

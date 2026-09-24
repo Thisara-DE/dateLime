@@ -563,6 +563,10 @@
     width: 56px;
     margin-inline: 16px;
   }
+  /* The drink's plate fills its (smaller) coaster, not the 88px art column. */
+  .ticket .coaster .plate {
+    width: 100%;
+  }
   @media (max-width: 400px) {
     .ticket .poster,
     .ticket .plate {
@@ -636,6 +640,7 @@
     }
   }
   .plan-controls {
+    container-type: inline-size;
     display: grid;
     gap: var(--space-5);
     padding: var(--space-5);
