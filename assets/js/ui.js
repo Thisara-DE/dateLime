@@ -10,7 +10,7 @@ export { html, render, href, icon, slice };
 /**
  * Delegated event listener scoped to a view. It's removed automatically when the view's
  * signal aborts on navigation. It fires only when the event comes from an element matching
- * `selector` inside `root`, never for clicks anywhere on the page (the 2021 bug).
+ * `selector` inside `root`, never for clicks anywhere on the page (the 2022 bug).
  */
 export function on(root, type, selector, handler, { signal }) {
   root.addEventListener(

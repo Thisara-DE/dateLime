@@ -20,6 +20,20 @@ const routes = [
   { path: '*', load: () => import('./views/not-found.js') },
 ];
 
+// Shown when a screen's code can't be downloaded. It must not need a download of its own,
+// so it uses only what main.js has already loaded. A reload is the reliable retry: browsers
+// may remember a failed module import for the life of the page.
+const loadError = {
+  title: () => 'Connection trouble',
+  mount(outlet, { signal }) {
+    render(
+      outlet,
+      html`<div class="page page--narrow"><div class="state" role="alert">${icon('wifi-off')}<h1>This screen didn't load</h1><p>The connection may have dropped. Your plan and saved dates are safe on this device.</p><div class="button-row"><button class="button button--primary" type="button" data-reload>${icon('retry')}Try again</button></div></div></div>`,
+    );
+    outlet.querySelector('[data-reload]').addEventListener('click', () => location.reload(), { signal });
+  },
+};
+
 const main = document.getElementById('main');
 
 // ---- Header ---------------------------------------------------------------------------
@@ -107,6 +121,7 @@ document.addEventListener(
 const router = createRouter({
   routes,
   outlet: main,
+  loadError,
   onRoute({ path }) {
     for (const link of document.querySelectorAll('[data-nav]')) {
       const active = path === link.dataset.nav || (link.dataset.nav === '/movies' && ['/movies/results', '/recipes', '/date'].includes(path));

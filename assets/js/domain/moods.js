@@ -56,7 +56,7 @@ export const BLEND_MIN_RESULTS = 8;
 
 /**
  * Turns the movie-step query (URL params) into a Discover query.
- * Accepts `mood` (a MOODS id) or `genre` (a TMDB genre id, e.g. from the 2021 URLs).
+ * Accepts `mood` (a MOODS id) or `genre` (a TMDB genre id, e.g. from the 2022 URLs).
  */
 export function movieQuery({ mood, genre, len, cert } = {}, rules = {}) {
   const byGenre = GENRES.find((g) => g.id === Number(genre));

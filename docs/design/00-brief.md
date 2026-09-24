@@ -5,7 +5,7 @@ get, so it is written to stand on its own.
 
 ## 1. The product
 
-**dateLime** is a 2021 bootcamp group project (five contributors) and is live at
+**dateLime** is a 2022 group project (five contributors) and is live at
 `https://thisara-de.github.io/dateLime/`. It's a planner for a **date night at
 home**. You pick a movie, then a recipe to cook, and you get a "date package"
 that shows both.

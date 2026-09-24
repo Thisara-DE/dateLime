@@ -1,4 +1,4 @@
-// Forwards the 2021 multi-page URLs (movie.html, movielist.html?info=2,28, ...) to the
+// Forwards the 2022 multi-page URLs (movie.html, movielist.html?info=2,28, ...) to the
 // single-page app's hash routes. It runs before the meta refresh fires.
 (() => {
   const target = document.currentScript?.dataset.target || '#/';

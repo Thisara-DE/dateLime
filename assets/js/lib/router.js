@@ -6,6 +6,7 @@
 //   mount(outlet, ctx) -> cleanup | void          renders into the outlet
 // ctx = { path, query, signal }. `signal` aborts when the user navigates away, so views
 // can pass it to fetches and to addEventListener and nothing leaks between pages.
+// `loadError` is the view shown when a route's module can't be downloaded.
 
 export function parseLocation(hash = globalThis.location?.hash ?? '') {
   const value = hash.replace(/^#/, '') || '/';
@@ -26,7 +27,7 @@ export function href(path, query = {}) {
 
 const prefersReducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-export function createRouter({ routes, outlet, onRoute }) {
+export function createRouter({ routes, outlet, onRoute, loadError }) {
   let current = null;
   let generation = 0;
 
@@ -49,8 +50,10 @@ export function createRouter({ routes, outlet, onRoute }) {
     try {
       view = await route.load();
     } catch (err) {
+      // The screen's code didn't download (a dropped connection, or a cache from before a
+      // deploy). Say so, rather than blaming the link with the not-found page.
       console.error('Failed to load view', err);
-      view = route.fallback ?? (await routes.find((r) => r.path === '*').load());
+      view = loadError ?? (await routes.find((r) => r.path === '*').load());
     }
     if (token !== generation) return; // a newer navigation already started
 

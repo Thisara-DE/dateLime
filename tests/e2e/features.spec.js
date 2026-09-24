@@ -182,6 +182,18 @@ test.describe('Errors and recovery', () => {
     await expect(page.getByLabel('Match the movie')).toBeEnabled();
   });
 
+  test('a screen whose code fails to download says so, and "Try again" recovers', async ({ page }) => {
+    await page.goto('/#/');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await page.route('**/assets/js/views/rules.js', (route) => route.abort('internetdisconnected'));
+    await page.evaluate(() => (location.hash = '#/rules'));
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText("This screen didn't load");
+    await expect(page).toHaveTitle('Connection trouble · dateLime');
+    await page.unroute('**/assets/js/views/rules.js');
+    await page.getByRole('button', { name: 'Try again' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('House rules');
+  });
+
   test('a shared link to a recipe that no longer exists says so', async ({ page }) => {
     await page.goto('/#/date?m=603&r=99999');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('We couldn’t find that');

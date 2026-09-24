@@ -35,7 +35,7 @@ test('plans a whole date night and saves it', async ({ page, api }) => {
   await expect(page).toHaveURL(/#\/movies\/results\?mood=swoony/);
   await expect(page.getByRole('list', { name: 'Movies' }).getByRole('listitem')).toHaveCount(10);
 
-  // One Discover request for the whole page: the 2021 site made 20 to 40 more.
+  // One Discover request for the whole page: the 2022 site made 20 to 40 more.
   expect(api.calls.tmdb).toHaveLength(1);
   expect(api.calls.tmdb[0].searchParams.get('with_genres')).toBe('10749');
 

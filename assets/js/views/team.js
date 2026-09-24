@@ -1,4 +1,4 @@
-// The crew: the five people who built dateLime in 2021.
+// The crew: the five people who built dateLime in 2022.
 import { html, render, icon } from '../ui.js';
 
 export const title = () => 'The team';
@@ -25,7 +25,7 @@ export function mount(outlet) {
     html`<div class="page">
       <header class="page-head">
         <h1>The crew</h1>
-        <p>dateLime began in 2021 as a bootcamp group project by five developers, and was remastered in 2026.</p>
+        <p>dateLime began in 2022 as a group project by five developers, and was remastered in 2026.</p>
       </header>
       <section class="section" aria-labelledby="starring"><h2 id="starring" class="eyebrow">Starring</h2>
         <ul class="crew">${CREW.map((c) => html`<li><span class="avatar" aria-hidden="true">${initials(c.name)}</span><div><h3>${c.name}</h3><a href="https://github.com/${c.github}" target="_blank" rel="noopener">@${c.github}<span class="visually-hidden"> (${c.name} on GitHub)</span>${icon('external')}</a></div></li>`)}</ul>

@@ -303,7 +303,7 @@ There are no dead ends: with nothing picked, the button reads "Show popular pick
 
 **The crew (390px)**
 - Styled as end credits, with no auto-scroll.
-- A short blurb: "Made by five bootcamp grads in 2021, remastered in 2026."
+- A short blurb: "Made by a team of five in 2022, remastered in 2026."
 - **STARRING:** five rows, each with an initials avatar in a Zest ring, the name in Fraunces 22px, and a "GitHub ↗" link whose accessible name reads like "Cha Vue on GitHub".
 - **WITH DATA FROM:** TMDB · JustWatch · TheMealDB · TheCocktailDB.
 

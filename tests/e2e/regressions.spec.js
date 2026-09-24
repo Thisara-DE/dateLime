@@ -1,7 +1,7 @@
 // One test per runtime defect in docs/AUDIT.md, proving each stays fixed.
 import { test, expect, seedState } from './support/fixtures.js';
 
-test.describe('2021 audit regressions', () => {
+test.describe('2022 audit regressions', () => {
   test('#1: the movie step can be completed with the keyboard alone', async ({ page }) => {
     await page.goto('/#/movies');
     await page.locator('input[name="mood"][value="any"]').focus();

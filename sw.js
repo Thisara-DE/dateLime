@@ -103,14 +103,19 @@ function timeout(ms) {
 
 async function networkFirst(request, cacheName, { wait = 4000, fallback } = {}) {
   const cache = await caches.open(cacheName);
-  try {
-    const response = await Promise.race([fetch(request), timeout(wait)]);
-    if (response.ok) cache.put(request, response.clone());
+  // A response that arrives after the timeout still refreshes the cache for next time.
+  const network = fetch(request).then((response) => {
+    if (response.ok) cache.put(request, response.clone()).catch(() => {});
     return response;
-  } catch (err) {
+  });
+  network.catch(() => {}); // failing after the cache has answered isn't an error
+  try {
+    return await Promise.race([network, timeout(wait)]);
+  } catch {
     const cached = (await cache.match(request, { ignoreSearch: request.mode === 'navigate' })) ?? (fallback && (await cache.match(fallback)));
-    if (cached) return cached;
-    throw err;
+    // Nothing cached yet (a slow connection, not an offline one): keep waiting for the
+    // network rather than failing the request at the timeout.
+    return cached ?? network;
   }
 }
 

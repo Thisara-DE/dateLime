@@ -565,7 +565,7 @@ this screen to a single decision.
 ```
 ┌───────────────────────────────┐  1280px: 5 cards in a row (3 + 2 below 1100px).
 │ The team                 (h1) │
-│ Built in 2021 as a bootcamp   │
+│ Built in 2022 as a group      │
 │ project by five developers.   │
 │ ┌ [avatar] Cha Vue          ┐ │  avatar: github.com/{user}.png?size=160, alt=""
 │ │ GitHub: @chavue91         │ │  (the name is adjacent); same-tab links

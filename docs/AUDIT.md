@@ -1,4 +1,4 @@
-# Audit of the original (2021) dateLime codebase
+# Audit of the original (2022) dateLime codebase
 
 **Scope:** every file at commit `837bd30`: 6 HTML pages, 6 stylesheets and
 6 scripts.

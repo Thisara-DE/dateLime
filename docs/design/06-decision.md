@@ -64,7 +64,7 @@ Two themes: **Late Show** (dark, velvet) and **Matinee** (light, program paper).
 | Ticket stub label | 11.97:1 | 11.97:1 | 4.5:1 |
 | Wordmark "Lime" on page | 11.97:1 | 5.58:1 | 4.5:1 |
 
-For comparison, the 2021 site had white on #23D160 at **2.03:1**, which fails for every text size.
+For comparison, the 2022 site had white on #23D160 at **2.03:1**, which fails for every text size.
 
 ### Typography (82.5 KB of Latin; Latin-Ext loads only when a page needs it)
 
@@ -108,7 +108,7 @@ The text floor is 0.875rem. Line length is 68ch or less.
 | `#/rules` | House Rules |
 | `#/team` | The crew (credits) |
 
-The 2021 page URLs (`movie.html`, `movielist.html?info=…`, …) redirect to these routes.
+The 2022 page URLs (`movie.html`, `movielist.html?info=…`, …) redirect to these routes.
 
 ## Features: final priority and acceptance criteria
 

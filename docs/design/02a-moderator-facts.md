@@ -6,7 +6,7 @@
 
 - **It's a single-page app with hash routes and one `index.html`.** Examples: `#/movies?genre=35&cert=PG-13` and `#/date?m=603&r=52982&at=2026-10-02T20:00`. There's no build step.
   - **Why hash routes:** GitHub Pages can't rewrite URLs, so hash routes are what make every deep link and refresh work.
-  - **Why one shell:** the 2021 site copied its header into five pages, and the copies drifted apart.
+  - **Why one shell:** the 2022 site copied its header into five pages, and the copies drifted apart.
   - **Analyst B's "the URL is the state" contract still holds.** Filters and plans live in the hash query, so Back, reload and share all work. Forms stay real `<form>` elements with native radios and Enter to submit, and on submit they're serialized into the hash.
   - **Transitions:** cross-document `@view-transition` doesn't apply to an SPA. The same-document View Transitions API does, and it degrades to no animation.
 - **Every third-party key and endpoint lives in one `config.js`.** Only the TMDB key remains. TheMealDB and TheCocktailDB are keyless, and the RapidAPI keys are gone.
