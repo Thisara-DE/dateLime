@@ -60,7 +60,7 @@ The redesign keeps the logo and the idea of the original site. It was decided by
 
 **The design language, "Limelight × Couch-Proof", in short:**
 
-- **Lights down, lime up.** Velvet surfaces (`#140F1A`) do the quiet work, and lime is the only vivid color on screen. The UI lime is **Zest `#9FE143`**, while the original **`#23D160`** lives on as the rind of the lime-slice logo. *The Zest refinement needs the team's sign-off.* Reverting is a change to the `--lime-*` tokens in [`tokens.css`](assets/css/tokens.css), and the contrast test then flags any pairing that needs adjusting.
+- **Lights down, lime up.** Velvet surfaces (`#140F1A`) do the quiet work, and lime is the only vivid color on screen. The lime is the original dateLime green, **`#23D160`**, with a scale built around it in [`tokens.css`](assets/css/tokens.css). It sits under dark text (9.3:1), never white.
 - **Two people, one phone.** Touch targets are at least 48px, type is readable at arm's length, and the main action sits within thumb reach.
 - **Defaults, not dead ends.** Every form works as it is, every empty state offers a way to loosen the filters, and every error has a retry.
 - **Honest data.** No invented cook times, difficulty or servings, and real certifications only.

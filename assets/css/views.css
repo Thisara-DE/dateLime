@@ -54,7 +54,7 @@
     --wordmark-lime: var(--lime-400);
   }
   :root[data-theme='light'] .stage {
-    /* Matinee: the heritage lime field, now in Zest, with an all-velvet wordmark (11.97:1). */
+    /* Matinee: the heritage lime field, with an all-velvet wordmark. */
     background: var(--lime-400);
     color: var(--velvet);
     --wordmark-date: var(--velvet);
