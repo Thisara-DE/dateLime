@@ -109,6 +109,7 @@ export function mount(outlet, { signal }) {
         <div class="landing-grid">
           <div class="stack">
             <div data-pairing>${pairingCard()}</div>
+            <h2 class="visually-hidden">Recipes</h2>
             <div data-results aria-busy="${String(state.loading)}">${resultsRegion()}</div>
           </div>
           <aside data-controls>${controls()}</aside>

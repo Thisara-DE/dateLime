@@ -648,7 +648,18 @@
     position: relative;
     display: grid;
     color: var(--ticket-text);
-    filter: drop-shadow(0 18px 28px rgb(0 0 0 / 0.35));
+    filter: drop-shadow(0 18px 28px rgb(0 0 0 / 0.3));
+  }
+  /* Paper on a paper page needs an edge: #8A7F94 is 3.55:1 against Matinee. (Transparent,
+     but still 1px, in Late Show, so the layout is identical in both themes.) */
+  .ticket > * {
+    border-inline: 1px solid var(--ticket-edge);
+  }
+  .ticket > :first-child {
+    border-block-start: 1px solid var(--ticket-edge);
+  }
+  .ticket > :last-child {
+    border-block-end: 1px solid var(--ticket-edge);
   }
   .ticket > * {
     --top: 0px;
@@ -688,9 +699,21 @@
   }
   .ticket__row {
     display: grid;
-    grid-template-columns: 88px 1fr;
+    /* minmax(0, 1fr): the text column may shrink below its content, so text wraps
+       instead of pushing the ticket wider than a 320px screen (WCAG 1.4.10). */
+    grid-template-columns: 88px minmax(0, 1fr);
     gap: var(--space-4);
     align-items: start;
+  }
+  @media (max-width: 400px) {
+    .ticket__section,
+    .ticket > .ticket__stub {
+      padding-inline: var(--space-4);
+    }
+    .ticket__row {
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: var(--space-3);
+    }
   }
   .ticket__row h2 {
     font-size: var(--text-h3);
@@ -719,6 +742,11 @@
   }
   .ticket__stub-text > span {
     white-space: nowrap;
+  }
+  .ticket__stub-text > span + span::before {
+    content: '·';
+    content: '·' / ''; /* decorative: screen readers skip it where supported */
+    margin-inline-end: 0.5em;
   }
   .ticket__stub .slice {
     width: 2.25rem;

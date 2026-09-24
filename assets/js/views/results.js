@@ -128,6 +128,7 @@ export function mount(outlet, ctx) {
           <p data-count class="muted" aria-live="polite"></p>
           <label>Sort <select class="select" data-sort><option value="popular" ${sort === 'popular' ? html`selected` : ''}>Popular</option><option value="acclaimed" ${sort === 'acclaimed' ? html`selected` : ''}>Crowd favorites</option></select></label>
         </div>
+        <h2 class="visually-hidden">Movies</h2>
         <div class="movies" data-results aria-busy="${String(state.loading)}">${resultsRegion()}</div>
         <div data-tray>${tray()}</div>
       </div>`,
@@ -177,6 +178,7 @@ export function mount(outlet, ctx) {
             ? html`<h1 class="its-a-date">It's a date!</h1><p>You both hearted ${movies.length === 1 ? html`<strong>${movies[0].title}</strong>` : `${movies.length} of the same movies. Pick one`}.</p>`
             : html`<h1>No match this time</h1><p>That's fine: the second person picks from everything you both hearted.</p>`}
         </header>
+        <h2 class="visually-hidden">${matched ? 'Your matches' : 'Everything you hearted'}</h2>
         <div class="movies"><ul class="movie-grid" aria-label="${matched ? 'Your matches' : 'Everything you hearted'}">${movies.map((m) => html`<li><article class="card movie-card" aria-labelledby="movie-${m.id}">${poster(m)}<div class="movie-card__body"><h3 class="movie-card__title" id="movie-${m.id}"><button type="button" data-open="${m.id}" aria-haspopup="dialog">${m.title}</button></h3><p class="meta">${m.year ? html`<span>${m.year}</span>` : ''}${m.rating !== null ? html`<span>${scoreLabel(m.rating)}</span>` : ''}</p><p class="movie-card__overview">${m.overview}</p></div></article></li>`)}</ul></div>
         <p class="load-more"><button class="button button--ghost" type="button" data-restart>Start over</button></p>
       </div>`,
@@ -213,6 +215,14 @@ export function mount(outlet, ctx) {
         refreshResults({ focusFirstNew: page > 1 });
       }
     }
+  }
+
+  /** Moves focus to the new screen's heading (it must be focusable first). */
+  function focusHeading() {
+    const h1 = outlet.querySelector('h1');
+    if (!h1) return;
+    h1.setAttribute('tabindex', '-1');
+    h1.focus();
   }
 
   // ---- Events -----------------------------------------------------------------------
@@ -268,33 +278,32 @@ export function mount(outlet, ctx) {
     if (button.getAttribute('aria-disabled') === 'true') return announce('Heart at least one movie first.');
     setTogether({ phase: 'handoff' });
     renderPage();
-    outlet.querySelector('h1')?.focus();
+    focusHeading();
   }, { signal });
   on(outlet, 'click', '[data-ready]', () => {
     setTogether({ phase: 'second' });
     renderPage();
     if (!state.movies.length && !state.loading) fetchPage(1); // e.g. reloaded mid-handoff
-    outlet.querySelector('h1')?.setAttribute('tabindex', '-1');
-    outlet.querySelector('h1')?.focus();
+    focusHeading();
   }, { signal });
   on(outlet, 'click', '[data-back-first]', () => {
     setTogether({ phase: 'first' });
     renderPage();
     if (!state.movies.length && !state.loading) fetchPage(1);
+    focusHeading();
   }, { signal });
   on(outlet, 'click', '[data-reveal]', (event, button) => {
     if (button.getAttribute('aria-disabled') === 'true') return announce('Heart at least one movie first.');
     setTogether({ phase: 'reveal' });
     renderPage();
-    const h1 = outlet.querySelector('h1');
-    h1?.setAttribute('tabindex', '-1');
-    h1?.focus();
+    focusHeading();
   }, { signal });
   on(outlet, 'click', '[data-restart]', () => {
     endTogether();
     startTogether(JSON.stringify({ ...query, together: undefined }));
     renderPage();
     if (!state.movies.length && !state.loading) fetchPage(1);
+    focusHeading();
   }, { signal });
 
   renderPage();

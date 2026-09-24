@@ -134,6 +134,7 @@
     --slice-flesh: var(--lime-400);
     /* The ticket stays velvet at night; paper would glare (16.66:1 against the page). */
     --ticket-bg: #1e1726;
+    --ticket-edge: transparent;
     --ticket-text: var(--color-text);
     --ticket-muted: #d2c8dc;
     --ticket-rule: #7a6e88;
@@ -191,6 +192,7 @@
     --slice-pith: var(--lime-100);
     --slice-flesh: var(--lime-400);
     --ticket-bg: var(--paper);
+    --ticket-edge: #8a7f94;
     --ticket-text: var(--ink);
     --ticket-muted: #463c50;
     --ticket-rule: #8a7f94;

@@ -175,6 +175,18 @@
   .how-it-works p {
     color: var(--color-text-secondary);
   }
+  @media (min-width: 720px) {
+    /* In three columns the icon sits above the heading, so the text gets the full width.
+       (Placed after the base rules so it wins at equal specificity.) */
+    .how-it-works li {
+      grid-template-columns: 1fr;
+      align-content: start;
+    }
+    .how-it-works .icon {
+      grid-row: auto;
+      margin-block-end: var(--space-2);
+    }
+  }
   .feature-card {
     display: grid;
     gap: var(--space-3);
@@ -527,6 +539,7 @@
   /* ---- Date ticket page ------------------------------------------------------------- */
   .date-layout {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-6);
   }
   @media (min-width: 960px) {
@@ -549,6 +562,16 @@
   .ticket .coaster {
     width: 56px;
     margin-inline: 16px;
+  }
+  @media (max-width: 400px) {
+    .ticket .poster,
+    .ticket .plate {
+      width: 64px;
+    }
+    .ticket .coaster {
+      width: 48px;
+      margin-inline: 8px;
+    }
   }
   .ticket__row-body {
     display: grid;
@@ -597,8 +620,10 @@
     font-style: italic;
   }
   @media (prefers-reduced-motion: no-preference) {
+    /* "backwards", not "both": once printed, the clip-path must go away, or it would keep
+       clipping the ticket's drop-shadow into a rectangle behind the rounded corners. */
     .ticket.is-printing {
-      animation: ticket-print var(--dur-print) var(--ease-enter) both;
+      animation: ticket-print var(--dur-print) var(--ease-enter) backwards;
     }
   }
   @keyframes ticket-print {
@@ -620,10 +645,15 @@
   }
   .plan-controls .row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* Side by side when there's room; stacked on narrow phones (native date inputs are wide). */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
     gap: var(--space-3);
   }
-  .plan-controls label {
+  .plan-controls .row > * {
+    min-width: 0;
+  }
+  .plan-controls > label,
+  .plan-controls .row > label {
     display: grid;
     gap: var(--space-2);
     font-weight: 600;

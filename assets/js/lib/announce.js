@@ -9,8 +9,9 @@ function ensureRegions() {
   politeRegion.setAttribute('aria-live', 'polite');
   politeRegion.setAttribute('aria-atomic', 'true');
   politeRegion.dataset.testid = 'live-region';
-  toastStack = document.createElement('div');
+  toastStack = document.createElement('section');
   toastStack.className = 'toast-stack';
+  toastStack.setAttribute('aria-label', 'Notifications');
   document.body.append(politeRegion, toastStack);
 }
 
