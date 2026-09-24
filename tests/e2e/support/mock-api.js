@@ -4,6 +4,7 @@
 //   ...
 //   expect(api.calls.tmdb.length).toBe(1);
 import { MOVIES, MEALS, DRINKS, PROVIDERS } from './data.js';
+import { genreName } from '../../../assets/js/domain/moods.js';
 
 const CERT_ORDER = ['G', 'PG', 'PG-13', 'R', 'NC-17'];
 const PAGE_SIZE = 20;
@@ -38,12 +39,18 @@ function foodSvg(label, seed) {
 const logoSvg = (label) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="92" height="92"><rect width="92" height="92" rx="18" fill="hsl(${hue(label)} 60% 40%)"/><text x="46" y="58" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="34" fill="#fff">${escapeXml(label.slice(0, 2))}</text></svg>`;
 
+// Origin countries and keywords drive the three-tier vibe pairing.
+const ORIGINS = { 194: ['FR'], 129: ['JP'], 372058: ['JP'], 11216: ['IT'], 398818: ['IT'], 496243: ['KR'], 4348: ['GB'], 530915: ['GB'] };
+const KEYWORDS = { 289: ['casablanca', 'morocco', 'world war ii'], 354912: ['mexico', 'day of the dead', 'music'], 313369: ['los angeles', 'jazz'], 597: ['ocean', 'ship'] };
+
 function movieDetails(m) {
   const providerSet = PROVIDERS.filter((_, i) => (m.id + i) % 3 === 0);
   return {
     ...m,
+    origin_country: ORIGINS[m.id] ?? ['US'],
+    keywords: { keywords: (KEYWORDS[m.id] ?? []).map((name, i) => ({ id: i + 1, name })) },
     tagline: `${m.title}: a night to remember.`,
-    genres: m.genre_ids.map((id) => ({ id, name: String(id) })),
+    genres: m.genre_ids.map((id) => ({ id, name: genreName(id) })),
     release_dates: {
       results: [
         { iso_3166_1: 'GB', release_dates: [{ certification: '15', type: 3 }] },
@@ -105,6 +112,10 @@ export async function mockApis(page, { fail = {}, delay = 0 } = {}) {
         calls.tmdb.push(url);
         if (fail.tmdb) return failWith(fail.tmdb);
         if (url.pathname === '/3/discover/movie') return route.fulfill({ json: discover(url.searchParams) });
+        if (url.pathname === '/3/watch/providers/movie') {
+          const region = url.searchParams.get('watch_region');
+          return route.fulfill({ json: { results: PROVIDERS.map((p) => ({ ...p, display_priorities: { [region]: p.display_priority } })) } });
+        }
         const detail = url.pathname.match(/^\/3\/movie\/(\d+)$/);
         if (detail) {
           const movie = MOVIES.find((m) => m.id === Number(detail[1]));

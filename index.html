@@ -8,7 +8,7 @@
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#140F1A">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-erJjLiQ1J0HP0FlaCH5wWS8fadOTBfkYDo01viyec/0='; style-src 'self'; img-src 'self' data: blob: https://image.tmdb.org https://www.themealdb.com https://www.thecocktaildb.com; connect-src 'self' https://api.themoviedb.org https://www.themealdb.com https://www.thecocktaildb.com; font-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0xToGsakv4SSw1Hvg1s6lD1q4thdpY+kTKLbMdE1Oeo='; style-src 'self'; img-src 'self' data: blob: https://image.tmdb.org https://www.themealdb.com https://www.thecocktaildb.com; connect-src 'self' https://api.themoviedb.org https://www.themealdb.com https://www.thecocktaildb.com; font-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="dateLime · Dinner and a movie, for two">
@@ -21,12 +21,13 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
 
-  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/roboto-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://api.themoviedb.org" crossorigin>
   <link rel="preconnect" href="https://image.tmdb.org">
 
-  <script>(()=>{try{const t=localStorage.getItem('datelime.theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch{}})()</script>
+  <script>(()=>{let t;try{t=localStorage.getItem('datelime.theme')}catch{}if(t!=='dark'&&t!=='light'){const h=new Date().getHours();t=matchMedia('(prefers-color-scheme: dark)').matches||h>=18||h<6?'dark':'light'}document.documentElement.dataset.theme=t})()</script>
 
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">

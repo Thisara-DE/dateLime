@@ -51,3 +51,14 @@ test('works with no storage at all', () => {
   assert.equal(store.get().a, 2);
   assert.equal(store.persistent, false);
 });
+
+test('reload() picks up changes another tab wrote', () => {
+  const storage = memoryStorage();
+  const store = createStore({ n: 0 }, { key: 'k', storage });
+  let notified = 0;
+  store.subscribe(() => (notified += 1));
+  storage.setItem('k', JSON.stringify({ v: 1, data: { n: 5 } }));
+  store.reload();
+  assert.equal(store.get().n, 5);
+  assert.equal(notified, 1);
+});

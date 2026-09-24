@@ -54,8 +54,18 @@ export function skeletonCards(count = 6, kind = 'movie') {
   return Array.from({ length: count }, () => one);
 }
 
+/** An error whose message is written for people (shown as-is, unlike bugs or HTTP errors). */
+export class NoticeError extends Error {
+  constructor(message, title = 'Nothing fits yet') {
+    super(message);
+    this.name = 'NoticeError';
+    this.title = title;
+  }
+}
+
 /** Maps an error to plain words: what happened and what the person can do. */
 export function describeError(err, source = 'the server') {
+  if (err instanceof NoticeError) return { icon: 'alert', title: err.title, body: err.message };
   if (!navigator.onLine) return { icon: 'wifi-off', title: "You're offline", body: 'Saved dates still work. We’ll be ready when you reconnect.' };
   if (err instanceof HttpError && err.status === 429) return { icon: 'timer', title: 'A little too fast', body: `${source} asked us to slow down. Try again in a few seconds.` };
   if (err instanceof HttpError && err.status === 401) return { icon: 'alert', title: `${source} turned us away`, body: 'The API key was rejected. If you run this copy of dateLime, check config.js.' };
@@ -63,13 +73,16 @@ export function describeError(err, source = 'the server') {
   return { icon: 'alert', title: 'The projector jammed', body: `We couldn’t reach ${source}. Check your connection and try again. Your picks are still here.` };
 }
 
-export function errorState(err, { source, retryLabel = 'Try again', extra = '' } = {}) {
+/** `level: 1` when the state replaces a whole page (every page needs an h1). */
+const heading = (level, text) => (level === 1 ? html`<h1>${text}</h1>` : html`<h2>${text}</h2>`);
+
+export function errorState(err, { source, retryLabel = 'Try again', extra = '', level = 2 } = {}) {
   const d = describeError(err, source);
-  return html`<div class="state" role="alert">${icon(d.icon)}<h2>${d.title}</h2><p>${d.body}</p><div class="button-row"><button class="button button--primary" type="button" data-action="retry">${icon('retry')}${retryLabel}</button>${extra}</div></div>`;
+  return html`<div class="state" role="alert">${icon(d.icon)}${heading(level, d.title)}<p>${d.body}</p><div class="button-row"><button class="button button--primary" type="button" data-action="retry">${icon('retry')}${retryLabel}</button>${extra}</div></div>`;
 }
 
-export function emptyState({ title, body, actions = '' }) {
-  return html`<div class="state">${slice()}<h2>${title}</h2><p>${body}</p><div class="button-row">${actions}</div></div>`;
+export function emptyState({ title, body, actions = '', level = 2 }) {
+  return html`<div class="state">${slice()}${heading(level, title)}<p>${body}</p><div class="button-row">${actions}</div></div>`;
 }
 
 // ---- Step indicator -------------------------------------------------------------------
@@ -108,6 +121,9 @@ export function formatDay(local) {
   const [y, m, d] = local.split('T')[0].split('-').map(Number);
   return dayFormat.format(new Date(y, m - 1, d));
 }
+
+/** "a Margarita", "an Afterglow". */
+export const withArticle = (noun) => `${/^[aeiou]/i.test(noun) ? 'an' : 'a'} ${noun}`;
 
 export function pluralize(n, one, many = `${one}s`) {
   return `${n} ${n === 1 ? one : many}`;

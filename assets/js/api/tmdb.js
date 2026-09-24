@@ -89,6 +89,7 @@ export function normalizeMovieDetails(raw, region = TMDB.region) {
     runtime: raw.runtime || null,
     genres: (raw.genres ?? []).map((g) => g.name),
     originCountries: raw.origin_country ?? (raw.production_countries ?? []).map((c) => c.iso_3166_1),
+    keywords: (raw.keywords?.keywords ?? []).map((k) => k.name),
     certification: usCertification(raw.release_dates),
     providers: watchProviders(raw['watch/providers'], region),
     trailer: pickTrailer(raw.videos),
@@ -167,10 +168,11 @@ export async function discoverMovies({
   };
 }
 
-/** Full details for one movie: runtime, real US certification, providers and trailer in one request. */
+/** Full details for one movie in ONE request: runtime, real US certification, providers,
+ *  trailer and keywords (for vibe pairing). */
 export async function getMovie(id, { region = TMDB.region, signal } = {}) {
   const raw = await getJSON(
-    endpoint(`/movie/${encodeURIComponent(id)}`, { append_to_response: 'release_dates,watch/providers,videos' }),
+    endpoint(`/movie/${encodeURIComponent(id)}`, { append_to_response: 'release_dates,watch/providers,videos,keywords' }),
     { signal },
   );
   return normalizeMovieDetails(raw, region);

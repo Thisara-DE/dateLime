@@ -526,8 +526,8 @@
     width: clamp(1rem, 4vw, 3rem);
     border-block-start: 2px dashed var(--color-border);
   }
-  .steps a,
-  .steps span {
+  .steps li > a,
+  .steps li > span {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
@@ -545,6 +545,7 @@
   .steps__dot {
     display: inline-grid;
     place-items: center;
+    flex: none;
     width: 1.5rem;
     height: 1.5rem;
     border: 2px solid var(--color-border);
@@ -580,14 +581,38 @@
     }
   }
 
-  /* ---- Sticky action bar (thumb zone) ---------------------------------------------- */
+  /* ---- Sticky action bar (thumb zone) ----------------------------------------------
+     --sticky-bar-height keeps toasts above the bar and focused elements from hiding
+     behind it (scroll-padding in base.css; WCAG 2.2 SC 2.4.11). */
+  html:has(.action-bar) {
+    --sticky-bar-height: 5rem;
+  }
+  @media (min-width: 900px) {
+    html:has(.action-bar):not(:has(.action-bar:not(.action-bar--inline-desktop))) {
+      --sticky-bar-height: 0px;
+    }
+  }
+  .only-mobile {
+    display: block;
+  }
+  .only-desktop {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .only-mobile {
+      display: none;
+    }
+    .only-desktop {
+      display: block;
+    }
+  }
   .action-bar {
     position: sticky;
     inset-block-end: 0;
     z-index: var(--z-sticky);
     margin-inline: calc(-1 * var(--gutter));
     padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
-    background: color-mix(in srgb, var(--color-overlay) 96%, transparent);
+    background: var(--color-overlay);
     border-block-start: 1px solid var(--color-hairline);
     box-shadow: 0 -8px 24px -12px rgb(0 0 0 / 0.5);
   }
@@ -687,6 +712,14 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+  .ticket__stub-text {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.5em;
+  }
+  .ticket__stub-text > span {
+    white-space: nowrap;
+  }
   .ticket__stub .slice {
     width: 2.25rem;
     height: 2.25rem;
@@ -728,6 +761,20 @@
     border-radius: 50%;
     background: var(--toast-dot, var(--color-brand));
     flex: none;
+  }
+  .toast .button {
+    --button-height: 36px;
+    border-color: currentColor;
+    color: inherit;
+  }
+  .toast__close {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 1.25rem;
+    line-height: 1;
   }
   .toast--danger {
     --toast-dot: var(--color-danger);
@@ -773,6 +820,9 @@
   .skeleton--text {
     height: 0.9rem;
     border-radius: var(--radius-xs);
+  }
+  .skeleton--block {
+    height: 180px;
   }
 
   /* ---- Empty, error, info states --------------------------------------------------- */

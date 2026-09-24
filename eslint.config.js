@@ -13,7 +13,7 @@ export default [
     languageOptions: { sourceType: 'script', globals: { ...globals.serviceworker } },
   },
   {
-    files: ['scripts/**/*.mjs', 'tests/**/*.js', '*.config.js'],
+    files: ['scripts/**/*.mjs', 'tests/**/*.{js,mjs}', '*.config.js'],
     languageOptions: { ecmaVersion: 2024, sourceType: 'module', globals: { ...globals.node, ...globals.browser } },
   },
   {
@@ -26,7 +26,7 @@ export default [
     },
   },
   {
-    files: ['scripts/**/*.mjs'],
+    files: ['scripts/**/*.mjs', 'tests/**/*.mjs'],
     rules: { 'no-console': 'off' },
   },
 ];

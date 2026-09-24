@@ -11,7 +11,7 @@
     const params = new URLSearchParams();
     if (/^\d+$/.test(genre ?? '')) params.set('genre', genre);
     if (certs[Number(cert)]) params.set('cert', certs[Number(cert)]);
-    if (params.size) hash += `?${params}`;
+    if (params.size) hash = `#/movies/results?${params}`;
   }
   location.replace(`./${hash}`);
 })();

@@ -7,24 +7,25 @@ import { detectRegion } from './api/tmdb.js';
 
 export const DEFAULT_RULES = {
   region: detectRegion(),
-  services: [], // TMDB provider ids; empty = don't filter
+  services: [], // [{id, name, logo}] TMDB providers; empty = don't filter
   maxCertification: '', // '' = any
   diet: '', // '' | 'vegetarian' | 'vegan' | 'pescatarian'
   drink: 'zero-proof', // 'zero-proof' | 'cocktail' | 'none'
   matchMovie: true, // vibe pairing on the recipe step
+  avoid: [], // keys of AVOID (best-effort ingredient scan)
 };
 
 const initial = {
   rules: DEFAULT_RULES,
   draft: { movie: null, meal: null, drink: null, when: null, cookMinutes: DEFAULT_COOK_MINUTES, note: '' },
   saved: [],
-  shortlist: [],
+  together: null, // blind shortlist: { key, phase, first: [], second: [], movies: {} }
 };
 
 export const store = createStore(initial, {
   key: 'datelime.v2',
   version: 1,
-  persist: ({ rules, draft, saved, shortlist }) => ({ rules, draft, saved, shortlist }),
+  persist: ({ rules, draft, saved, together }) => ({ rules, draft, saved, together }),
 });
 
 // ---- Rules ---------------------------------------------------------------------------
@@ -36,6 +37,49 @@ export const getDraft = () => store.get().draft;
 export const updateDraft = (patch) => store.set((s) => ({ draft: { ...s.draft, ...patch } }));
 export function resetDraft() {
   store.set({ draft: { ...initial.draft, cookMinutes: getDraft().cookMinutes ?? DEFAULT_COOK_MINUTES } });
+}
+
+// ---- Decide together (blind shortlist) -------------------------------------------------
+export const MAX_HEARTS = 3;
+export const getTogether = () => store.get().together;
+
+/** Starts (or resumes) a session for a given results query. */
+export function startTogether(key) {
+  const current = getTogether();
+  if (current?.key === key) return current;
+  const fresh = { key, phase: 'first', first: [], second: [], movies: {} };
+  store.set({ together: fresh });
+  return fresh;
+}
+
+export function setTogether(patch) {
+  store.set((s) => ({ together: s.together ? { ...s.together, ...patch } : null }));
+}
+
+export const endTogether = () => store.set({ together: null });
+
+/**
+ * Hearts or un-hearts a movie for whoever holds the phone.
+ * @returns {'added'|'removed'|'full'}
+ */
+export function toggleHeart(movie) {
+  const t = getTogether();
+  if (!t || (t.phase !== 'first' && t.phase !== 'second')) return 'full';
+  const list = t[t.phase];
+  if (list.includes(movie.id)) {
+    setTogether({ [t.phase]: list.filter((id) => id !== movie.id) });
+    return 'removed';
+  }
+  if (list.length >= MAX_HEARTS) return 'full';
+  setTogether({ [t.phase]: [...list, movie.id], movies: { ...t.movies, [movie.id]: movie } });
+  return 'added';
+}
+
+/** Overlaps win; with none, the second person picks from everything hearted (at most 6). */
+export function revealTogether(t = getTogether()) {
+  const matches = t.first.filter((id) => t.second.includes(id));
+  const pool = matches.length ? matches : [...new Set([...t.first, ...t.second])];
+  return { matched: matches.length > 0, movies: pool.map((id) => t.movies[id]).filter(Boolean) };
 }
 
 // ---- Saved dates ---------------------------------------------------------------------
@@ -66,6 +110,11 @@ export function removeSaved(id) {
   store.set({ saved: before.filter((p) => p.id !== id) });
   // Undo puts it back where it was.
   return () => store.set((s) => ({ saved: [...s.saved.slice(0, index), removed, ...s.saved.slice(index)] }));
+}
+
+/** Afterglow: rate a past date (1-5 limes), or pass null to clear the rating. */
+export function rateSaved(id, rating) {
+  store.set((s) => ({ saved: s.saved.map((p) => (p.id === id ? { ...p, rating } : p)) }));
 }
 
 // ---- Diary export / import (Safari may evict storage after 7 idle days) ---------------

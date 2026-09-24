@@ -25,21 +25,49 @@ export function announce(message) {
 }
 
 /**
- * Shows a toast and announces it.
+ * Shows a toast and announces it. Toasts never take focus. A toast with an action (Undo)
+ * stays until it's used, dismissed or the next navigation, and the action is always
+ * available elsewhere too.
  * @param {string} message
- * @param {{tone?: 'success'|'info'|'danger', duration?: number}} [options]
+ * @param {{tone?: 'success'|'info'|'danger', duration?: number, action?: {label: string, onClick: () => void}}} [options]
  */
-export function toast(message, { tone = 'success', duration = 4000 } = {}) {
+export function toast(message, { tone = 'success', duration = 5000, action } = {}) {
   ensureRegions();
   const el = document.createElement('div');
   el.className = `toast toast--${tone}`;
-  el.textContent = message;
-  toastStack.append(el);
-  announce(message);
+  const text = document.createElement('span');
+  text.textContent = message;
+  el.append(text);
+  let timer;
   const remove = () => {
+    clearTimeout(timer);
     el.classList.add('is-leaving');
     setTimeout(() => el.remove(), 250);
   };
-  setTimeout(remove, duration);
+  if (action) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'button button--small button--secondary';
+    button.textContent = action.label;
+    button.addEventListener('click', () => {
+      action.onClick();
+      remove();
+    });
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'toast__close';
+    close.setAttribute('aria-label', 'Dismiss');
+    close.textContent = '×';
+    close.addEventListener('click', remove);
+    el.append(button, close);
+    window.addEventListener('hashchange', remove, { once: true });
+  } else {
+    timer = setTimeout(remove, duration);
+    // Pause while someone is reading or pointing at it.
+    el.addEventListener('pointerenter', () => clearTimeout(timer));
+    el.addEventListener('pointerleave', () => (timer = setTimeout(remove, 2000)));
+  }
+  toastStack.append(el);
+  announce(action ? `${message} ${action.label} is available.` : message);
   return remove;
 }

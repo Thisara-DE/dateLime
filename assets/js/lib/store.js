@@ -18,20 +18,25 @@ function safeStorage() {
  * @param {{key?: string, version?: number, persist?: (state: T) => Partial<T>, migrate?: (old: any, fromVersion: number) => Partial<T>, storage?: Storage|null}} [options]
  */
 export function createStore(initial, { key, version = 1, persist = (s) => s, migrate, storage = safeStorage() } = {}) {
-  let state = structuredClone(initial);
   const listeners = new Set();
 
-  if (key && storage) {
-    try {
-      const saved = JSON.parse(storage.getItem(key));
-      if (saved && typeof saved === 'object') {
-        if (saved.v === version) state = { ...state, ...saved.data };
-        else if (migrate) state = { ...state, ...migrate(saved.data, saved.v) };
+  function load() {
+    let next = structuredClone(initial);
+    if (key && storage) {
+      try {
+        const saved = JSON.parse(storage.getItem(key));
+        if (saved && typeof saved === 'object') {
+          if (saved.v === version) next = { ...next, ...saved.data };
+          else if (migrate) next = { ...next, ...migrate(saved.data, saved.v) };
+        }
+      } catch {
+        /* corrupt JSON: start fresh rather than crash (the old app threw here) */
       }
-    } catch {
-      /* corrupt JSON: start fresh rather than crash (the old app threw here) */
     }
+    return next;
   }
+
+  let state = load();
 
   function save() {
     if (!key || !storage) return;
@@ -51,6 +56,12 @@ export function createStore(initial, { key, version = 1, persist = (s) => s, mig
       const prev = state;
       state = { ...state, ...next };
       save();
+      listeners.forEach((fn) => fn(state, prev));
+    },
+    /** Re-reads persisted state (e.g. after another tab changed it) and notifies subscribers. */
+    reload() {
+      const prev = state;
+      state = load();
       listeners.forEach((fn) => fn(state, prev));
     },
     subscribe(fn) {

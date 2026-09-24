@@ -56,7 +56,11 @@ test('normalizeMovieDetails reads appended responses', () => {
     release_dates: { results: [{ iso_3166_1: 'US', release_dates: [{ certification: 'R', type: 3 }] }] },
     'watch/providers': { results: { US: { link: 'l', flatrate: [{ provider_id: 1, provider_name: 'Max' }] } } },
     videos: { results: [] },
+    keywords: { keywords: [{ id: 1, name: 'paris' }] },
+    origin_country: ['FR'],
   });
+  assert.deepEqual(d.keywords, ['paris']);
+  assert.deepEqual(d.originCountries, ['FR']);
   assert.equal(d.certification, 'R');
   assert.equal(d.runtime, 118);
   assert.deepEqual(d.genres, ['Comedy']);
