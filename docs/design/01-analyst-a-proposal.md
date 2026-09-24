@@ -1,57 +1,71 @@
 # dateLime redesign: Analyst A proposal, "Limelight"
 
-*Analyst A, Experience & Brand. Written for the critique round, 2026-09-24. Every contrast ratio below was measured with the brief's `contrast.py`.*
+*Analyst A (Experience & Brand), 2026-09-24. Every contrast ratio here was measured with the brief's `contrast.py`.*
 
 ## 1. Direction: **Limelight**
 
-Limelight was the stage light of the 1800s, made by heating a block of lime, and being "in the limelight" means being the whole show. This direction takes the pun literally. The living room becomes a private cinema and supper club for two, with the house lights down, and **lime is the only light in the room**. Surfaces are *velvet*: a warm plum-black, like a theatre seat in the dark. Lime marks what's lit: the next action, the current choice, the brand. I retune it from Bulma's generic "success" #23D160 to a true citrus **Zest #9FE143** (hue 85°), which sits almost exactly opposite velvet (hue 267°) on the color wheel. The flow plays in three acts, *The Feature*, *The Menu* and *The Ticket*, and ends in something worth sending: a paper cinema ticket stamped **ADMIT TWO**. The feeling should be anticipation, a little mischief and candlelight, so that planning the date already feels like the start of it.
+Limelight was the 1800s stage light made by heating lime, and to be "in the limelight" is to be the whole show. dateLime takes the pun literally. The living room becomes a private cinema and supper club for two with the house lights down, and **lime is the only light in the room**.
+
+Surfaces are *velvet*, a warm plum-black like a theatre seat in the dark. Lime marks what's lit: the next action, the current choice and the brand. I retune it from Bulma's generic success green #23D160 to a true citrus, **Zest #9FE143** (hue 85°), which is nearly complementary to velvet (267°).
+
+The flow plays in three acts: *The Feature*, *The Menu* and *The Ticket*. It ends in a paper cinema ticket stamped **ADMIT TWO**. The feeling is anticipation, mischief and candlelight, so planning the date feels like the start of it.
 
 Two rules carry the system:
-- **Lit = inverse + lime.** Anything primary or selected flips to maximum contrast and carries lime. In the dark theme that's a lime pill with a velvet label. In the light theme it's a velvet pill with a lime label, because lime on white is only 1.58:1.
-- **Rectangles are screens, circles are plates.** Posters are always 2:3 rectangles. Food and drink photos are always circles: the plate, the coaster, the lime slice.
+- **Lit = inverse + lime.** Primary and selected elements flip to maximum contrast and carry lime. In dark that means a lime pill with a velvet label. In light it means a velvet pill with a lime label, because lime on white is only 1.58:1.
+- **Rectangles are screens, circles are plates.** Posters are always 2:3. Food and drink photos are always circles.
 
 ## 2. Principles, voice & tone
 
-1. **Lights down, lime up.** Velvet does the quiet work, and lime marks the one thing to do next. Lime covers ≤10% of any screen, because if everything glows, nothing does.
-2. **Two people, one phone.** It's built to be passed across a couch: 48px targets, text readable at arm's length, and choices that feel like a game rather than a form.
-3. **Every step is a scene.** Each screen asks for one decision, shows a visible "what's next", and has a ceremonial transition that respects reduced motion. The ending is an object (the ticket), not a page.
-4. **Honest charm.** Delight never fakes data. There are no invented cook times, the movie's rating is its real certification, and errors are plain and offer a way forward.
-5. **Nobody's left out of date night.** Dietary needs, screen readers, keyboards, color-blind users (state is never shown by color alone) and reduced motion are all first-class.
+1. **Lights down, lime up.** Velvet does the quiet work. Lime marks the one next thing and covers no more than 10% of any screen.
+2. **Two people, one phone.** It gets passed across a couch, so it uses 48px targets, arm's-length type, and choices that feel like a game.
+3. **Every step is a scene.** Each screen holds one decision and a visible "what's next". The ending is an object (the ticket), not a page.
+4. **Honest charm.** We never fake data: no invented cook times, real certifications only, and plain errors with a way out.
+5. **Nobody's left out.** Diets, screen readers, keyboards, color-blindness (we never rely on color alone) and reduced motion are first-class.
 
-**Voice:** warm, witty, a little flirty, never crude. Cinema and kitchen wordplay goes in headlines only. Buttons are plain verbs. The copy says "you two" and "your date", never gendered roles. After an error headline, the jokes stop.
+**Voice:** warm, witty, a little flirty, never crude.
+- Wordplay goes in headlines only.
+- Buttons are plain verbs.
+- We say "you two", never gendered roles.
+- Errors drop the jokes after the headline.
 
 | Moment | Copy |
 |---|---|
-| Landing hero + CTA | Eyebrow "DATE NIGHT, IN" · H1 "Dinner and a movie, *for two.*" · "Pick tonight's film. We'll pair a dish and a drink with its mood, then hand you a ticket for two." · **Start tonight's date** · secondary **Surprise us** |
-| Loading | "Dimming the lights…" (movies) · "Setting the table…" (recipes) · "Muddling the lime…" (drinks). Screen readers get a single plain announcement, "Loading movies." |
+| Landing hero + CTA | Eyebrow: "DATE NIGHT, IN". H1: "Dinner and a movie, *for two.*" Body: "Pick tonight's film. We'll pair a dish and a drink with its mood, then hand you a ticket for two." Primary: **Start tonight's date**. Secondary: **Surprise us**. |
+| Loading | "Dimming the lights…" (movies), "Setting the table…" (recipes), "Muddling the lime…" (drinks). Screen readers get one plain line: "Loading movies." |
 | Empty | "Nothing's showing with those picks." / "Try another mood, raise the rating limit, or add a streaming service." [Change picks] |
 | API error | "The projector jammed." / "We couldn't reach the movie database. Check your connection and try again. Your picks are still here." [Try again] [Open a saved date] |
-| Saved / shared | Toast "Saved to your date diary." [View] · after Web Share "Ticket sent. Admit two!" · clipboard fallback "Link copied. Paste it to your date." |
+| Saved / shared | "Saved to your date diary." [View]. After Web Share: "Ticket sent. Admit two!" After a clipboard copy: "Link copied. Paste it to your date." |
 
 ## 3. Color theme
 
-**Default: dark ("Late Show"). Light theme: "Matinee".** Here is why dark is the default:
-- People use this in the evening in a dim room, where a white screen is a flashlight in your partner's face.
-- Lime works as *light*: it measures 11.97:1 on velvet but only 1.58:1 on white.
-- Posters and food photography look richer on dark, which is the cinema convention.
-- It fixes the original sin, which was lime used as wallpaper under white text (2.03:1).
+**Default: dark, "Late Show"** (the light theme is "Matinee"). Dark wins for four reasons:
+- It's used in the evening in a dim room, where a white screen is a flashlight in your partner's face.
+- Lime works as *light*: 11.97:1 on velvet against 1.58:1 on white.
+- Posters and food look richer on dark.
+- It cures the original sin of lime wallpaper under white text (2.03:1).
 
-The first visit is Late Show whatever the OS setting, because "light" is the never-chosen default on most phones. A header toggle ("Lights up" / "Lights down", `aria-pressed`) remembers the choice, and a tiny inline head script applies it before first paint. **Brand moments stay velvet in both themes**: the header ("marquee"), the landing hero ("stage") and the share image. The ticket always takes the *opposite* theme: paper on Late Show, velvet on Matinee. `prefers-contrast: more` maps secondary and muted text to primary and makes borders 2px. `forced-colors` falls back to system colors.
+**Theme rules:**
+- First visits get Late Show regardless of the OS setting, because light is the never-chosen default on most phones.
+- A header toggle, "Lights up / Lights down" (`aria-pressed`), is remembered and applied before first paint.
+- **Brand moments stay velvet in both themes:** the header "marquee", the landing "stage" and the share image.
+- **The ticket takes the opposite theme:** paper on Late Show, velvet on Matinee.
+- `prefers-contrast: more` promotes secondary and muted text to primary and borders to 2px.
+- `forced-colors` uses system colors.
 
-**Lime scale (theme-independent):** 50 #F6FCE9 · 100 #EAF8CF · 200 #D6F2A3 · 300 #BDEB74 · **400 #9FE143 Zest** · 500 #84C92F · 600 #64A01E · 700 #446F12 · 800 #34540F · 900 #263D0C · 950 #16240A
+**Lime scale (both themes):** 50 #F6FCE9 · 100 #EAF8CF · 200 #D6F2A3 · 300 #BDEB74 · **400 #9FE143 Zest** · 500 #84C92F · 600 #64A01E · 700 #446F12 · 800 #34540F · 900 #263D0C · 950 #16240A
 
 | Token | Late Show (default) | Matinee |
 |---|---|---|
 | bg.page | #140F1A velvet | #FBF7F1 program paper |
 | bg.raised | #1E1726 | #FFFFFF |
-| bg.overlay (sheets, toasts) | #2A2133 | #FFFFFF + shadow (toasts #1A1420) |
+| bg.overlay (sheets, toasts) | #2A2133 | #FFFFFF + shadow; toasts #1A1420 |
 | bg.sunken (inputs) | #0E0A12 | #F2ECE3 |
 | text.primary | #F6F2EC moonlight | #1A1420 ink |
 | text.secondary | #D2C8DC | #463C50 |
 | text.muted | #A89CB6 | #685D73 |
-| text.brand / link | #BDEB74 (Zest #9FE143 for eyebrows) | #446F12 |
-| action.fill → hover → active | #9FE143 → #BDEB74 → #84C92F | #1A1420 → #2E2537 → #000000 |
-| text.on-action | #140F1A | #BDEB74 |
+| text.brand / link | #BDEB74; eyebrows Zest #9FE143 | #446F12 |
+| brand.fill → hover → active | #9FE143 → #BDEB74 → #84C92F | #1A1420 → #2E2537 → #000000 |
+| text.on-brand | #140F1A | #BDEB74 |
 | border.strong (control edges) | #7A6E88 | #8A7F94 |
 | border.hairline (*decorative only*) | #372C42 | #E6DED3 |
 | focus.ring (2px, 2px offset) | #D6F2A3 | #446F12 |
@@ -59,300 +73,408 @@ The first visit is Late Show whatever the OS setting, because "light" is the nev
 | warning fg / tint | #FFC96B / #3A2B12 | #8A5200 / #FFF3DA |
 | danger fg / tint | #FF8A73 / #3B1A1C | #B42A1A / #FDECE8 |
 | info fg / tint | #9DBEFF / #1A2440 | #2556C4 / #EAF0FF |
-| accent.blush (love and match moments only) | #FF9CC8 | #A62B7C |
+| accent.blush (love and match only) | #FF9CC8 | #A62B7C |
 | ticket | paper #F7F0E4 with Matinee text tokens | velvet with Late Show tokens |
 | scrim | rgb(14 10 18 / .72) | same |
 
-Blush and danger are kept 37–46° of hue apart, and each always travels with its own icon (heart vs. alert).
+Blush and danger sit 37–46° of hue apart, and each always carries its own icon (heart or alert).
 
-**Measured contrast (WCAG 2.2 AA: text ≥4.5, large text and UI ≥3):**
+**Measured contrast** (AA: text ≥4.5, large text and UI ≥3). In rows marked ¹, the surfaces are page / raised / overlay for Late Show and page / white / sunken for Matinee.
 
 | Pairing | Late Show | Matinee |
 |---|---|---|
-| text.primary on page / raised / overlay (Matinee: sunken) | 16.92 / 15.62 / 13.81 | 16.89 / 18.03 / 15.35 |
-| text.secondary, same surfaces | 11.71 / 10.81 / 9.56 | 9.73 / 10.38 / 8.84 |
-| text.muted, same surfaces (+ sunken) | 7.27 / 6.71 / 5.94 (7.56) | 5.78 / 6.17 / 5.26 |
-| brand text on page / raised / overlay | Zest 11.97 / 11.05 / 9.77; #BDEB74 13.75 / 12.69 / 11.22 | #446F12 5.58 / 5.95 / 5.07 (sunken) |
-| label on action fill: rest / hover / active | 11.97 / 13.75 / 9.32 | 13.13 / 10.65 / 15.30 |
-| secondary button label on hover / active tint (#25281F / #303922) | 10.91 / 8.82 | ink on #F2ECE3 / #E6DED3: 15.35 / 13.52 |
-| border.strong vs page / raised / overlay (Matinee: page / white / sunken) | 3.97 / 3.66 / 3.24 | 3.55 / 3.79 / 3.23 |
-| focus ring vs page / raised / overlay (Matinee: page / white) | 15.35 / 14.17 / 12.53 | 5.58 / 5.95 |
-| ring touching lime fill (why the offset is mandatory) | #BDEB74 on #9FE143 = 1.15 ✗ | — |
-| danger on page / raised / tint | 8.21 / 7.58 / 6.76; ink on danger fill 8.21 | 5.99 / 6.39 / 5.58; white on fill 6.39 |
-| warning on page / raised / tint | 12.42 / 11.46 / 9.01 | 5.99 / 6.39 / 5.81 |
-| info on page / raised / tint | 10.10 / 9.32 / 8.20 | 6.14 / 6.55 / 5.74 |
-| success on tint | 10.52 | 7.89 (page 8.13) |
+| text.primary ¹ | 16.92 / 15.62 / 13.81 | 16.89 / 18.03 / 15.35 |
+| text.secondary ¹ | 11.71 / 10.81 / 9.56 | 9.73 / 10.38 / 8.84 |
+| text.muted ¹ (Late Show on sunken) | 7.27 / 6.71 / 5.94 (7.56) | 5.78 / 6.17 / 5.26 |
+| brand text ¹ | Zest 11.97 / 11.05 / 9.77; #BDEB74 13.75 / 12.69 / 11.22 | 5.58 / 5.95 / 5.07 |
+| on-brand label: rest / hover / active | 11.97 / 13.75 / 9.32 | 13.13 / 10.65 / 15.30 |
+| secondary label on hover / active tint | 10.91 / 8.82 (#25281F / #303922) | 15.35 / 13.52 |
+| border.strong ¹ | 3.97 / 3.66 / 3.24 | 3.55 / 3.79 / 3.23 |
+| focus ring ¹ | 15.35 / 14.17 / 12.53 | 5.58 / 5.95 (page / white) |
+| ring touching a lime fill (why the offset is required) | 1.15 ✗ | n/a |
+| danger: page / raised / tint, then filled-button label | 8.21 / 7.58 / 6.76, ink 8.21 | 5.99 / 6.39 / 5.58, white 6.39 |
+| warning: page / raised / tint | 12.42 / 11.46 / 9.01 | 5.99 / 6.39 / 5.81 |
+| info: page / raised / tint | 10.10 / 9.32 / 8.20 | 6.14 / 6.55 / 5.74 |
+| success on tint (Matinee on page in brackets) | 10.52 | 7.89 (8.13) |
 | text.primary on danger / warning / info / success tints | 13.94 / 12.27 / 13.74 / 12.94 | 15.74 / 16.38 / 15.80 / 16.39 |
-| blush on page / raised / overlay (Matinee: page / white / sunken) | 9.74 / 8.99 / 7.95 | 6.04 / 6.45 / 5.49 |
-| light toast: moonlight / lime icon / danger icon on #1A1420 | — | 16.17 / 13.13 / 7.84 |
-| ticket paper: ink / secondary / muted / lime / blush | 15.92 / 9.17 / 5.45 / 5.25 / 5.69 | (uses Late Show pairs) |
-| ticket stub: ink on Zest · paper edge vs page | 11.44 · 16.66 | — |
-| worst-case text on photo scrim (85% velvet over white = #37333C) | primary 11.07, secondary 7.66 | same |
-| hairline vs page (decorative, never the only edge) | 1.44 | 1.25 |
-| heritage fallback: #23D160 on velvet · ink on #23D160 | 9.31 · 8.89 | — |
+| blush ¹ | 9.74 / 8.99 / 7.95 | 6.04 / 6.45 / 5.49 |
+| ink toast: text / lime icon / #FF8A73 icon | n/a | 16.17 / 13.13 / 7.84 |
+| ticket paper: ink / secondary / muted / #446F12 / blush | 15.92 / 9.17 / 5.45 / 5.25 / 5.69 | uses the Late Show pairs |
+| stub ink on Zest; paper edge against page | 11.44; 16.66 | n/a |
+| worst-case photo scrim #37333C (85% velvet over white): primary / secondary | 11.07 / 7.66 | same |
+| hairline against page (decorative only) | 1.44 | 1.25 |
+| heritage fallback: #23D160 on velvet; ink on #23D160 | 9.31; 8.89 | n/a |
 
 ## 4. Typography
 
-The type is self-hosted variable woff2 files with a Latin subset, **≤150 KB total**. Roboto Condensed and Figtree are preloaded. Fraunces uses `font-display: swap` with a metric-matched Georgia fallback so nothing shifts on load.
+Fonts are self-hosted variable woff2 with a Latin subset, **150 KB or less in total**. Roboto Condensed and Figtree are preloaded. Fraunces uses `font-display: swap` with a metric-matched Georgia fallback, so the layout doesn't shift.
 
-- **Roboto Condensed** (100–900) sets the wordmark at 800. It also sets the *marquee labels* (eyebrows, step names, ticket fields, badges) and tabular numerals.
-- **Fraunces** (opsz 9–144, weights 500–700, plus italic 400) is the display serif. It's warm and menu-card romantic, and its italic is for accents like "*for two*".
-- **Figtree** (300–900) handles all UI and body text. It has a large x-height and open apertures, so it stays legible at arm's length.
+- **Roboto Condensed** (100–900): the wordmark (800), marquee labels (eyebrows, steps, ticket fields, badges) and tabular numerals.
+- **Fraunces** (opsz 9–144, 500–700, italic 400): the display serif, with a warm menu-card romance. Its italic is reserved for accents ("*for two*").
+- **Figtree** (300–900): all UI and body text. Its big x-height and open apertures read well at arm's length.
 
-| Token | Size (390 → 1280px) | Face / weight | Line height | Tracking |
+| Token | Size (390 → 1280px) | Face / weight | LH | Tracking |
 |---|---|---|---|---|
-| wordmark.hero | clamp(4.5rem, 3.25rem + 7.19vw, 9rem): 80 → 144px | RC 800 | 0.9 | −0.03em |
-| display (H1) | clamp(2.25rem, 1.7rem + 2.25vw, 3.5rem): 36 → 56 | Fraunces 600 (accent: italic 400) | 1.05 | −0.015em |
-| h2 | clamp(1.75rem, 1.42rem + 1.35vw, 2.5rem): 28 → 40 | Fraunces 600 | 1.1 | −0.01em |
-| h3 | clamp(1.375rem, 1.32rem + 0.22vw, 1.5rem) | Fraunces 600 | 1.2 | 0 |
+| wordmark.hero | clamp(4.5rem, 3.25rem + 7.19vw, 9rem) = 80 → 144px | RC 800 | 0.9 | −0.03em |
+| display (H1) | clamp(2.25rem, 1.7rem + 2.25vw, 3.5rem) = 36 → 56 | Fraunces 600 (accent: italic 400) | 1.05 | −0.015em |
+| h2 | clamp(1.75rem, 1.42rem + 1.35vw, 2.5rem) = 28 → 40 | Fraunces 600 | 1.1 | −0.01em |
+| h3 | clamp(1.375rem, 1.32rem + 0.22vw, 1.5rem) = 22 → 24 | Fraunces 600 | 1.2 | 0 |
 | title (cards) | 1.125rem | Figtree 700 | 1.3 | 0 |
-| body-lg (plots, steps) | 1.125rem (Showtime: 1.375rem) | Figtree 400 | 1.6 | 0 |
+| body-lg (plots, steps) | 1.125rem (Showtime 1.375rem) | Figtree 400 | 1.6 | 0 |
 | body | 1rem | Figtree 400 | 1.55 | 0 |
 | body-sm (meta) | 0.875rem | Figtree 500 | 1.45 | 0.005em |
-| label | 0.875rem, UPPERCASE | RC 700 | 1.2 | 0.08em |
+| label | 0.875rem UPPERCASE | RC 700 | 1.2 | 0.08em |
 | button | 1rem | Figtree 700 | 1 | 0.01em |
-| micro (attribution only) | 0.75rem (the floor) | Figtree 500 | 1.4 | 0.01em |
+| micro (attribution only, the size floor) | 0.75rem | Figtree 500 | 1.4 | 0.01em |
 
-**Rules:** Body text is never Roboto Condensed or Fraunces, and Fraunces never goes below 22px. Italic is for accents of one to three words only. Text is sentence case everywhere except `label`. Lines are at most 68ch. Numerals use `tabular-nums`.
+**Rules:**
+- No body text in RC or Fraunces.
+- Fraunces never goes below 22px.
+- Italic only for accents of one to three words.
+- Sentence case everywhere except `label`.
+- Lines no longer than 68ch.
+- `tabular-nums` for times.
 
-**Wordmark:** "dateLime" in RC 800, with lowercase "date" and capital "Lime" unchanged. It's **two-tone**: "date" in text.primary and "Lime" in Zest on velvet. The print lockup, on paper, is ink plus #446F12 (5.58:1). There are also mono versions: all moonlight on photos, all ink for print. The nav size is 1.5rem on mobile and 1.75rem on desktop, the minimum is 18px, and the clear space on every side equals the height of the "L". Never outline it, add a gradient, italicize it or place it on a lime fill.
+**Wordmark:** "dateLime" in RC 800, lowercase "date" plus capital "Lime".
+- **Two-tone:** "date" in text.primary and "Lime" in Zest, on velvet.
+- **Print lockup:** ink with #446F12 (5.58:1 on paper).
+- **Mono versions:** all moonlight on photos, all ink for print.
+- **Size:** 1.5rem in the mobile nav and 1.75rem on desktop, never below 18px. Clear space equals the height of the "L".
+- **Never** outline it, fill it with a gradient, italicize it or set it on lime.
 
-The supporting glyph is a **lime slice**: an 8% rind ring in #64A01E, a pith ring in #EAF8CF, and 8 Zest segments (6 below 20px). It appears in four places:
-- **Favicon and app icon**, on a velvet rounded square.
-- **Header lockup**, at 1.1× cap height with a 0.3em gap before the wordmark.
-- **Ticket seal, spinner and rating unit.**
-- **Landing hero, as a half slice** rising behind the wordmark like a moon (the "lime moon"). An optional flourish for the hero only swaps the "i" tittle for a tiny slice, using an outlined SVG with `aria-label="dateLime"`.
+**Glyph, the lime slice:** a #64A01E rind (8% of the diameter), #EAF8CF pith, and 8 Zest segments (6 below 20px). It appears as:
+- the favicon and app icon, on velvet;
+- the header lockup (1.1× cap height, 0.3em gap);
+- the ticket seal, spinner and rating unit;
+- on the landing, a **half slice rising behind the wordmark like a moon** (the "lime moon").
+
+An optional hero flourish turns the "i" tittle into a tiny slice (outlined SVG, `aria-label="dateLime"`).
 
 ## 5. Shape, spacing, elevation, motion, iconography, imagery
 
-- **Radius:** xs 4 (badges), sm 8 (inputs, thumbnails), md 12 (posters), lg 20 (cards, sheets), xl 28 (ticket, hero stage), pill 999 (buttons, chips). The ticket's perforation is cut with 12px semicircle notches using a CSS `mask` radial-gradient.
-- **Spacing (4-pt):** 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96. Gutters are 16 / 24 / 32px. Content is at most 1200px wide, the ticket at most 960px, and reading text at most 68ch. Touch targets are ≥48px, well above WCAG 2.2's 24px minimum. The sticky bottom bar sets `scroll-padding-bottom` so focus is never hidden behind it (2.4.11).
-- **Elevation.** Late Show uses a lighter surface plus shadow:
-  - e1 is `inset 0 1px 0 rgb(255 255 255/.04), 0 2px 6px rgb(0 0 0/.35)`.
-  - e2 is `0 12px 32px -8px rgb(0 0 0/.6)`.
-  - e3 is `0 24px 64px -12px rgb(0 0 0/.75)`.
-
-  Matinee uses plum-tinted shadows: `rgb(26 20 32/.08–.30)` at the same offsets. Glow (Late Show only) is `0 0 0 1px #9FE143, 0 8px 28px -6px rgb(159 225 67/.45)` and is reserved for selected chips, primary hover and the lime moon.
-- **Motion tokens:**
-  - Durations: micro 90ms (press, scale .97), fast 160ms (hover, focus), base 240ms (chips, toasts), sheet 380ms, scene 650ms (page transitions, the ticket "printing"), ritual 1200ms (the lime moon, once per session).
-  - Easings: standard `cubic-bezier(.2,0,0,1)`, enter `(.05,.7,.1,1)`, exit `(.3,0,.8,.15)`, and pop `(.34,1.56,.64,1)` (selection only).
-  - Signature moments: the lime moon rises, a chip pops and glows on select, the poster morphs into the ticket (View Transitions, `view-transition-name: poster`), the ticket prints up out of a slot, match segments burst, and Showtime's "Lights down" dims the edges.
-  - **Reduced motion:** no transforms, parallax or bursts. View transitions become a 120ms crossfade, the shimmer stops, and the spinner becomes a static slice with text. Nothing auto-advances and nothing loops for more than 5s.
-- **Icons:** Lucide (ISC license), on a 24px grid with a 1.75px stroke and round joins, in `currentColor`. They're 20px inside chips and buttons. Custom icons follow the same grid: lime slice, ticket, popcorn, plate, coupe, candle and reel. Filled icons are used only to show state (a filled heart means saved). Icon-only buttons get an `aria-label` and a tooltip.
-- **Posters:**
-  - Always 2:3 and never squared, with `srcset` from TMDB w185, w342 (grid at 2×) and w500 (ticket).
-  - A 12px radius and a 1px inner stroke `rgb(255 255 255/.08)` so dark posters don't dissolve into the page.
+- **Radius:** xs 4 (badges) · sm 8 (inputs, thumbnails) · md 12 (posters) · lg 20 (cards, sheets) · xl 28 (ticket, stage) · pill 999 (buttons, chips). The ticket's notches are 12px semicircles cut with a CSS `mask`.
+- **Spacing (4-pt):** 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64 · 80 · 96.
+  - Gutters are 16/24/32px.
+  - Max width is 1200px (ticket 960px, text 68ch).
+  - Targets are at least 48px (WCAG 2.2 requires 24).
+  - Sticky bars set `scroll-padding-bottom` so focus is never obscured (2.4.11).
+- **Elevation:**
+  - Late Show:
+    - e1 `inset 0 1px 0 rgb(255 255 255/.04), 0 2px 6px rgb(0 0 0/.35)`
+    - e2 `0 12px 32px -8px rgb(0 0 0/.6)`
+    - e3 `0 24px 64px -12px rgb(0 0 0/.75)`
+  - Matinee uses the same offsets in plum: `rgb(26 20 32/.08–.30)`.
+  - **Glow** exists in Late Show only: `0 0 0 1px #9FE143, 0 8px 28px -6px rgb(159 225 67/.45)`. It's reserved for selected chips, primary hover and the lime moon.
+- **Motion:**
+  - **Durations:** micro 90ms (press, scale .97) · fast 160ms (hover, focus) · base 240ms (chips, toasts) · sheet 380ms · scene 650ms (page transitions, ticket print) · ritual 1200ms (lime moon, once per session).
+  - **Easings:** standard `cubic-bezier(.2,0,0,1)` · enter `(.05,.7,.1,1)` · exit `(.3,0,.8,.15)` · pop `(.34,1.56,.64,1)`, used for selection only.
+  - **Signature moments:** moon rise, chip pop, poster-to-ticket morph (View Transitions, `view-transition-name: poster`), the ticket printing out of a slot, a match burst, and a "Lights down" vignette.
+  - **Reduced motion:** no transforms, parallax or bursts. View transitions become 120ms crossfades. No shimmer, and the spinner is static with text. Nothing auto-advances or loops for more than 5s.
+- **Icons:** Lucide (ISC license) on a 24px grid: 1.75px stroke, round joins, `currentColor`, 20px inside chips and buttons.
+  - Custom icons on the same grid: slice, ticket, popcorn, plate, coupe, candle and reel.
+  - Filled only to show state (a filled heart means saved).
+  - Icon-only buttons get an `aria-label` and a tooltip.
+- **Posters:** always 2:3, never squared.
+  - TMDB `srcset` at w185/w342/w500.
+  - 12px radius plus a 1px inner stroke of `rgb(255 255 255/.08)`, so dark posters don't dissolve into the page.
   - Lazy-loaded with `decoding="async"`.
-  - A missing poster becomes a *typographic poster*: the title in Fraunces on velvet with a small slice.
-- **Backdrops:** w780 at the top of the movie sheet, fading into the surface. Behind the ticket, a w300 version blurred 40px at 30% gives a static "screen glow" (Late Show only).
-- **Food and drink:** always circles, meaning plates (grid 150px, ticket 96–160px) and coasters (48px). TheMealDB and TheCocktailDB images are square and dish-centred, so the corner loss is acceptable. Photos are **never filtered**. Alt text reads "{meal}, plated".
+  - A missing poster becomes a typographic poster: the title in Fraunces on velvet.
+- **Backdrops:** a w780 image tops the movie sheet and fades into the surface. Behind the ticket, a static w300 copy (40px blur, 30% opacity) acts as a "screen glow" in Late Show only.
+- **Food and drink:** always circles.
+  - Plates are 150px in the grid and 96–160px on the ticket. Coasters are 48px.
+  - The source images are square and centred on the dish, so losing the corners is acceptable.
+  - Photos are **never filtered**.
+  - Alt text: "{meal}, plated".
 
 ## 6. Core components
 
 | Component | Spec and states |
 |---|---|
-| **Primary button** | Pill, 48px (56px for hero and sticky CTAs), padding 0 24px, button type. Late Show: Zest with a velvet label. Matinee: ink with a #BDEB74 label. Hover: lighter fill + glow, or #2E2537. Active: #84C92F or #000 with scale .97. Focus: 2px ring with 2px offset. **Disabled:** avoided. Instead we use `aria-disabled` with the reason as helper text and a muted label on overlay/sunken (5.94 / 5.26). |
-| Secondary | 1.5px border (Zest or ink) with a #BDEB74 or ink label. Hover tint #25281F or #F2ECE3, active #303922 or #E6DED3. |
-| Tertiary / danger | Text links in brand text, underlined on hover. Destructive actions use danger text; after confirming, a filled danger button (ink or white label). |
-| **Chips / pills** | Real radio or checkbox inputs inside a `fieldset` with a `legend`. 48px tall. Unselected: raised fill, border.strong, text.primary. **Selected: lit = inverse, plus a ✓ icon** (never color alone), with a 240ms pop. Mood tiles are 96px chips with an icon, the mood, and a genre line. |
-| **Movie card** | `<article>`: 2:3 poster (`alt=""`), then an `<h3><button>` title whose `::after` stretches across the whole card. That gives one control per card, with no nested links and no document-wide listener. Meta line: "2001 · ★ 7.9". An "On your services" badge appears only when the query guarantees it. Hover lifts 2px with a glow. The focus ring wraps the card. |
-| Movie sheet | A `<dialog>`: a bottom sheet at 92vh on mobile, a 520px right-side drawer on desktop. It shows the backdrop, the overlapping poster, an h2, "2001 · 2h 2m · R · Romance, Comedy" (the *real* certification), the italic tagline, the **full plot**, a [▶ Trailer] button (youtube-nocookie in a nested dialog), provider logos with "Data by JustWatch", a teaser line "Pairs with: French bistro · Kir Royale", and a sticky [Pick this movie]. |
-| **Recipe card** | Circle photo, title, "French · Vegetarian", "9 ingredients" (an honest effort proxy), and a pairing reason in brand text ("Paris match"). The recipe sheet has an ingredient checklist with measures, numbered steps, YouTube and source links, and [Cook this]. |
-| **Step progress** | `<ol aria-label="Progress">` with ACT I THE FEATURE · ACT II THE MENU · ACT III THE TICKET as RC labels joined by a dashed "perforation". The current step (`aria-current="step"`) gets a Zest dot. Done steps get a ✓, upcoming ones are muted. Mobile collapses it to "ACT II OF III · THE MENU" plus a 3-segment bar. |
-| **Date package: "Admit Two" ticket** | `<article>` with an xl radius and notches. **Header strip:** "DATELIME PRESENTS · A DOUBLE FEATURE". **Feature:** poster, title (h2), year · runtime · cert. **Perforation.** **Menu:** a plate circle, recipe, area, and the drink on a coaster (optional, with zero-proof). **Run of show**, e.g. 7:15 cook · 8:00 dinner · 8:30 feature · 10:32 credits: the end time uses TMDB runtime, while cook and dinner times are labelled "your estimate" (default 45 + 30 min, editable). **Stub:** a Zest band with "ADMIT TWO · FRI 26 SEP · 8:30 PM" and the slice seal. Any decorative barcode is `aria-hidden`. |
-| **Toast** | Bottom-center, above the safe area, max 420px. A lime-slice ✓ icon, text and an optional action. Uses `role="status"`. Stays 5s (8s with an action), pauses on hover or focus, and its action is always available elsewhere too. Offers Undo after a delete. **Errors are never toasts.** |
-| **Skeleton** | The exact shapes of the real content (2:3 blocks, circles, two text bars) on raised. A diagonal "projector beam" sweeps across every 1.6s and is static under reduced motion. The list gets `aria-busy="true"` and one polite announcement. |
-| **Empty / error** | Replace the content region. A slice illustration (a slice alone on a plate; a slice tangled in film), an h3 headline, plain body text, and one primary plus one secondary action. Errors use `role="alert"` and keep the user's selections. When offline: "You're offline. Saved dates still work." |
+| **Primary button** | A 48px pill (56px in the hero and sticky bars), padding 0 24px.<br>• **Late Show:** Zest fill, velvet label.<br>• **Matinee:** ink fill, #BDEB74 label.<br>• **Hover:** lighter fill plus glow (Matinee: #2E2537).<br>• **Active:** #84C92F (Matinee: #000), scaled to .97.<br>• **Focus:** 2px ring at a 2px offset.<br>• **Disabled:** avoided. Use `aria-disabled` plus helper text that gives the reason, with a muted label on overlay/sunken (5.94 / 5.26). |
+| Secondary | 1.5px border in Zest or ink, with a #BDEB74 or ink label. Hover: #25281F / #F2ECE3. Active: #303922 / #E6DED3. |
+| Tertiary / danger | Links in brand text, underlined on hover. Destructive actions show danger text first, then a filled danger button to confirm. |
+| **Chips / pills** | Real radio or checkbox inputs in a `fieldset` with a `legend`, 48px tall.<br>• **Unselected:** raised fill, border.strong, text.primary.<br>• **Selected:** lit = inverse **plus a ✓ icon**, with a 240ms pop.<br>• **Mood tiles:** 96px chips with an icon, the mood and a genre line. |
+| **Movie card** | An `<article>` holding a 2:3 poster (`alt=""`) and an `<h3><button>` title whose `::after` covers the whole card. That gives one control per card, with no nested links and no document-wide listener.<br>• **Meta line:** "2001 · ★ 7.9".<br>• **"On your services" badge:** shown only when the query guarantees it.<br>• **Hover:** lifts 2px with a glow. The focus ring wraps the whole card. |
+| Movie sheet | A `<dialog>`: a 92vh bottom sheet on mobile, a 520px right drawer on desktop. Top to bottom:<br>• backdrop with the poster overlapping it, then the h2 title<br>• "2001 · 2h 2m · R · Romance, Comedy", using the *real* certification<br>• italic tagline and the **full plot**<br>• [▶ Trailer] (youtube-nocookie in a nested dialog)<br>• provider logos with "Data by JustWatch"<br>• "Pairs with: French bistro"<br>• a sticky [Pick this movie] button |
+| **Recipe card** | Circle photo, title, "French · Vegetarian", "9 ingredients" (an honest effort proxy), and the pairing reason in brand text ("Paris match").<br>Its sheet has an ingredient checklist with measures, numbered steps, YouTube and source links, and [Cook this]. |
+| **Step progress** | `<ol aria-label="Progress">`: ACT I THE FEATURE · ACT II THE MENU · ACT III THE TICKET in RC, joined by a dashed perforation.<br>• **Current** (`aria-current="step"`): Zest dot.<br>• **Done:** ✓.<br>• **Upcoming:** muted.<br>On mobile it shrinks to "ACT II OF III · THE MENU" and a 3-segment bar. |
+| **Date package: the "Admit Two" ticket** | An `<article>` with an xl radius and notches. Top to bottom:<br>1. **Header strip:** "DATELIME PRESENTS · A DOUBLE FEATURE".<br>2. **Feature:** poster, h2 title, year, runtime and certification.<br>3. A perforation.<br>4. **Menu:** plate, recipe and area, plus an optional drink coaster (zero-proof available).<br>5. **Run of show:** "7:15 cook · 8:00 dinner · 8:30 feature · 10:32 credits". The end time comes from the TMDB runtime. Cook and dinner times are labelled "your estimate" (45 + 30 min by default, editable).<br>6. **Stub:** a Zest band reading "ADMIT TWO · FRI 26 SEP · 8:30 PM", with the slice seal.<br>Any decorative barcode is `aria-hidden`. |
+| **Toast** | Bottom-center above the safe area, at most 420px wide. It holds a slice ✓ icon, the text and an optional action, with `role="status"`.<br>• Stays 5s, or 8s if it has an action. Pauses on hover and focus.<br>• The action is also reachable elsewhere. Deletes get an Undo.<br>• **Errors are never toasts.** |
+| **Skeleton** | Matches the exact final shapes (2:3 blocks, circles, two text bars) on raised. A diagonal "projector beam" sweeps across every 1.6s, and stays static under reduced motion. The list gets `aria-busy="true"` and one polite announcement. |
+| **Empty / error** | Replaces the content region. It shows a slice illustration (alone on a plate, or tangled in film), an h3, plain body text, and one primary plus one secondary action.<br>• **Errors:** `role="alert"`, and the user's selections are kept.<br>• **Offline:** "You're offline. Saved dates still work." |
 
 ## 7. Screen concepts
 
-The mobile header is 56px: slice + wordmark on the left, then an "Our dates" ticket icon with a count badge, and a menu popover holding Plan, House rules, Crew and Lights up/down. The desktop header lists those items inline.
+The titles shown are illustrative.
+
+**Mobile header (56px):** the slice and wordmark sit on the left. "Dates" (with a count badge) and a menu popover (Plan, House rules, Crew, Lights up/down) sit on the right. On landing the header shows only the slice until the hero scrolls away, so the wordmark never appears twice. On desktop, the menu items sit inline.
 
 **Landing (390px)**
 ```
-┌ velvet stage (both themes) ─────────┐
-│ ◉ dateLime               🎟2   ≡   │
-│           ◠  lime moon + glow       │
-│        dateLime   (80px)            │
-│  DATE NIGHT, IN                     │
-│  Dinner and a movie, for two.       │  display 36
-│  Pick tonight's film. We'll pair…   │
-│ [ Start tonight's date        → ]   │  primary 56px
-│ [ ⟳ Surprise us                 ]   │  secondary
+┌ velvet stage (both themes) ────────┐
+│ ◉                     Dates(2)  ≡  │
+│            ◠ lime moon + glow      │
+│         dateLime   (80px)          │
+│ DATE NIGHT, IN                     │
+│ Dinner and a movie, for two.       │  display 36
+│ Pick tonight's film. We'll pair…   │
+│ [ Start tonight's date        → ]  │  primary 56px
+│ [ ⟳ Surprise us                 ]  │  secondary
 ├ page ──────────────────────────────┤
-│ Pick up where you left off  ›      │  if a draft or upcoming date exists
-│ ACT I film · ACT II menu · ACT III ticket   (3 tiles)
-│ ♥ Can't agree? Try Match Night →   │  blush-accent card
-│ TMDB · JustWatch · MealDB · CocktailDB · Crew
+│ Pick up where you left off     ›   │  only if a draft exists
+│ ACT I film · ACT II menu · ACT III │  3 tiles: how it works
+│ ♥ Can't agree? Try Match Night  →  │  blush-accent card
+│ TMDB · JustWatch · MealDB · Crew   │  footer + attributions
 └────────────────────────────────────┘
 ```
 
 **Choose your movie (390px)**
 ```
-│ ACT I OF III · THE FEATURE  ▬▭▭    │
+│ ACT I OF III · THE FEATURE   ▬▭▭   │
 │ What's the mood tonight?           │
-│ Pick one, or one each.             │  max 2 = blend
-│ [♥ Swoony      ] [☺ Belly laughs ] │  96px mood tiles, 2 columns,
-│ [⚡ Edge-of-seat] [☠ Scream togeth.] │  genre line under each
-│ [☂ Tearjerker  ] [✦ Mind-bender  ] │
-│ [☕ Cozy classic] [⛰ Big adventure] │
+│ Pick one, or one each.             │  2 picks = blend
+│ ┌ Swoony ─────────┐┌ Belly laughs ┐│  96px mood tiles:
+│ │ Romance         ││ Comedy       ││  icon, mood,
+│ └─────────────────┘└──────────────┘│  genre line
+│  Edge-of-seat · Scream together    │
+│  Tearjerker · Mind-bender          │
+│  Cozy classic · Big adventure      │
 │ How late are we going?             │
 │ (Short <100m)(Standard <130m)(Epic)│
 │ Keep it at or below                │
 │ ( G )( PG )( PG-13 )( R )( Any )   │
-│ Streaming on: Netflix, Max  Edit › │  from House Rules
-│▔ sticky: [ Show movies → ] ▔▔▔▔▔▔▔ │  no dead ends: with nothing
-                                         picked it reads "Show popular picks"
+│ Streaming on: Netflix, Max  Edit › │  House Rules
+├────────────────────────────────────┤
+│ [          Show movies  →       ]  │  sticky bar
 ```
+There are no dead ends: with nothing picked, the button reads "Show popular picks".
 
-**Movie results (390px).** Filter summary chips sit at the top, each with an edit icon, followed by a Sort control (Crowd favorites / Popular / Newest). Below is a 2-column poster grid of 171×256 posters with a 16px gap, 20 per page, and a [More movies] button (no infinite scroll). Tapping a card opens the movie sheet.
+**Movie results (390px)**
+- Editable filter-summary chips sit at the top.
+- Sort options: Crowd favorites (`sort_by=vote_average.desc&vote_count.gte=500`), Popular, Newest.
+- The grid has 2 columns of 171×256 posters with 16px gaps, 20 per page.
+- A [More movies] button loads the next page. There's no infinite scroll, so the footer and attributions stay reachable.
+- A card opens the movie sheet.
 
 **Recipe results (390px)**
 ```
-│ ACT II OF III · THE MENU  ▬▬▭      │
-│ ┌▭ Amélie ─────────────────────┐   │  pairing header
-│ │ Set in Paris → French bistro │   │
-│ │ classics and a sweet finish. │   │
-│ └──────────────────────────────┘   │
-│ (Perfect pairing)(Lighter)(Sweet ending)  tabs
-│ (✓Vegetarian)(No pork)(≤8 ingr.) ›  │  house-rule chips, scrollable
-│    ◯ plate         ◯ plate         │  2 columns, 150px circles
-│  Ratatouille    Tian provençal     │
-│  French · Veg   French · Veg       │
-│  9 ingredients  7 ingredients      │
+│ ACT II OF III · THE MENU   ▬▬▭     │
+│ ┌ ▭ Amélie ───────────────────┐    │  pairing header
+│ │ Set in Paris → French bistro│    │
+│ │ classics and a sweet finish.│    │
+│ └─────────────────────────────┘    │
+│ (Perfect pairing)(Lighter)(Sweet)  │  tabs
+│ (✓ Vegetarian)(No pork)(≤8 ingr) › │  house-rule chips, scroll
+│     ◯ plate          ◯ plate       │  2 cols, 150px circles
+│  Ratatouille       Dish name       │
+│  French · Veg      French · Veg    │
+│  9 ingredients     7 ingredients   │
 ```
-[Cook this] opens an "Add a drink?" sheet with 3 coasters (lime-forward by default), a zero-proof toggle and a [Skip the drink] option. Then comes the ticket.
+[Cook this] opens an "Add a drink?" sheet: three coasters, a zero-proof toggle and [Skip the drink]. From there the user goes to the ticket.
 
 **Date package (390px)**
 ```
 │ ACT III · THE TICKET               │
 │ Your date is set.                  │
 │ When? [ Fri 26 Sep · 8:30 PM ▾ ]   │  datetime-local
-│ ╭ paper ticket ─────────────────╮  │
-│ │ DATELIME PRESENTS              │  │
-│ │ ▭poster  Amélie                │  │
-│ │          2001 · 2h 2m · R      │  │
-│ ◖ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐◗  │
-│ │ ◯ Ratatouille · French         │  │
-│ │ ◦ Kir Royale (or zero-proof)   │  │
-│ │ 7:15 cook·8:00 eat·8:30 film·10:32
-│ ◖ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐◗  │
-│ │▓ ADMIT TWO · FRI 26 SEP ◉ ▓▓▓▓│  │  Zest stub
-│ ╰───────────────────────────────╯  │
+│ ╭ paper ticket ──────────────────╮ │
+│ │ DATELIME PRESENTS              │ │
+│ │ ▭ poster  Amélie               │ │
+│ │           2001 · 2h 2m · R     │ │
+│ ◖ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐◗ │
+│ │ ◯ Ratatouille · French         │ │
+│ │ ◦ Kir Royale (or zero-proof)   │ │
+│ │ 7:15 cook · 8:00 eat · 8:30    │ │
+│ │ film · 10:32 credits           │ │
+│ ◖ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐◗ │
+│ │ ADMIT TWO · FRI 26 SEP      ◉  │ │  Zest stub
+│ ╰────────────────────────────────╯ │
 │ [ Share ticket ]                   │  primary
-│ [ Save to diary ] [ Add to calendar ]
+│ [ Save to diary ] [ + Calendar ]   │
 │ [ Start Showtime mode ]            │
 │ ▸ Full recipe   ▸ About the movie  │  disclosures
 ```
 
-**Saved dates, "Our dates" (390px).** Tabs for Upcoming (n) and Past (n) sit above a list of stub cards. Each card shows the date and time in RC, a poster thumbnail + plate thumbnail, the titles, and [Open] [Share] [⋯]. The ⋯ menu offers Duplicate and Delete (with Undo). Past cards add "How was it?" with 1–5 lime slices plus a note. Export and import live under ⋯ in the page header.
+**Our dates (390px)**
+- Upcoming and Past tabs, each with a count, sit over a list of stub cards.
+- Each card shows the date and time in RC, poster and plate thumbnails, both titles, and [Open] [Share] [⋯]. The ⋯ menu holds Duplicate and Delete (with Undo).
+- Past cards add "How was it?" (1–5 lime slices) and a note.
+- Export and import live in the header's ⋯ menu.
 
-**Team, "The crew" (390px).** The page is set as end credits, with no auto-scroll. A short blurb ("Made by five bootcamp grads in 2021, remastered in 2026") is followed by a **STARRING** label and five rows: an initials avatar in a Zest ring, the name in Fraunces 22px, and a "GitHub ↗" link with the accessible name "Cha Vue on GitHub". It closes with **WITH DATA FROM** TMDB · JustWatch · TheMealDB · TheCocktailDB.
+**The crew (390px)**
+- Styled as end credits, with no auto-scroll.
+- A short blurb: "Made by five bootcamp grads in 2021, remastered in 2026."
+- **STARRING:** five rows, each with an initials avatar in a Zest ring, the name in Fraunces 22px, and a "GitHub ↗" link whose accessible name reads like "Cha Vue on GitHub".
+- **WITH DATA FROM:** TMDB · JustWatch · TheMealDB · TheCocktailDB.
 
-**Desktop (1280px), 12 columns, 32px gutters:**
+**Desktop (1280px, 12 columns, 32px gutters)**
 
 | Screen | Layout |
 |---|---|
-| Landing | A 640px velvet stage. Columns 1–6 hold the 144px wordmark, the 56px H1 and the CTA row. Columns 7–12 hold an illustrated sample ticket, tilted −4°, under the lime moon (no API calls above the fold). Below: the three acts in a row, a Match Night band and the "pick up" row. |
-| Choose movie | A centered 720px column. Mood tiles in 4 columns. The CTA sits inline, not sticky. |
-| Movie results | Filter bar across the top, then a 5-column grid of ~220px posters. The sheet becomes a 520px right drawer with the backdrop header. |
-| Recipe results | A sticky 320px left rail (pairing card + House Rules) and a 4-column circle grid on the right. |
-| Date package | A horizontal 960×380 ticket (stub on the right) on the ambient backdrop glow, an action row, then two columns: the recipe (ingredients, steps) and the movie (plot, providers, trailer). |
-| Saved dates | Tabs and [Plan another] in the top row, then a 3-column grid of stub cards. |
+| Landing | A 640px velvet stage. Columns 1–6 hold the 144px wordmark, the 56px H1 and the CTAs. Columns 7–12 show an illustrated sample ticket, tilted −4°, under the lime moon. Nothing above the fold calls an API. Below the stage come the three acts in a row, a Match Night band and the "Pick up" row. |
+| Choose movie | A centered 720px column with 4-column mood tiles and the CTA inline. |
+| Movie results | A filter bar over a 5-column grid of posters about 214px wide. The sheet becomes a 520px drawer with the backdrop as its header. |
+| Recipe results | A sticky 320px left rail (pairing card and House Rules) next to a 4-column grid of circles. |
+| Date package | A horizontal 960×380 ticket with the stub on the right, on the screen glow. Actions sit below it, then two columns: the recipe (ingredients, steps) and the movie (plot, providers, trailer). |
+| Saved dates | Tabs and [Plan another] across the top, then a 3-column grid of stubs. |
 | Team | A centered 640px credits column with 28px names. |
 
 ## 8. Innovative feature proposals
 
 | Rank | Feature | Pitch | Effort | V / I / F | |
 |---|---|---|---|---|---|
-| 1 | **Vibe Pairing** | Every movie gets a dish and a drink matched to its setting and mood, with a one-line reason why. | M | 5 / 4 / 4 | **MUST** |
-| 2 | **Admit Two** | The date package becomes a ticket you save, send and add to your calendar. | M | 5 / 4 / 4 | **MUST** |
-| 3 | **Match Night** | Each of you swipes yes or no on the same 10 movies, and dateLime reveals your matches. | M | 5 / 5 / 4 | **MUST** |
+| 1 | **Vibe Pairing** | Every movie gets a dish and a drink matched to its setting and mood, plus a one-line reason. | M | 5 / 4 / 4 | **MUST** |
+| 2 | **Admit Two** | The date package becomes a ticket you can save, send and add to your calendar. | M | 5 / 4 / 4 | **MUST** |
+| 3 | **Match Night** | You each swipe the same 10 movies, and the app reveals your matches. | M | 5 / 5 / 4 | **MUST** |
 | 4 | **House Rules** | Set diet, streaming services and vetoes once, and every date obeys them. | S–M | 5 / 3 / 5 | **MUST** |
 | 5 | **Mood Dial** | Pick a feeling, not a genre, or blend one mood each. | S | 4 / 3 / 5 | |
 | 6 | **Showtime Mode** | A hands-free cook-along that keeps the screen awake and counts down to "lights down". | M | 4 / 4 / 4 | |
-| 7 | **Spin the Lime** | One tap deals a full date on three reels. Hold the ones you like and re-spin the rest. | S | 3 / 3 / 5 | |
+| 7 | **Spin the Lime** | One tap deals a full date on three reels. Hold what you like and re-spin the rest. | S | 3 / 3 / 5 | |
 | 8 | **Afterglow** | Rate the night in limes, keep a note, and get "one year ago tonight" reminders. | S | 3 / 3 / 5 | |
 
-**1. Vibe Pairing (MUST).**
-- **Value:** this is the unbuilt README promise. The *reason* line ("Set in Paris → French bistro classics") makes the app feel curated rather than random.
-- **How:** after the movie is picked, call TMDB `GET /movie/{id}?append_to_response=keywords,release_dates` (one call). A hand-authored `pairings.json` of about 40 rules resolves the dish in three tiers:
-  - (a) **Origin:** `original_language` / `production_countries` → a TheMealDB area (fr→French, it→Italian, ja→Japanese, hi→Indian, th→Thai, es→Spanish, el→Greek…) via `filter.php?a=`.
-  - (b) **Keywords:** "paris"→French, "christmas"→`filter.php?c=Dessert`, "sushi"→Japanese.
-  - (c) **Genre mood:** Romance→French + Dessert, Comedy→American/Mexican, Drama→slow Beef/Lamb comfort, Sci-Fi→Japanese, Horror→shareable Side/Starter.
-  
-  The tiers are merged into a pool of about 12. `lookup.php?i=` runs only for cards on screen and is cached in IndexedDB. The drink comes from TheCocktailDB: `filter.php?i=Lime` by default (on-brand), or `filter.php?a=Non_Alcoholic`, then `lookup.php?i=`.
-- **Risks:** pairings are subjective and could read as stereotypes, so every rule gets an editorial review and reasons talk about setting and mood, never people. Sparse areas fall back a tier. The per-recipe lookups are the price of the filter endpoints returning summaries only.
+**1. Vibe Pairing (MUST)**
 
-**2. Admit Two (MUST).**
-- **Value:** the ending finally *does* something. The broken "Save" is fixed, and the result is social with no backend.
-- **How:**
-  - **State in the URL:** the fragment `#t=` holds base64url `{v:1,m:<tmdbId>,r:<mealId>,d:<drinkId>,at:"2026-09-26T20:30",n:"≤80-char note"}`, about 120 characters.
-  - **Save:** to IndexedDB.
-  - **Share:** `navigator.share({title,text,url})`. Where `navigator.canShare({files})` allows it, a 1080×1350 PNG rendered with canvas is attached. The fallback is Clipboard `writeText` plus a toast.
-  - **Calendar:** a `.ics` Blob with a VEVENT in floating local time and the run of show plus the link in DESCRIPTION.
-  - **Recipient view:** "You're invited", with the ticket sliding out of an envelope and [Add to calendar] [Plan our own].
-- **Risks:** if the image hosts don't send CORS headers, the canvas is tainted and the PNG falls back to a typographic ticket. Notes in the URL are readable by anyone with the link, which we say explicitly. Desktop browsers without Web Share get the copy fallback.
+*Value:* It keeps the README's unbuilt promise. A reason line ("Set in Paris → French bistro classics") makes the pairing feel curated rather than random.
 
-**3. Match Night (MUST).**
-- **Value:** it ends the "I don't mind, you pick" standoff and turns choosing into the night's first game. It's the feature people will show their friends.
-- **How:** both modes use the same 10 TMDB IDs from Discover, filtered by House Rules.
-  - **Pass-the-phone:** A votes, a hand-off screen says "Pass to your date, no peeking", B votes, and the matches are revealed.
-  - **Two phones:** A shares `#match=v1.<ids>.<10-bit mask>`. B votes, B's device computes the intersection, and it offers a "send result back" link.
-  - **Input:** swipes use Pointer Events, and **Yes/No buttons and ←/→ keys work just as well** (WCAG 2.5.1 / 2.5.7).
-  - **Payoff:** the match burst uses blush, with an optional `navigator.vibrate` on Android.
-- **Risks:** A's mask can be peeked (it's lightly obfuscated, and we say it's a game, not security). No overlap leads to "No match. Deal 10 more, or let Spin the Lime decide." The two-phone relay is asynchronous and needs a single, clear explainer screen. Feasibility is 5 for pass-the-phone and 3 for two phones.
+*How:*
+- One TMDB call: `GET /movie/{id}?append_to_response=keywords,release_dates`.
+- A hand-written `pairings.json` (about 40 rules) picks TheMealDB lists in three tiers:
+  - **Origin:** `original_language` or `production_countries` maps to an area (fr→French, it→Italian, ja→Japanese, hi→Indian…) via `filter.php?a=`.
+  - **Keywords:** "paris"→French, "christmas"→`filter.php?c=Dessert`.
+  - **Genre mood:** Romance→French and Dessert, Comedy→American or Mexican, Drama→slow Beef or Lamb, Sci-Fi→Japanese, Horror→shareable Starter or Side.
+- The lists are filtered by House Rules and merged to about 12.
+- `lookup.php?i=` runs only for cards that get opened, and results are cached in IndexedDB.
+- Drinks are curated TheCocktailDB IDs per rule, fetched with `lookup.php?i=` (Kir Royale for Paris). Otherwise we use `filter.php?i=Lime` or `filter.php?a=Non_Alcoholic`.
 
-**4. House Rules (MUST).**
-- **Value:** it removes the two date-killers, "can't eat it" and "can't stream it". It's the README's dietary promise plus the wireframe's filter pills.
-- **How:** the rules live in localStorage and apply to three sources:
-  - **TMDB Discover:** `with_watch_providers` + `watch_region` (defaulting to the `navigator.language` region, editable), `certification_country=US&certification.lte=` (fixing the old bug), and `without_genres` for vetoes. Provider choices come from `/watch/providers/movie?watch_region=`.
-  - **TheMealDB:** `filter.php?c=Vegetarian|Vegan|Seafood`, with exclusions dropping the Pork, Beef, Lamb and Goat categories. An allergen scan runs on the looked-up ingredient lists.
-  - **TheCocktailDB:** zero-proof via `a=Non_Alcoholic`.
-- **Risks:** allergen scanning is a heads-up, never a guarantee, and the copy says so. Provider data can be stale (hence the JustWatch attribution). Stacked vetoes can empty the results, which triggers the guided empty state.
+*Risks:*
+- Pairings are subjective and could turn into stereotypes. Every rule gets an editorial review, and reasons cite setting and mood, never people.
+- Areas with few recipes fall back a tier.
 
-**5. Mood Dial.**
-- **Value:** couples decide by feeling. Eight moods replace TMDB's 19-genre taxonomy and the old four radio buttons.
-- **How:** a static table maps each mood to Discover parameters:
-  - Swoony = `with_genres=10749&vote_average.gte=6.5&vote_count.gte=300`
-  - Mind-bender = `878|9648`
-  - Cozy classic = `35|10751&with_runtime.lte=110`
-  
-  Two moods combine with AND (`,`), falling back to OR (`|`) when there are fewer than 8 results. "How late are we going?" maps to `with_runtime.lte`.
-- **Risks:** moods are subjective, so the genre line stays visible and a "pick exact genres" escape hatch is available.
+**2. Admit Two (MUST)**
 
-**6. Showtime Mode.**
-- **Value:** the date happens in the kitchen too. A phone that sleeps while your hands are covered in flour ruins it.
-- **How:**
-  - **Wake lock:** `navigator.wakeLock.request('screen')`, re-acquired on `visibilitychange`.
-  - **Steps:** `strInstructions` split into big-type cards (Space moves to the next one).
-  - **Timers:** a duration regex ("20 minutes", "30–35 mins") creates tap-to-start timers with a Web Audio chime.
-  - **Countdown:** "Feature starts in 25 min", then a "Lights down" button that dims the page and opens the TMDB/JustWatch where-to-watch link.
-  - **Offline:** the Service Worker caches the saved date's recipe and images.
-- **Risks:** Wake Lock support has gaps (we show a notice when it's missing). The regex will miss some timers, so timers stay editable. Audio needs a user gesture, and the start tap provides it.
+*Value:* The ending finally works (save, share, calendar), and it needs no backend.
 
-**7. Spin the Lime.**
-- **How:** the Feature comes from Discover with House Rules and a random `page` from 1 to 10. The Menu comes from the Vibe Pairing pool, *not* `random.php`, which ignores diet. The Drink is a random pick from the Lime or Non_Alcoholic filter. Three `<output aria-live="polite">` reels each have a hold toggle (`aria-pressed`), and under reduced motion the swap is instant.
-- **Risks:** random picks can be weak, so results are biased toward `vote_count.gte=500`.
+*How:*
+- State lives in the URL fragment `#t=`: base64url of `{v:1,m,r,d,at:"2026-09-26T20:30",n:"≤80-char note"}`, about 120 characters.
+- **Save** writes to IndexedDB.
+- **Share** calls `navigator.share({title,text,url})`. Where `navigator.canShare({files})` allows, it attaches a 1080×1350 canvas PNG. Otherwise it falls back to Clipboard `writeText` plus a toast.
+- **Calendar** downloads an `.ics` Blob: a VEVENT in floating local time, with the run of show and the link in DESCRIPTION.
+- Recipients get "You're invited": the ticket slides out of an envelope, with [Add to calendar] and [Plan our own].
 
-**8. Afterglow.**
-- **How:** IndexedDB diary entries gain `{rating, note}`. On open, the app surfaces same-day anniversaries. Movies already watched are filtered out of Discover client-side. The diary can be exported and imported as JSON (a Blob download plus `<input type=file>`).
-- **Risks:** the diary lives on one device with no sync, which is exactly why export exists. Notes may be private on shared devices.
+*Risks:*
+- Image hosts that don't send CORS headers taint the canvas. The fallback is a typographic PNG.
+- Notes in the URL are readable by anyone with the link, and the UI says so.
+- Some desktops lack Web Share. They get the copy fallback.
+
+**3. Match Night (MUST)**
+
+*Value:* It ends "I don't mind, you pick" and makes choosing the night's first game. It's the feature people show their friends.
+
+*How:*
+- Discover supplies 10 TMDB IDs with House Rules applied.
+- **Pass the phone:** A votes, the screen says "Pass to your date, no peeking", B votes, then the reveal.
+- **Two phones:** A shares `#match=v1.<ids>.<10-bit mask>`. B votes, B's device computes the intersection and offers a "send the result back" link.
+- Swiping uses Pointer Events. **Yes/No buttons and ←/→ keys** work just as well (WCAG 2.5.1, 2.5.7).
+- A match triggers a blush burst, plus an optional `navigator.vibrate` on Android.
+
+*Risks:*
+- A's mask can be peeked. It's lightly obfuscated and framed as a game.
+- With no overlap, the app offers "Deal 10 more, or let Spin the Lime decide".
+- The asynchronous relay needs one clear explainer screen.
+- Feasibility: pass the phone 5, two phones 3.
+
+**4. House Rules (MUST)**
+
+*Value:* It removes the two date-killers, "can't eat it" and "can't stream it". It also covers the README's dietary promise and the wireframes' filter pills.
+
+*How:*
+- Stored in localStorage.
+- **Discover** gets:
+  - `with_watch_providers` and `watch_region`. The region defaults from `navigator.language`, and provider choices come from `/watch/providers/movie?watch_region=`.
+  - `certification_country=US&certification.lte=`, which fixes the old bug.
+  - `without_genres` for vetoes.
+- **Diets in TheMealDB** are exact and cheap:
+  - Intersect a pairing list, by `idMeal`, with `filter.php?c=Vegetarian` or `c=Vegan`.
+  - Or subtract `c=Pork`, `Beef`, `Lamb` or `Goat`.
+  - Each is one cached call per category, with no lookups.
+- Allergen words are flagged in ingredient lists once a recipe is looked up.
+- Zero-proof maps to `filter.php?a=Non_Alcoholic`.
+
+*Risks:*
+- Allergen flags are a heads-up, never a guarantee, and the copy says so.
+- Provider data lags, so we show JustWatch attribution.
+- Stacked vetoes can empty the results, which leads to the guided empty state.
+
+**5. Mood Dial**
+
+*Value:* Couples decide by feeling. Eight moods replace both the old four radio buttons and TMDB's 19 genres.
+
+*How:*
+- A static table maps each mood to Discover parameters, for example:
+  - Swoony: `with_genres=10749&vote_average.gte=6.5&vote_count.gte=300`
+  - Mind-bender: `with_genres=878|9648`
+  - Cozy classic: `with_genres=35|10751&with_runtime.lte=110`
+- Two moods combine with AND (`,`). Under 8 results, they fall back to OR (`|`).
+- "How late are we going?" sets `with_runtime.lte`.
+
+*Risks:* Moods are subjective. Each tile therefore shows its genres, and a "pick exact genres" option is always there.
+
+**6. Showtime Mode**
+
+*Value:* The date happens in the kitchen too, and a phone that sleeps under floury hands ruins it.
+
+*How:*
+- `navigator.wakeLock.request('screen')` keeps the screen on and is re-requested on `visibilitychange`.
+- `strInstructions` is split into big-type step cards. Space moves to the next one.
+- A duration regex ("20 minutes", "30–35 mins") creates tap-to-start timers with a Web Audio chime.
+- A countdown ("Feature starts in 25 min") ends in **Lights down**. It dims the page and opens TMDB's JustWatch where-to-watch link.
+- The Service Worker caches the saved date for offline use.
+
+*Risks:*
+- Wake Lock isn't everywhere, so we show a notice when it's missing.
+- The regex will miss some times, so timers stay editable.
+- Audio needs a gesture. The start tap provides it.
+
+**7. Spin the Lime**
+
+*Value:* A zero-effort path for tired couples, and a playful one.
+
+*How:*
+- **Feature:** Discover with House Rules, a random `page` from 1 to 10 and `vote_count.gte=500`.
+- **Menu:** the Vibe Pairing pool. We avoid `random.php` because it ignores diets.
+- **Drink:** a random pick from the Lime or Non_Alcoholic filter.
+- Three `<output>` reels, each with a hold toggle (`aria-pressed`). Under reduced motion the swap is instant.
+
+*Risks:* Randomness can feel arbitrary. Holds and re-spins soften it.
+
+**8. Afterglow**
+
+*Value:* It turns the planner into a shared memory book and prevents repeats.
+
+*How:*
+- IndexedDB diary entries gain `{rating (1–5 limes), note}`.
+- On open, same-day anniversaries surface ("One year ago tonight: Amélie + Ratatouille").
+- Watched movies are filtered out of Discover on the client.
+- JSON export and import use a Blob download and `<input type=file>`.
+
+*Risks:*
+- Data lives on one device, which is why export exists.
+- Notes can be private, which matters on shared devices.
 
 ## 9. Assumptions & open questions
 
 **Assumptions**
-- Shifting #23D160 to Zest #9FE143 and the two-tone wordmark fall within "refine how it's colored". If the owner vetoes it, the heritage green drops straight into the Zest slot (9.31:1 on velvet, 8.89:1 with ink on it) and nothing else changes.
-- The rating ceiling uses US certifications, while the region for providers follows the user's locale.
-- TheMealDB has no timing data, so every cook or dinner time is the user's labelled estimate.
-- The ~40 pairing rules are hand-written, reviewed, and shipped as static JSON.
-- There are zero API calls above the fold on the landing page.
+- The hue shift and the two-tone wordmark fall within "refine how it's colored". If they're vetoed, the heritage green drops into the Zest slot: 9.31:1 on velvet, with ink on it at 8.89:1.
+- US certifications set the rating ceiling. The locale's region sets the providers.
+- Every cook and dinner time is labelled as the user's estimate.
+- About 40 reviewed pairing rules ship as static JSON.
+- The landing page makes no API calls above the fold.
 
 **Open questions**
 1. Will the product owner accept the hue shift and the two-tone lockup?
-2. Should dark be the default regardless of the OS setting, or should we follow `prefers-color-scheme`? I expect Analyst B to argue for following the OS. My acceptable compromise is to follow the OS but keep the marquee, stage and share image velvet in both themes.
+2. Should dark be the default regardless of the OS, or should we follow `prefers-color-scheme`? I expect Analyst B to argue for the OS setting. My fallback is to follow the OS but keep the marquee, stage and share image velvet.
 3. Do `image.tmdb.org` and `themealdb.com` send CORS headers? That decides whether the share PNG can include photos, and it needs a spike.
-4. Should the default drink be alcoholic, zero-proof or both? I propose showing both until House Rules say otherwise.
-5. Should the share PNG ship in v1, or should v1 be URL-only?
-6. The team page links Thisara to `ThisaraMallawaArachchige`, but the README says `@Thisara-DE`. Which is right, and do contributors want roles in the credits?
-7. Should any localization beyond US certifications be in scope?
+4. Should drinks default to alcoholic, zero-proof or both? I propose both until House Rules say otherwise.
+5. Should the share PNG ship in v1, or should v1 share a URL only?
+6. The team page links Thisara to `ThisaraMallawaArachchige`, but the README says `@Thisara-DE`. Which is right, and do contributors want roles listed in the credits?
+7. Should localization go beyond US certifications?

@@ -37,6 +37,7 @@ export function normalizeMovie(raw) {
     backdrop: raw.backdrop_path || null,
     rating: typeof raw.vote_average === 'number' && raw.vote_count > 0 ? Math.round(raw.vote_average * 10) / 10 : null,
     genreIds: raw.genre_ids ?? (raw.genres ?? []).map((g) => g.id),
+    originalLanguage: raw.original_language || '',
   };
 }
 
@@ -87,30 +88,75 @@ export function normalizeMovieDetails(raw, region = TMDB.region) {
     tagline: raw.tagline || '',
     runtime: raw.runtime || null,
     genres: (raw.genres ?? []).map((g) => g.name),
+    originCountries: raw.origin_country ?? (raw.production_countries ?? []).map((c) => c.iso_3166_1),
     certification: usCertification(raw.release_dates),
     providers: watchProviders(raw['watch/providers'], region),
     trailer: pickTrailer(raw.videos),
   };
 }
 
+/** Region for watch providers, from the browser locale ("en-GB" -> "GB"), defaulting to US. */
+export function detectRegion(locale = globalThis.navigator?.language) {
+  try {
+    const region = new Intl.Locale(locale).maximize().region;
+    return /^[A-Z]{2}$/.test(region ?? '') ? region : TMDB.region;
+  } catch {
+    return TMDB.region;
+  }
+}
+
+/** Streaming services available in a region, most popular first. */
+export async function watchProviderCatalog(region = TMDB.region, { signal } = {}) {
+  const data = await getJSON(endpoint('/watch/providers/movie', { watch_region: region }), { signal, cacheFor: 24 * 60 * 60_000 });
+  return (data.results ?? [])
+    .map((p) => ({ id: p.provider_id, name: p.provider_name, logo: p.logo_path || null, priority: p.display_priorities?.[region] ?? p.display_priority ?? 999 }))
+    .sort((a, b) => a.priority - b.priority);
+}
+
+export const SORTS = {
+  popular: { sort_by: 'popularity.desc' },
+  acclaimed: { sort_by: 'vote_average.desc', 'vote_count.gte': 500 },
+  newest: { sort_by: 'primary_release_date.desc', 'primary_release_date.lte': new Date().toISOString().slice(0, 10) },
+};
+
 /**
  * Discover movies.
- * @param {{genreIds?: number[], maxCertification?: string, page?: number, minVotes?: number,
- *          maxRuntime?: number, signal?: AbortSignal}} query
+ * @param {{genreIds?: number[], matchAllGenres?: boolean, maxCertification?: string, page?: number,
+ *          minVotes?: number, minRating?: number, maxRuntime?: number, providerIds?: number[],
+ *          region?: string, sort?: keyof SORTS, signal?: AbortSignal}} query
  */
-export async function discoverMovies({ genreIds = [], maxCertification, page = 1, minVotes = 150, maxRuntime, signal } = {}) {
+export async function discoverMovies({
+  genreIds = [],
+  matchAllGenres = false,
+  maxCertification,
+  page = 1,
+  minVotes = 150,
+  minRating,
+  maxRuntime,
+  providerIds = [],
+  region = TMDB.region,
+  sort = 'popular',
+  signal,
+} = {}) {
   const params = {
-    sort_by: 'popularity.desc',
     include_adult: 'false',
     include_video: 'false',
     'vote_count.gte': minVotes,
-    with_genres: genreIds.join('|'), // "|" = any of these genres
+    'vote_average.gte': minRating,
+    with_genres: genreIds.join(matchAllGenres ? ',' : '|'), // "," = all of, "|" = any of
     page,
     'with_runtime.lte': maxRuntime,
+    ...(SORTS[sort] ?? SORTS.popular),
   };
   if (maxCertification) {
-    params.certification_country = TMDB.region; // the old app sent certification=US, which TMDB ignores
+    params.certification_country = 'US'; // the old app sent certification=US, which TMDB ignores
     params['certification.lte'] = maxCertification;
+  }
+  if (providerIds.length) {
+    // One request filters by service. The old app made 20 to 40 provider calls per page instead.
+    params.with_watch_providers = providerIds.join('|');
+    params.watch_region = region;
+    params.with_watch_monetization_types = 'flatrate|free|ads';
   }
   const data = await getJSON(endpoint('/discover/movie', params), { signal });
   return {
@@ -122,10 +168,10 @@ export async function discoverMovies({ genreIds = [], maxCertification, page = 1
 }
 
 /** Full details for one movie: runtime, real US certification, providers and trailer in one request. */
-export async function getMovie(id, { signal } = {}) {
+export async function getMovie(id, { region = TMDB.region, signal } = {}) {
   const raw = await getJSON(
     endpoint(`/movie/${encodeURIComponent(id)}`, { append_to_response: 'release_dates,watch/providers,videos' }),
     { signal },
   );
-  return normalizeMovieDetails(raw);
+  return normalizeMovieDetails(raw, region);
 }

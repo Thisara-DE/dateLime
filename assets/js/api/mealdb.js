@@ -82,27 +82,26 @@ export function normalizeMeal(raw) {
   };
 }
 
+// TheMealDB answers "no results" with {meals:null}; guard against any other non-array too.
+const mealsOf = (data) => (Array.isArray(data?.meals) ? data.meals : []);
+
 async function list(path, params, signal) {
-  const data = await getJSON(endpoint(path, params), { signal });
-  return (data?.meals ?? []).map(normalizeMealSummary); // TheMealDB returns {meals:null} for no match
+  return mealsOf(await getJSON(endpoint(path, params), { signal })).map(normalizeMealSummary);
 }
 
 export const mealsByArea = (area, { signal } = {}) => list('filter.php', { a: area }, signal);
 export const mealsByCategory = (category, { signal } = {}) => list('filter.php', { c: category }, signal);
 export const mealsByIngredient = (ingredient, { signal } = {}) => list('filter.php', { i: ingredient }, signal);
 export const searchMeals = async (query, { signal } = {}) => {
-  const data = await getJSON(endpoint('search.php', { s: query }), { signal });
-  return (data?.meals ?? []).map(normalizeMeal);
+  return mealsOf(await getJSON(endpoint('search.php', { s: query }), { signal })).map(normalizeMeal);
 };
 
 export async function getMeal(id, { signal } = {}) {
-  const data = await getJSON(endpoint('lookup.php', { i: id }), { signal });
-  const raw = data?.meals?.[0];
+  const raw = mealsOf(await getJSON(endpoint('lookup.php', { i: id }), { signal }))[0];
   return raw ? normalizeMeal(raw) : null;
 }
 
 export async function randomMeal({ signal } = {}) {
-  const data = await getJSON(endpoint('random.php'), { signal, cacheFor: 0 });
-  const raw = data?.meals?.[0];
+  const raw = mealsOf(await getJSON(endpoint('random.php'), { signal, cacheFor: 0 }))[0];
   return raw ? normalizeMeal(raw) : null;
 }
