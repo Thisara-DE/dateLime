@@ -45,27 +45,6 @@ The recipe step picks cuisines from [TheMealDB](https://www.themealdb.com/) in t
 
 Diets are applied by intersecting the pairing with TheMealDB's vegetarian, vegan and seafood lists. If fewer than four recipes match, it keeps your diet, adds dishes from every cuisine, and says so. It never drops the diet. Foods to avoid (pork, beef, shellfish, nuts, dairy, mushrooms) are a best-effort scan of ingredient lists, and the page says so. It's never labeled "allergy-safe".
 
-## Design
-
-The redesign keeps the logo and the idea of the original site. It was decided by two analysts through two proposals, cross-critiques and a resolution, all recorded in [`docs/design/`](docs/design/):
-
-| Document | What it covers |
-|---|---|
-| [00-brief](docs/design/00-brief.md) | The product, its users, and the constraints both analysts worked from |
-| [01 Analyst A: "Limelight"](docs/design/01-analyst-a-proposal.md) | Experience and brand: the living room as a private cinema, ending in a ticket |
-| [02 Analyst B: "Couch-Proof"](docs/design/02-analyst-b-proposal.md) | Product, accessibility and feasibility: one decision per screen, honest data |
-| [03](docs/design/03-critique-by-a.md), [04](docs/design/04-critique-by-b.md) | Cross-critiques. The analysts swapped sides on six questions. |
-| [05-resolution](docs/design/05-resolution.md) | All ten open items settled by agreement, with no tie-break needed |
-| [06-decision](docs/design/06-decision.md) | **The spec:** design language, color and contrast table, routes, and features with acceptance criteria |
-
-**The design language, "Limelight × Couch-Proof", in short:**
-
-- **Lights down, lime up.** Velvet surfaces (`#140F1A`) do the quiet work, and lime is the only vivid color on screen. The lime is the original dateLime green, **`#23D160`**, with a scale built around it in [`tokens.css`](assets/css/tokens.css). It sits under dark text (9.3:1), never white.
-- **Two people, one phone.** Touch targets are at least 48px, type is readable at arm's length, and the main action sits within thumb reach.
-- **Defaults, not dead ends.** Every form works as it is, every empty state offers a way to loosen the filters, and every error has a retry.
-- **Honest data.** No invented cook times, difficulty or servings, and real certifications only.
-- **Type:** Fraunces for display headings, Roboto Condensed for labels (the wordmark's face), and Atkinson Hyperlegible Next for reading. All three are self-hosted (82.5 KB for Latin).
-
 ## What changed since 2022
 
 The [audit](docs/AUDIT.md) found **44 defects** in the original code and reproduced 20 of them in a headless browser. Among them:
