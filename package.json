@@ -1,0 +1,29 @@
+{
+  "name": "datelime",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Plan a date night in: a movie, a meal that matches its vibe, and a date plan you can share.",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "lint": "eslint .",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test \"tests/unit/**/*.test.js\"",
+    "test:e2e": "playwright test",
+    "check": "npm run lint && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thisara-DE/dateLime.git"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.56.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0"
+  }
+}
