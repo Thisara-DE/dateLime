@@ -8,7 +8,7 @@
  * - API responses: network-first, cached, so a recipe you've opened works offline.
  * PRECACHE is checked by tests/unit/sw.test.js: every module and stylesheet must be listed.
  */
-const VERSION = 'v2.0.0';
+const VERSION = 'v2.1.0';
 const APP_CACHE = `datelime-app-${VERSION}`;
 const IMAGE_CACHE = 'datelime-images';
 const API_CACHE = 'datelime-api';
@@ -31,6 +31,15 @@ const PRECACHE = [
   './assets/img/favicon-32.png',
   './assets/img/icon-192.png',
   './assets/js/main.js',
+  './assets/js/account.js',
+  './assets/js/lib/cloud.js',
+  './assets/js/domain/account-merge.js',
+  './assets/js/domain/regions.js',
+  './assets/js/components/account-forms.js',
+  './assets/js/views/signin.js',
+  './assets/js/views/signup.js',
+  './assets/js/views/account.js',
+  './assets/js/views/account-off.js',
   './assets/js/config.js',
   './assets/js/state.js',
   './assets/js/ui.js',

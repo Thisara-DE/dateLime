@@ -4,6 +4,7 @@ import { toShareQuery } from '../domain/plan.js';
 import { store, getSaved, removeSaved, rateSaved, exportDiary, importDiary } from '../state.js';
 import { shareLink, downloadFile, appUrl } from '../lib/share.js';
 import { announce, toast } from '../lib/announce.js';
+import { getAccount } from '../account.js';
 
 export const title = () => 'Your dates';
 
@@ -38,6 +39,13 @@ function miniTicket(p, { past = false } = {}) {
   </article></li>`;
 }
 
+function storageNote() {
+  const { status } = getAccount();
+  if (status === 'signed-in') return 'Saved to your account, so they’re on every device you sign in on. Only you can see them.';
+  if (status === 'signed-out') return html`Saved on this device only. <a href="${href('/signin', { next: '/dates' })}">Sign in</a> to keep them on every device, or export your diary to keep a copy.`;
+  return 'Saved on this device only. Export your diary to keep a copy, or to move it to another phone.';
+}
+
 export function mount(outlet, { signal }) {
   function renderAll() {
     const saved = getSaved();
@@ -47,7 +55,7 @@ export function mount(outlet, { signal }) {
       html`<div class="page">
         <header class="page-head">
           <h1>Your dates</h1>
-          <p>Saved on this device only. Export your diary to keep a copy, or to move it to another phone.</p>
+          <p>${storageNote()}</p>
         </header>
         ${saved.length
           ? html`${g.upcoming.length ? html`<section class="section" aria-labelledby="up-title"><h2 id="up-title">Coming up</h2><ul class="date-list">${g.upcoming.map((p) => miniTicket(p))}</ul></section>` : ''}

@@ -1,7 +1,7 @@
 // A date plan is a movie + a meal (+ optional drink and time). Plans store compact
 // snapshots so the saved-dates list renders instantly without network requests.
 
-const MAX_SAVED = 50;
+export const MAX_SAVED = 50;
 
 export function movieSnapshot(m) {
   if (!m) return null;

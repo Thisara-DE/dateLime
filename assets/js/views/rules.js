@@ -3,24 +3,16 @@ import { html, render, icon, on } from '../ui.js';
 import { watchProviderCatalog, tmdbImage } from '../api/tmdb.js';
 import { CERTIFICATIONS } from '../domain/moods.js';
 import { DIETS } from '../domain/pairing.js';
+import { REGIONS, regionName } from '../domain/regions.js';
 import { AVOID } from '../domain/avoid.js';
 import { getRules, updateRules } from '../state.js';
+import { getAccount } from '../account.js';
 import { getThemePreference, setThemePreference, THEME_CHOICES } from '../lib/theme.js';
 import { announce } from '../lib/announce.js';
 import { isAbortError } from '../lib/http.js';
 
 export const title = () => 'House rules';
 
-// Regions where JustWatch (and so TMDB) has streaming data; names come from the browser.
-const REGIONS = ['US', 'CA', 'GB', 'IE', 'AU', 'NZ', 'IN', 'LK', 'SG', 'PH', 'ZA', 'DE', 'AT', 'CH', 'FR', 'BE', 'NL', 'IT', 'ES', 'PT', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'GR', 'TR', 'BR', 'MX', 'AR', 'CL', 'CO', 'JP', 'KR', 'TW', 'HK', 'MY', 'ID', 'TH'];
-const regionName = (() => {
-  try {
-    const names = new Intl.DisplayNames(undefined, { type: 'region' });
-    return (code) => names.of(code) ?? code;
-  } catch {
-    return (code) => code;
-  }
-})();
 
 function chip({ name, value, checked, label, type = 'radio', extra = '' }) {
   return html`<label class="chip ${extra}"><input type="${type}" name="${name}" value="${value}" ${checked ? html`checked` : ''}><span class="chip__glyph" aria-hidden="true"></span>${label}</label>`;
@@ -52,7 +44,7 @@ export function mount(outlet, { signal }) {
       html`<div class="page page--narrow">
         <header class="page-head">
           <h1>House rules</h1>
-          <p>Set these once. Every date, including "Surprise us", follows them. Changes save as you go, on this device only.</p>
+          <p>Set these once. Every date, including "Surprise us", follows them. Changes save as you go, ${getAccount().status === 'signed-in' ? 'to your account' : 'on this device only'}.</p>
         </header>
         <form class="rules-form" data-rules-form>
           <fieldset class="field">

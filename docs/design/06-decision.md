@@ -199,3 +199,15 @@ Each MUST and SHOULD feature has browser tests for its main behavior in `tests/e
 
 **Still open for the product owners:**
 1. Revoke the two RapidAPI keys left in the git history (audit item 17).
+
+## After launch: optional accounts
+
+"Accounts or cloud sync" was on the analysts' WON'T list for v1. After launch, the product owner asked for accounts so that each person's data is theirs, and chose:
+
+- **Firebase** (Authentication and Cloud Firestore), with Google sign-in and email and password.
+- **Optional sign-in.** Planning, sharing and shared tickets work without an account, as before.
+- **Sign-up asks for** a display name, email and password, plus region and diet, which start the account's house rules. New Google accounts confirm the same details on the account page.
+- **Dates already on a device** at sign-in: offer to add them to the account and then remove them from the device; if not added, ask whether to delete them from the device.
+
+House rules and saved dates sync to the account; the plan in progress and the shortlist stay on the device. `firestore.rules` restricts each document to its owner and is tested on the emulator.
+
