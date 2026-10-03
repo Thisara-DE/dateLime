@@ -14,6 +14,8 @@ const SESSION_KEY = 'datelime.account';
 /** Set just before a Google redirect, so the page knows to finish it when it comes back. */
 const REDIRECT_KEY = 'datelime.redirecting';
 const PUSH_DELAY = 600;
+/** Set while this device holds edits the account hasn't confirmed (e.g. made offline). */
+const UNSYNCED_KEY = 'datelime.account.unsynced';
 const pluralize = (n, one) => `${n} ${n === 1 ? one : `${one}s`}`;
 
 let state = { status: cloud.accountsEnabled() ? 'signed-out' : 'off', user: null, profile: null, syncError: false };
@@ -70,6 +72,7 @@ store.subscribe((next, prev) => {
 });
 
 function schedulePush() {
+  write(UNSYNCED_KEY, state.user.uid);
   clearTimeout(pushTimer);
   pushTimer = setTimeout(push, PUSH_DELAY);
 }
@@ -81,6 +84,7 @@ async function push() {
   const { rules, saved } = store.get();
   try {
     await cloud.writeUserDoc(state.user.uid, { rules, saved });
+    if (!pushTimer && read(UNSYNCED_KEY) === state.user?.uid) write(UNSYNCED_KEY, null); // nothing newer waiting
     if (state.syncError) setState({ syncError: false });
   } catch {
     setState({ syncError: true }); // kept on this device; retried with the next change
@@ -108,7 +112,12 @@ function applyRemote(data) {
 /** Handles the first look at the account's document after signing in. */
 async function firstLoad(user, data) {
   const wanted = pending;
-  if (data) {
+  if (data && read(UNSYNCED_KEY) === user.uid) {
+    // This device changed things the account never received (it was offline, then
+    // reloaded): keep those changes and send them, rather than overwrite them.
+    setState({ profile: data.profile ?? state.profile });
+    await push();
+  } else if (data) {
     applyRemote(data);
   } else {
     // A new account: its profile comes from the sign-up form (or Google), and its house
@@ -174,6 +183,7 @@ function forgetAccount() {
   clearTimeout(pushTimer);
   pushTimer = null;
   write(SESSION_KEY, null);
+  write(UNSYNCED_KEY, null);
   if (uid) write(accountKey(uid), null);
   switchStore(GUEST_KEY);
   setState({ status: 'signed-out', user: null, profile: null, syncError: false });
@@ -236,8 +246,17 @@ export function signInWithGoogle() {
 
 export const sendPasswordReset = (email) => cloud.sendPasswordReset(email);
 
+/** True when this device has edits the account hasn't confirmed yet. */
+export const hasUnsyncedChanges = () => isSignedIn() && read(UNSYNCED_KEY) === state.user.uid;
+
+/** Tries to send waiting edits, giving up after a few seconds (offline, writes never settle). */
+export function flushChanges(wait = 3000) {
+  if (!hasUnsyncedChanges()) return Promise.resolve(true);
+  return Promise.race([push().then(() => !hasUnsyncedChanges()), new Promise((resolve) => setTimeout(() => resolve(false), wait))]);
+}
+
 export async function signOut() {
-  if (pushTimer) await push(); // don't lose an edit made in the last moment
+  await flushChanges(); // don't lose an edit made in the last moment
   await cloud.signOutUser();
   forgetAccount();
 }

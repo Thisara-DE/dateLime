@@ -3,7 +3,7 @@ import { html, render, on, icon } from '../ui.js';
 import { navigate } from '../lib/navigate.js';
 import { toast } from '../lib/announce.js';
 import { openSheet } from '../components/sheet.js';
-import { getAccount, subscribeAccount, updateProfile, signOut, deleteAccount } from '../account.js';
+import { getAccount, subscribeAccount, updateProfile, signOut, deleteAccount, flushChanges } from '../account.js';
 import { getRules, getSaved } from '../state.js';
 import { describeAuthError } from '../lib/cloud.js';
 import { field, regionField, dietField, showFormError, setBusy } from '../components/account-forms.js';
@@ -81,10 +81,30 @@ export function mount(outlet, { query, signal }) {
     }
   }, { signal });
 
-  on(outlet, 'click', '[data-signout]', async () => {
+  async function finishSignOut() {
     await signOut().catch(() => {}); // the device forgets the account either way
     toast('Signed out. Your dates are safe in your account.');
     navigate('/', {}, { replace: true });
+  }
+
+  on(outlet, 'click', '[data-signout]', async (event, trigger) => {
+    if (trigger.getAttribute('aria-disabled')) return;
+    setBusy(trigger, true, 'Signing out…');
+    const synced = await flushChanges();
+    setBusy(trigger, false);
+    if (synced) return finishSignOut();
+    // Offline with edits the account hasn't received: signing out would discard them.
+    const sheet = openSheet({
+      title: 'Some changes aren’t saved to your account yet',
+      trigger,
+      className: 'sheet--prompt',
+      body: html`<p>We can't reach your account right now. If you sign out, changes you made on this device since you went offline are lost. Stay signed in and they're sent when you reconnect.</p>`,
+      footer: html`<div class="button-row"><button class="button button--secondary" type="button" data-sheet-close>Stay signed in</button><button class="button button--danger" type="button" data-signout-anyway>Sign out anyway</button></div>`,
+    });
+    sheet.dialog.querySelector('[data-signout-anyway]').addEventListener('click', () => {
+      sheet.close();
+      finishSignOut();
+    });
   }, { signal });
 
   on(outlet, 'click', '[data-delete-account]', (event, trigger) => {

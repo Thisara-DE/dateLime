@@ -240,6 +240,43 @@ test.describe('privacy', () => {
   });
 });
 
+test.describe('offline', () => {
+  test('an edit made offline survives a reload, then reaches the account', async ({ page, firebase }) => {
+    existingAccount(firebase);
+    await signIn(page);
+    await expect(page.getByRole('heading', { name: 'Amélie + Tuna Niçoise' })).toBeVisible();
+    firebase.offline = true;
+    await page.getByRole('button', { name: 'Delete Amélie + Tuna Niçoise' }).click();
+    await expect(page.getByRole('heading', { name: 'Amélie + Tuna Niçoise' })).toHaveCount(0);
+    await page.waitForTimeout(1200); // the upload is tried and fails
+    expect(firebase.docFor(ANA.email).saved).toHaveLength(1);
+    await page.reload();
+    await expect(page.getByRole('heading', { name: 'Amélie + Tuna Niçoise' })).toHaveCount(0); // not overwritten
+    firebase.offline = false;
+    await expect.poll(() => firebase.docFor(ANA.email).saved.length).toBe(0);
+    await page.waitForTimeout(500);
+    await expect(page.getByRole('heading', { name: 'Amélie + Tuna Niçoise' })).toHaveCount(0);
+  });
+
+  test('signing out with unsent changes warns first', async ({ page, firebase }) => {
+    existingAccount(firebase);
+    await signIn(page);
+    await expect(page.getByRole('heading', { name: 'Amélie + Tuna Niçoise' })).toBeVisible();
+    firebase.offline = true;
+    await page.getByRole('button', { name: 'Delete Amélie + Tuna Niçoise' }).click();
+    await page.goto('/#/account');
+    await page.getByRole('button', { name: 'Sign out' }).click();
+    const warning = page.getByRole('dialog', { name: 'Some changes aren’t saved to your account yet' });
+    await expect(warning).toBeVisible();
+    await warning.getByRole('button', { name: 'Stay signed in' }).click();
+    await expect(accountLink(page)).toHaveAccessibleName('Your account (Ana Lima)');
+    firebase.offline = false;
+    await page.getByRole('button', { name: 'Sign out' }).click();
+    await expect(page.locator('.toast').getByText('Signed out. Your dates are safe in your account.')).toBeVisible();
+    expect(firebase.docFor(ANA.email).saved).toEqual([]); // the edit was sent before signing out
+  });
+});
+
 test('the header fits on one line on small phones, with the account button', async ({ page, firebase }) => {
   expect(firebase.requests).toBe(0);
   for (const width of [320, 390]) {

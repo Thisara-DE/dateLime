@@ -120,7 +120,7 @@ npm start                         # http://localhost:4173
 | `npm run lint` | ESLint |
 | `npm run test:unit` | 95 unit tests: pairing, moods, plans, `.ics`, timers, API normalization, router, store, HTTP, theme, the service worker, CSP, and **every color pairing's contrast** in both themes |
 | `npm run test:rules` | 6 tests of `firestore.rules` on the real Firestore emulator: you can read and write only your own data, and nobody can list accounts. Needs Java 21. |
-| `npm run test:e2e` | 208 browser tests (104 scenarios on desktop Chrome and a Pixel 7) |
+| `npm run test:e2e` | 212 browser tests (106 scenarios on desktop Chrome and a Pixel 7) |
 | `npm test` | Unit, then browser tests |
 | `npm run check` | Lint, unit and browser tests. CI runs these plus `test:rules` on every push and pull request. |
 
@@ -134,7 +134,7 @@ The browser tests mock every API ([`tests/e2e/support/mock-api.js`](tests/e2e/su
 - reduced motion;
 - layout invariants;
 - a real offline run, where the test stops its own server;
-- accounts: sign-up, sign-in with email and Google, the choice about dates already on a device, sync to a second device, signing out on a shared device, and deleting an account. Firebase is replaced by a stand-in ([`tests/e2e/support/fake-firebase.js`](tests/e2e/support/fake-firebase.js)).
+- accounts: sign-up, sign-in with email and Google, the choice about dates already on a device, sync to a second device, edits made offline, signing out on a shared device, and deleting an account. Firebase is replaced by a stand-in ([`tests/e2e/support/fake-firebase.js`](tests/e2e/support/fake-firebase.js)).
 
 After editing the inline theme script in `index.html`, run `node scripts/csp-hash.mjs` to update the CSP hash (a unit test catches a stale one). When you add a JavaScript or CSS file, add it to `PRECACHE` in `sw.js`; a unit test catches a missing one.
 

@@ -74,7 +74,10 @@ export function onSnapshot(ref, next, error) {
       const json = await call({ op: 'get', path: ref.path });
       if (!stopped && json.version !== w.version) { w.version = json.version; next(snap(json, false)); }
       setTimeout(poll, 150);
-    } catch (err) { if (!stopped) error?.(err); }
+    } catch (err) {
+      if (err.code === 'unavailable') setTimeout(poll, 150); // like Firestore, wait out an outage
+      else if (!stopped) error?.(err);
+    }
   };
   poll();
   return () => { stopped = true; watchers.get(ref.path).delete(w); };
@@ -89,6 +92,7 @@ export function createFakeFirebase() {
     versions: new Map(),
     google: { email: 'sam@example.com', displayName: 'Sam Rivera' },
     resets: [],
+    offline: false, // true: the database can't be reached
     requests: 0,
     nextUid: 1,
   };
@@ -134,6 +138,7 @@ export function createFakeFirebase() {
       return { body: {} };
     }
     if (path === 'doc') {
+      if (server.offline) return fail('unavailable');
       const owner = body.path.match(/^users\/([^/]+)$/)?.[1];
       if (!body.uid || owner !== body.uid) return fail('permission-denied'); // as firestore.rules
       const bump = () => server.versions.set(body.path, (server.versions.get(body.path) ?? 0) + 1);
