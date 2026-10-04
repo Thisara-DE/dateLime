@@ -8,7 +8,7 @@
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#140F1A">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0xToGsakv4SSw1Hvg1s6lD1q4thdpY+kTKLbMdE1Oeo='; style-src 'self'; img-src 'self' data: blob: https://image.tmdb.org https://www.themealdb.com https://www.thecocktaildb.com; connect-src 'self' https://api.themoviedb.org https://www.themealdb.com https://www.thecocktaildb.com; font-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0xToGsakv4SSw1Hvg1s6lD1q4thdpY+kTKLbMdE1Oeo=' https://www.gstatic.com https://apis.google.com; style-src 'self'; img-src 'self' data: blob: https://image.tmdb.org https://www.themealdb.com https://www.thecocktaildb.com; connect-src 'self' https://api.themoviedb.org https://www.themealdb.com https://www.thecocktaildb.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firestore.googleapis.com; font-src 'self'; frame-src https://www.youtube-nocookie.com https://*.firebaseapp.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="dateLime · Dinner and a movie, for two">
@@ -46,6 +46,7 @@
         <a class="nav-link nav-link--desktop" href="#/movies" data-nav="/movies">Plan a date</a>
         <a class="nav-link" href="#/dates" data-nav="/dates">Your dates <span class="count" data-saved-count hidden></span></a>
         <a class="nav-link nav-link--desktop" href="#/team" data-nav="/team">Team</a>
+        <a class="icon-button account-button" href="#/signin" data-account-link data-nav="/account" hidden></a>
         <button class="icon-button" type="button" data-theme-toggle aria-label="Theme"></button>
       </nav>
     </div>

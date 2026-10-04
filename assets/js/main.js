@@ -4,6 +4,7 @@ import { html, render } from './lib/html.js';
 import { applyTheme, toggleTheme, watchSystemTheme, getThemePreference, setThemePreference, THEME_CHOICES } from './lib/theme.js';
 import { store, getSaved } from './state.js';
 import { wordmark } from './components/wordmark.js';
+import { startAccounts, subscribeAccount, getAccount, initials } from './account.js';
 import { icon, slice } from './components/icons.js';
 
 const routes = [
@@ -17,6 +18,9 @@ const routes = [
   { path: '/dates', load: () => import('./views/dates.js') },
   { path: '/rules', load: () => import('./views/rules.js') },
   { path: '/team', load: () => import('./views/team.js') },
+  { path: '/signin', load: () => import('./views/signin.js') },
+  { path: '/signup', load: () => import('./views/signup.js') },
+  { path: '/account', load: () => import('./views/account.js') },
   { path: '*', load: () => import('./views/not-found.js') },
 ];
 
@@ -49,9 +53,29 @@ function updateSavedCount() {
 store.subscribe(updateSavedCount);
 updateSavedCount();
 
-// Another tab saved or deleted a date: pick up the change.
+// ---- Account ---------------------------------------------------------------------------
+// Signed in on this device: switch to the account's data before the first screen renders.
+startAccounts();
+const accountLink = document.querySelector('[data-account-link]');
+function renderAccountLink({ status, user }) {
+  accountLink.hidden = status === 'off';
+  if (status === 'signed-in') {
+    accountLink.href = '#/account';
+    accountLink.setAttribute('aria-label', `Your account (${user.name || user.email})`);
+    render(accountLink, html`<span class="avatar avatar--small" aria-hidden="true">${initials(user)}</span>`);
+  } else {
+    accountLink.href = '#/signin';
+    accountLink.setAttribute('aria-label', 'Sign in');
+    render(accountLink, icon('user'));
+  }
+}
+subscribeAccount(renderAccountLink);
+renderAccountLink(getAccount());
+
+// Another tab saved or deleted a date, or signed in or out: pick up the change.
 window.addEventListener('storage', (event) => {
-  if (event.key === 'datelime.v2') store.reload();
+  if (event.key === store.key) store.reload();
+  if (event.key === 'datelime.account') location.reload();
   if (event.key === 'datelime.theme') applyTheme();
 });
 

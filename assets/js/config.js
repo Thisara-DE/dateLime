@@ -20,3 +20,12 @@ export const MEALDB = {
 export const COCKTAILDB = {
   baseUrl: 'https://www.thecocktaildb.com/api/json/v1/1',
 };
+
+// Accounts (optional sign-in) use Firebase Authentication and Cloud Firestore. Leave this
+// null and dateLime runs without accounts, as before. To switch accounts on, create a
+// Firebase project, add a web app, and paste its config object here. The web config is not
+// a secret: what protects each user's data is firestore.rules (see the README).
+export const FIREBASE = null;
+
+// The Firebase JS SDK version, loaded from Google's CDN only when someone signs in.
+export const FIREBASE_SDK = 'https://www.gstatic.com/firebasejs/12.19.0';

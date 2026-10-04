@@ -91,7 +91,10 @@ test.describe('House Rules', () => {
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-    await page.getByRole('button', { name: 'Dark theme' }).click();
+    // The header toggle (wider screens) and the footer control (always) do the same job.
+    const toggle = page.getByRole('button', { name: 'Dark theme' });
+    if (await toggle.isVisible()) await toggle.click();
+    else await page.locator('.site-footer').getByLabel('Dark', { exact: true }).check();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   });
 });

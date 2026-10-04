@@ -1,5 +1,7 @@
 // Application state: House Rules (preferences), the date being planned, saved dates and
-// the shortlist. Everything persists on this device only; share links carry plans elsewhere.
+// the shortlist. Signed out, it lives on this device only (the guest key). Signed in, the
+// store points at that account's cache instead, which account.js keeps in sync with the
+// account's private Firestore document. Share links carry plans elsewhere.
 import { createStore } from './lib/store.js';
 import { createPlan, upsertSaved, isComplete, samePairing } from './domain/plan.js';
 import { DEFAULT_COOK_MINUTES } from './domain/night-plan.js';
@@ -22,8 +24,12 @@ const initial = {
   together: null, // blind shortlist: { key, phase, first: [], second: [], movies: {} }
 };
 
+export const GUEST_KEY = 'datelime.v2';
+/** Where a signed-in account's data is cached on this device (removed on sign-out). */
+export const accountKey = (uid) => `datelime.v2.account.${uid}`;
+
 export const store = createStore(initial, {
-  key: 'datelime.v2',
+  key: GUEST_KEY,
   version: 1,
   persist: ({ rules, draft, saved, together }) => ({ rules, draft, saved, together }),
 });
@@ -135,4 +141,23 @@ export function importDiary(text) {
   }
   store.set({ saved });
   return added;
+}
+
+// ---- Guest data (what a signed-out visitor saved on this device) ------------------------
+/** Reads the guest's data without switching the store to it. */
+export function readGuestData() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(GUEST_KEY));
+    return { rules: raw?.data?.rules ?? {}, saved: raw?.data?.saved ?? [] };
+  } catch {
+    return { rules: {}, saved: [] };
+  }
+}
+
+export function clearGuestData() {
+  try {
+    localStorage.removeItem(GUEST_KEY);
+  } catch {
+    /* storage unavailable: nothing to clear */
+  }
 }

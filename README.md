@@ -19,7 +19,7 @@ Planning takes three steps, one decision each:
 2. **Pick a meal.** Recipes are matched to the movie, and a *Why this pairs* line says how: *"Straight from France: French cooking to match."* Turn off **Match the movie** to browse freely.
 3. **Get your ticket.** An "Admit Two" ticket with the movie, the meal, a drink and tonight's timeline: start cooking, dinner, press play, credits. Save it, share it, or add it to your calendar.
 
-Everything runs in the browser. There are no accounts, and your plans stay on your device.
+Everything runs in the browser. You don't need an account: signed out, your plans stay on your device. Sign in, with Google or an email and password, to keep your dates and house rules on every device you use.
 
 ## Features
 
@@ -27,8 +27,9 @@ Everything runs in the browser. There are no accounts, and your plans stay on yo
 |---|---|
 | 🎟️ **The date ticket** | Save it (with undo) and share it as a link plus readable text, using the share sheet, the clipboard or a copyable field. Add a calendar invite with a 15-minute reminder. Set a cook-time estimate (30, 45, 60 or 90 min) for the timeline. When your date opens the link, they see the same ticket and can save it to their own dates. |
 | 🍋 **Vibe pairing** | A movie's origin, its keywords or its genre decides the cuisine (see [below](#how-the-pairing-works)). Vegetarian, vegan and pescatarian diets are applied exactly, not guessed. The drink defaults to zero-proof; a lime cocktail or no drink are one tap away. |
-| 🏠 **House rules** | Your streaming services and region (filtered in a single request), a rating cap, a diet, foods to avoid, a default drink and a theme. All of it is remembered on this device. |
-| 💞 **Decide together** | A blind shortlist. Each of you hearts up to three movies without seeing the other's picks, then reveal: any overlap is *"It's a date!"*. *This feature is waiting on a hallway test with five couples before it's promoted from "should" to "must" (see the [design spec](docs/design/06-decision.md#architects-implementation-notes)).* |
+| 🏠 **House rules** | Your streaming services and region (filtered in a single request), a rating cap, a diet, foods to avoid, a default drink and a theme. Remembered on this device, or in your account when you're signed in. |
+| 🔐 **Your account (optional)** | Sign up with Google, or with your name, email and password plus your region and diet. Your saved dates and house rules then follow you to any device you sign in on, and only you can read them. When you sign in on a device that already has dates, you choose whether to add them to your account; if you don't, you're asked whether to delete them from the device. Signing out removes your data from that device, and you can delete your account at any time. |
+| 💞 **Decide together** | A blind shortlist. Each of you hearts up to three movies without seeing the other's picks, then reveal: any overlap is *"It's a date!"*. |
 | 🎰 **Spin the lime** | Can't decide? Three reels deal a movie, a dinner and a drink that follow your house rules. Hold any reel and spin again. |
 | 👩‍🍳 **Cook-along** | One step at a time, in big type. Timers are found in the recipe text, with a chime, a vibration and an announcement. Also an ingredient checklist, a countdown to "press play", ← and → keys, and the screen stays awake while you cook. |
 | 📔 **Your dates** | Upcoming and past dates. Rate past ones ("How was it?", 1 to 5 limes), and export or import your diary as JSON. |
@@ -68,9 +69,10 @@ A static single-page app built with native ES modules. There's no framework, no 
 
 - **Routing.** A hash router (`#/movies/results?mood=swoony`) loads each screen's module on demand. A view exports `title(ctx)` and `mount(outlet, ctx)`. Its `ctx.signal` aborts when you navigate away, so listeners and requests never leak between screens. Focus moves to the new page's heading.
 - **Rendering.** `html` tagged templates escape every interpolated value by default. Third-party text can't inject markup, a class of bug the 2022 site had.
-- **Security.** A strict Content-Security-Policy: `script-src 'self'` plus the hash of one inline theme script, `style-src 'self'`, and no inline event handlers.
+- **Security.** A strict Content-Security-Policy: scripts only from the site itself, the hash of one inline theme script, and Google's Firebase CDN (used only for sign-in); `style-src 'self'`; and no inline event handlers.
 - **Data.** The API clients normalize every response into plain objects. The HTTP layer adds timeouts, one retry on transient errors, de-duplicated in-flight requests and a session cache, and it redacts API keys from cache keys.
 - **State.** A small versioned store in `localStorage` holds house rules, the plan in progress and saved dates, and it syncs across tabs. A shared ticket needs no storage at all: the URL *is* the plan.
+- **Accounts.** Optional, on Firebase Authentication and Cloud Firestore. Each person's house rules and saved dates live in one document, `users/{uid}`, which [`firestore.rules`](firestore.rules) lets only that signed-in person read or write. While signed in, the store points at a per-account cache on the device, which `account.js` keeps in sync with Firestore in both directions; signing out deletes the cache. The Firebase SDK loads from Google's CDN only when someone signs in, or when the device already has a signed-in account, so signed-out visitors never contact Google.
 - **Offline.** The service worker fetches app files network-first (with a timeout) and falls back to the cache, so you always get the latest deploy when online. Images are cache-first. API replies are network-first and cached.
 
 ```
@@ -85,17 +87,21 @@ assets/
   images/               The 2022 team's screenshot and wireframes
   js/
     main.js             Routes, header, theme controls, service worker registration
+    account.js          Optional accounts: sign-in state and Firestore sync
     config.js           API endpoints and keys (the only place they live)
     state.js            House rules, the plan in progress, saved dates
     ui.js               Shared UI: posters, plates, empty and error states, step indicator
-    lib/                Router, HTML templates, HTTP client, store, theme, share, announcements
+    lib/                Router, HTML templates, HTTP client, store, theme, share, announcements, Firebase adapter
     api/                TMDB, TheMealDB and TheCocktailDB clients
     domain/             Pure logic: pairing, moods, plans, timeline, .ics, timers, foods to avoid
     components/         Wordmark, icons, bottom sheets, movie and recipe sheets
     views/              One module per screen
 docs/                   The audit, the design record, screenshots
 scripts/                Dev server, CSP hash sync, contrast report
+firestore.rules         Who can read and write account data (only its owner)
+firebase.json           Firestore emulator settings for the rules tests
 tests/unit/             node --test
+tests/rules/            Security-rules tests on the Firestore emulator
 tests/e2e/              Playwright
 ```
 
@@ -112,10 +118,11 @@ npm start                         # http://localhost:4173
 | Command | What it does |
 |---|---|
 | `npm run lint` | ESLint |
-| `npm run test:unit` | 91 unit tests: pairing, moods, plans, `.ics`, timers, API normalization, router, store, HTTP, theme, the service worker, CSP, and **every color pairing's contrast** in both themes |
-| `npm run test:e2e` | 176 browser tests (88 scenarios on desktop Chrome and a Pixel 7) |
+| `npm run test:unit` | 95 unit tests: pairing, moods, plans, `.ics`, timers, API normalization, router, store, HTTP, theme, the service worker, CSP, and **every color pairing's contrast** in both themes |
+| `npm run test:rules` | 6 tests of `firestore.rules` on the real Firestore emulator: you can read and write only your own data, and nobody can list accounts. Needs Java 21. |
+| `npm run test:e2e` | 212 browser tests (106 scenarios on desktop Chrome and a Pixel 7) |
 | `npm test` | Unit, then browser tests |
-| `npm run check` | Lint and all tests, which is what CI runs on every push and pull request |
+| `npm run check` | Lint, unit and browser tests. CI runs these plus `test:rules` on every push and pull request. |
 
 The browser tests mock every API ([`tests/e2e/support/mock-api.js`](tests/e2e/support/mock-api.js)), so they need no keys or network, and any console error fails the test. They cover:
 
@@ -126,7 +133,8 @@ The browser tests mock every API ([`tests/e2e/support/mock-api.js`](tests/e2e/su
 - reflow at 320px;
 - reduced motion;
 - layout invariants;
-- a real offline run, where the test stops its own server.
+- a real offline run, where the test stops its own server;
+- accounts: sign-up, sign-in with email and Google, the choice about dates already on a device, sync to a second device, edits made offline, signing out on a shared device, and deleting an account. Firebase is replaced by a stand-in ([`tests/e2e/support/fake-firebase.js`](tests/e2e/support/fake-firebase.js)).
 
 After editing the inline theme script in `index.html`, run `node scripts/csp-hash.mjs` to update the CSP hash (a unit test catches a stale one). When you add a JavaScript or CSS file, add it to `PRECACHE` in `sw.js`; a unit test catches a missing one.
 
@@ -136,6 +144,19 @@ Every endpoint and key lives in [`assets/js/config.js`](assets/js/config.js).
 
 - **TMDB:** dateLime is a static site, so its TMDB key is visible to anyone. It's a free, read-only v3 key. To use your own, create one at [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api).
 - **TheMealDB and TheCocktailDB:** these use the public test key `1`, which needs no sign-up. Check each service's terms before depending on it in production.
+
+### Switching accounts on (Firebase)
+
+Accounts are off until `FIREBASE` in `config.js` holds a Firebase web config; with it `null`, the app runs device-only and hides sign-in. To switch accounts on:
+
+1. Create a project at [console.firebase.google.com](https://console.firebase.google.com) (the free Spark plan is enough).
+2. **Authentication → Sign-in method:** enable **Email/Password** and **Google**.
+3. **Authentication → Settings → Authorized domains:** add `thisara-de.github.io` (and `localhost` is there already for development).
+4. **Firestore Database:** create a database in production mode.
+5. **Publish the security rules:** paste [`firestore.rules`](firestore.rules) into **Firestore → Rules** and publish, or run `npx firebase-tools deploy --only firestore:rules --project <your-project-id>`. Without them, Firestore's defaults decide who can read the data.
+6. **Project settings → Your apps:** add a web app, and copy its `firebaseConfig` object into `FIREBASE` in `config.js`.
+
+The web config isn't a secret: Firebase identifies the project with it, and the security rules are what keep each person's data private. Optionally, under **Authentication → Settings**, turn on email enumeration protection.
 
 ## Deployment
 
@@ -156,7 +177,7 @@ Automated checks run on every push but catch only some problems. If something do
 
 ## Privacy
 
-There are no accounts, analytics or cookies. House rules, plans and saved dates stay in your browser's local storage. A shared link contains the plan and your optional note, so anyone with the link can read them. The landing page makes no third-party requests at all. Other screens call TMDB, TheMealDB and TheCocktailDB, and YouTube is contacted only if you press play on a trailer (using youtube-nocookie.com).
+There are no analytics or cookies. Signed out, house rules, plans and saved dates stay in your browser's local storage. Signed in, your house rules and saved dates are stored in your account in Firebase, where only you can read them; your name, email and region are stored with them. The plan in progress stays on the device. Signing out removes your account's data from the device, and deleting your account removes it from Firebase. A shared link contains the plan and your optional note, so anyone with the link can read them. The landing page makes no third-party requests at all. Other screens call TMDB, TheMealDB and TheCocktailDB, and YouTube is contacted only if you press play on a trailer (using youtube-nocookie.com).
 
 ## Credits
 

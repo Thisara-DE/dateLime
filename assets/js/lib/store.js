@@ -68,6 +68,18 @@ export function createStore(initial, { key, version = 1, persist = (s) => s, mig
       listeners.add(fn);
       return () => listeners.delete(fn);
     },
+    /**
+     * Points the store at another storage key (a signed-in account's cache rather than the
+     * guest's data) and loads what's there, notifying subscribers.
+     */
+    switchKey(nextKey) {
+      if (nextKey === key) return;
+      key = nextKey;
+      this.reload();
+    },
+    get key() {
+      return key;
+    },
     /** True when changes survive a reload. */
     get persistent() {
       return Boolean(key && storage);

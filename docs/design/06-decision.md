@@ -183,7 +183,7 @@ The 2022 page URLs (`movie.html`, `movielist.html?info=…`, …) redirect to th
 These are refinements within the agreed decisions, not overrides:
 
 - **Header theme control.** The header carries a two-state *Lights up/down* toggle (`aria-pressed`). The full three-state **Auto / Dark / Light** radio group, which B asked for so that Auto can always be picked again, lives in the footer and on House Rules. Three 48px options don't fit a 390px header next to the logo and "Your dates" without crowding.
-- **Match Night ships as a SHOULD** so that the five-couple hallway test the analysts asked for can run on the real thing. The README flags it as awaiting that validation.
+- **Match Night ships as a SHOULD.** The analysts asked for a five-couple hallway test before promoting it. After launch, the product owner accepted it as it is, so it no longer waits on that test.
 - **Recipe cards show their source** ("French", "Dessert"). It comes from the list the recipe came from, so no lookup per card is needed. Details load only when a recipe sheet opens.
 - **"Match the movie" off** switches the recipe step to a category picker (Chicken, Pasta, Seafood and so on).
 
@@ -198,5 +198,16 @@ These are refinements within the agreed decisions, not overrides:
 Each MUST and SHOULD feature has browser tests for its main behavior in `tests/e2e/`, run on desktop Chrome and a Pixel 7 against mocked APIs. The logic behind them (pairing tiers, diet relaxation, timers, `.ics`) has unit tests. The axe-core audits pass on every screen in both themes. Some details are checked only by review, not by tests: the chime and vibration, and the 64px Back and Next buttons.
 
 **Still open for the product owners:**
-1. Run the five-couple hallway test before Match Night is promoted.
-2. Revoke the two RapidAPI keys left in the git history (audit item 17).
+1. Revoke the two RapidAPI keys left in the git history (audit item 17).
+
+## After launch: optional accounts
+
+"Accounts or cloud sync" was on the analysts' WON'T list for v1. After launch, the product owner asked for accounts so that each person's data is theirs, and chose:
+
+- **Firebase** (Authentication and Cloud Firestore), with Google sign-in and email and password.
+- **Optional sign-in.** Planning, sharing and shared tickets work without an account, as before.
+- **Sign-up asks for** a display name, email and password, plus region and diet, which start the account's house rules. New Google accounts confirm the same details on the account page.
+- **Dates already on a device** at sign-in: offer to add them to the account and then remove them from the device; if not added, ask whether to delete them from the device.
+
+House rules and saved dates sync to the account; the plan in progress and the shortlist stay on the device. `firestore.rules` restricts each document to its owner and is tested on the emulator.
+
